@@ -31,3 +31,7 @@ class Recipe(models.Model):
     # code from CI 'I Think Therefore I Blog' WT project
     def number_of_likes(self):
         return self.likes.count()
+
+    def alert_author_of_removal(self):
+        if removed:
+            messages.add_message(request, messages.INFO, 'Hello world.')
