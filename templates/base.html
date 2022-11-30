@@ -66,6 +66,7 @@
                                 {% if user.is_authenticated %}
                                 <li><a class="dropdown-item" href="#">Profile</a></li>
                                 <li><a class="dropdown-item" href="#">Dashboard</a></li>
+                                <li><a class="dropdown-item" href="{% url 'add_recipe' %}">Add Recipe</a></li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
@@ -87,39 +88,21 @@
     </header>
 
     <main>
-        {% block content %}
-        {% endblock %}
-
-
-        <div>
-            <div class="toast-container position-static">
-                {% if user.is_authorised %}
-                <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-                    <div class="toast-header">
-                        <img src="..." class="rounded me-2" alt="...">
-                        <strong class="me-auto">Bootstrap</strong>
-                        <small class="text-muted">just now</small>
-                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    {% for message in messages %}
+                    <div class="alert {{ message.tags }} alert-dismissible fade show" id="msg" role="alert">
+                        {{ message | safe }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
-                    <div class="toast-body">
-                        See? Just like this.
-                    </div>
-                </div>
-                {% endif %}
-
-                <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-                    <div class="toast-header">
-                        <img src="..." class="rounded me-2" alt="...">
-                        <strong class="me-auto">Bootstrap</strong>
-                        <small class="text-muted">2 seconds ago</small>
-                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-                    </div>
-                    <div class="toast-body">
-                        Heads up, toasts will stack automatically
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
+
+        {% block content %}
+        {% endblock %}
     </main>
 
     <footer>

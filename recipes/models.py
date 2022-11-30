@@ -1,13 +1,15 @@
 from django.db import models
 from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
+from django.template.defaultfilters import slugify
+from django.contrib import messages
 
 
 class Recipe(models.Model):
 
     title = models.CharField(max_length=100, unique=True)
     slug = models.SlugField(max_length=100, unique=True)
-    caption = models.TextField()
+    caption = models.TextField(blank=True, null=True)
     author = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
@@ -15,9 +17,9 @@ class Recipe(models.Model):
         )
     created_on = models.DateTimeField(auto_now=True)
     updated_on = models.DateTimeField(auto_now=True)
-    ingredients = models.JSONField()
-    steps = models.JSONField()
-    image = CloudinaryField('image', default='placeholder')
+    ingredients = models.TextField(blank=True, null=True)
+    steps = models.TextField(blank=True, null=True)
+    image = CloudinaryField('image', default='placeholder', blank=True)
     likes = models.ManyToManyField(
         User,
         related_name='recipe_likes',
@@ -28,10 +30,10 @@ class Recipe(models.Model):
     def __str__(self):
         return self.title
 
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.title)
+        super(Recipe, self).save(*args, **kwargs)
+
     # code from CI 'I Think Therefore I Blog' WT project
     def number_of_likes(self):
         return self.likes.count()
-
-    def alert_author_of_removal(self):
-        if removed:
-            messages.add_message(request, messages.INFO, 'Hello world.')

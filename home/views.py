@@ -7,6 +7,6 @@ class HomePage(generic.ListView):
     """"""
 
     model = Recipe
-    queryset = Recipe.objects.filter(removed=False)
+    queryset = Recipe.objects.all().filter(removed=False)
     template_name = "index.html"
     paginate_by = 9
