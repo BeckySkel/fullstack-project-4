@@ -9,8 +9,11 @@ class AddRecipe(View):
     
     def get(self, request, *args, **kwargs):
 
-        return render(request, 'add_recipe.html', {'recipe_form': RecipeForm()})
-
+        return render(
+            request,
+            'add_recipe.html',
+            {'recipe_form': RecipeForm()}
+            )
 
     def post(self, request, *args, **kwargs):
 
@@ -18,10 +21,12 @@ class AddRecipe(View):
         
         if recipe_form.is_valid():
             recipe_form.instance.author = request.user
-            recipe_form.save()
-            return render(request, 'add_recipe.html', {'recipe_form': RecipeForm()})
+            recipe = recipe_form.save()
+
+            slug = recipe_form.instance.slug
+            
+            return redirect(f'/recipes/{slug}')
         else:
-            # messages.error(request, 'Invalid form response')
             data = {
                 'title': recipe_form.instance.title,
                 'caption': recipe_form.instance.caption,
@@ -29,8 +34,13 @@ class AddRecipe(View):
                 'ingredients': recipe_form.instance.ingredients,
                 'steps': recipe_form.instance.steps,
                 }
-            recipe_form = RecipeForm()
-            return render(request, 'add_recipe.html', {'recipe_form': RecipeForm(data)})
+            # https://docs.djangoproject.com/en/dev/ref/forms/api/#dynamic-initial-values
+            # https://www.reddit.com/r/django/comments/4oie1d/how_to_automatically_prepopulate_data_in_forms/
+            return render(
+                request,
+                'add_recipe.html',
+                {'recipe_form': RecipeForm(data)}
+                )
 
 
 class RecipeDetail(View):

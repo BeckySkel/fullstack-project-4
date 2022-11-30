@@ -4,7 +4,9 @@ from recipes.models import Recipe
 
 
 class HomePage(generic.ListView):
-    """"""
+    """
+    View to display all recipes in the home page
+    """
 
     model = Recipe
     queryset = Recipe.objects.all().filter(removed=False)

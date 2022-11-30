@@ -6,3 +6,4 @@ class RecipeForm(forms.ModelForm):
     class Meta:
         model = Recipe
         fields = ('title', 'caption', 'image', 'ingredients', 'steps')
+        # widgets = {'slug': forms.HiddenInput()}

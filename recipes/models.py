@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
 from django.template.defaultfilters import slugify
-from django.contrib import messages
+# https://stackoverflow.com/questions/837828/how-do-i-create-a-slug-in-django
 
 
 class Recipe(models.Model):
@@ -17,9 +17,9 @@ class Recipe(models.Model):
         )
     created_on = models.DateTimeField(auto_now=True)
     updated_on = models.DateTimeField(auto_now=True)
-    ingredients = models.TextField(blank=True, null=True)
-    steps = models.TextField(blank=True, null=True)
-    image = CloudinaryField('image', default='placeholder', blank=True)
+    ingredients = models.TextField()
+    steps = models.TextField()
+    image = CloudinaryField('image', default='placeholder')
     likes = models.ManyToManyField(
         User,
         related_name='recipe_likes',
