@@ -15,3 +15,4 @@ class RecipeAdmin(admin.ModelAdmin):
 
     def remove_recipe(self, request, queryset):
         queryset.update(removed=True)
+        

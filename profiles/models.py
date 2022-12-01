@@ -11,7 +11,7 @@ class Profile(models.Model):
     Created/deleted automatically when a new user is added/deleted 
     """
 
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     profile_image = CloudinaryField('image', default='profile_placeholder')
@@ -29,13 +29,10 @@ class Profile(models.Model):
 
 class Notification(models.Model):
     """"""
-    profile = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='notifications')
-    sender = models.OneToOneField(User, on_delete=models.CASCADE)
+    to = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='notifications')
+    sender = models.ForeignKey(User, on_delete=models.CASCADE, default=User.objects.filter(username='recipebook')[0])
     sent = models.DateTimeField(auto_now_add=True)
     message = models.TextField()
 
     def __str__(self):
         return f'Notification of {self.message} from {self.sender}'
-    
-    #  def number_of_likes(self):
-    #     return self.profile.count()
