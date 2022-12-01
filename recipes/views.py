@@ -1,8 +1,25 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
+from django.views.generic.detail import DetailView
 from .models import Recipe
 from .forms import RecipeForm
 from django.contrib import messages
+from multiurl import ContinueResolving
+
+
+class RecipeDetail(View):
+
+    def get(self, request, slug, *args, **kwargs):
+        queryset = Recipe.objects.filter(removed=False)
+        recipe = get_object_or_404(queryset, slug=slug)
+
+        return render(
+            request,
+            "recipe_detail.html",
+            {
+                "recipe": recipe
+            },
+        )
 
 
 class AddRecipe(View):
@@ -41,21 +58,5 @@ class AddRecipe(View):
                 'add_recipe.html',
                 {'recipe_form': RecipeForm(data)}
                 )
-
-
-class RecipeDetail(View):
-
-    def get(self, request, slug, *args, **kwargs):
-        queryset = Recipe.objects.all().filter(removed=False)
-        recipe = get_object_or_404(queryset, slug=slug)
-
-        return render(
-            request,
-            'recipe_detail.html',
-            {
-                'recipe': recipe
-            }
-        )
-
 
 

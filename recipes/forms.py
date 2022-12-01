@@ -5,5 +5,11 @@ from django import forms
 class RecipeForm(forms.ModelForm):
     class Meta:
         model = Recipe
-        fields = ('title', 'caption', 'image', 'ingredients', 'steps')
-        # widgets = {'slug': forms.HiddenInput()}
+        fields = (
+            'title',
+            'caption',
+            'image',
+            'ingredients',
+            'steps',
+            'private'
+        )

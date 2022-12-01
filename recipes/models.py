@@ -26,6 +26,7 @@ class Recipe(models.Model):
         blank=True
         )
     removed = models.BooleanField(default=False)
+    private = models.BooleanField(default=False)
 
     def __str__(self):
         return self.title

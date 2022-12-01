@@ -1,6 +1,25 @@
 {% extends "base.html" %}
 {% block content %}
 
-{{ recipe.title }}
+{% if recipe.private %}
 
+    {% if user.username == recipe.author %}
+        This is your private recipe
+        user: {{ user.username }}
+        author: {{ recipe.author }}
+        recipe: {{ recipe }}
+    {% else %}
+
+        Sorry this recipe is private :(
+
+    {% endif %}
+
+
+{% else %}
+
+    This recipe is public
+    author: {{ recipe.author }}
+    recipe: {{ recipe }}
+
+{% endif %}
 {% endblock %}
