@@ -7,7 +7,7 @@ class HomePage(generic.ListView):
     """
     View to display all recipes in the home page
     """
-
+    # code insprired by CI walkthrough project
     model = Recipe
     queryset = Recipe.objects.all().filter(removed=False, private=False)
     template_name = "index.html"

@@ -1,4 +1,4 @@
-from .models import Recipe
+from .models import Recipe, Comment
 from django import forms
 
 
@@ -13,3 +13,10 @@ class RecipeForm(forms.ModelForm):
             'steps',
             'private'
         )
+
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ('body',)
+        # widgets = {'commenter': forms.HiddenInput(), 'recipe': forms.HiddenInput()}

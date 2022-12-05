@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Recipe
+from .models import Recipe, Comment
 
 
 @admin.register(Recipe)
@@ -16,3 +16,8 @@ class RecipeAdmin(admin.ModelAdmin):
     def remove_recipe(self, request, queryset):
         queryset.update(removed=True)
         
+
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    """"""
+    

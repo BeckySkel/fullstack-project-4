@@ -12,7 +12,7 @@
     <meta name="keywords" content="cook recipe social blog">
     <meta name="author" content="Recipebook">
 
-    <title>Document</title>
+    <title>Recipebook</title>
 
     <!-- Link to favicon -->
     <link rel="icon" href="#" type="image/x-icon">
@@ -29,9 +29,9 @@
 <body>
     <header>
         <!-- Nav Bar template by Bootstrap -->
-        <nav class="navbar navbar-expand-lg bg-light">
+        <nav class="navbar navbar-expand-lg bg-light bg-gradient fw-bold">
             <div class="container-fluid">
-                <a class="navbar-brand" href="{% url 'home' %}">recipebook</a>
+                <a class="navbar-brand bg-gradient bg-main" href="{% url 'home' %}"><i class="fa-solid fa-bowl-food d-inline-block"></i> recipebook</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
                     aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -81,7 +81,7 @@
                     </ul>
                     <form class="d-flex" role="search">
                         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">Search</button>
+                        <button class="btn btn-outline-success bg-highlight fw-bold text-dark" type="submit">Search</button>
                     </form>
                 </div>
             </div>

@@ -38,3 +38,18 @@ class Recipe(models.Model):
     # code from CI 'I Think Therefore I Blog' WT project
     def number_of_likes(self):
         return self.likes.count()
+
+
+class Comment(models.Model):
+    """"""
+    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, related_name='recipe_comments')
+    commenter = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_comments')
+    body = models.TextField()
+    created_on = models.DateTimeField(auto_now_add=True)
+    removed = models.BooleanField(default=False)
+
+    class Meta:
+        ordering = ["-created_on"]
+
+    def __str__(self):
+        return f"{self.commenter}: {self.body}"

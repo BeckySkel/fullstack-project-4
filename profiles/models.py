@@ -28,9 +28,12 @@ class Profile(models.Model):
 
 
 class Notification(models.Model):
-    """"""
+    """
+    Model for user notifications
+    """
+    
     to = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='notifications')
-    sender = models.ForeignKey(User, on_delete=models.CASCADE, default=User.objects.filter(username='recipebook')[0])
+    sender = models.ForeignKey(User, on_delete=models.CASCADE)
     sent = models.DateTimeField(auto_now_add=True)
     message = models.TextField()
 

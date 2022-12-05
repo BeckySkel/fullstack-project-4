@@ -1,13 +1,15 @@
 {% extends "base.html" %}
 {% block content %}
+{% load crispy_forms_tags %}
 
 {% if recipe.private %}
 
-    {% if user.username == recipe.author %}
+    {% if user == recipe.author %}
         This is your private recipe
         user: {{ user.username }}
         author: {{ recipe.author }}
         recipe: {{ recipe }}
+
     {% else %}
 
         Sorry this recipe is private :(
@@ -21,5 +23,17 @@
     author: {{ recipe.author }}
     recipe: {{ recipe }}
 
+        {% for comment in comments %}
+            {{ comment }}
+        {% endfor %}
+    
+        {% if user.is_authenticated %}
+        <form method="POST" class="col-6 offset-3">
+            {{ comment_form | crispy }}
+            {% csrf_token %}
+            <button type="submit" class="btn btn-warning btn-lg mt-5">Post</button>
+        </form>
+        {% endif %}
+        
 {% endif %}
 {% endblock %}
