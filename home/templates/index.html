@@ -10,7 +10,9 @@
                 <div class="card-body">
                   <h5 class="card-title">{{ recipe.title }}</h5>
                   <p class="card-text">{{ recipe.caption }}</p>
-                  <a href="{% url 'recipe_detail' recipe.slug  %}" class="btn btn-primary">Go somewhere</a>
+                  <span>{{ recipe.number_of_likes }}</span>
+                  <span>{{ recipe.number_of_comments }}</span>
+                  <a href="{% url 'recipe_detail' recipe.slug  %}" class="btn btn-primary">Cook!</a>
                 </div>
               </div>
             {% endfor %}

@@ -12,7 +12,7 @@
                 <span class="badge bg-highlight">modified: {{ recipe.updated_on }}</span>
                 {% endif %}
             </p>
-            <p>Likes: {{ recipe.number_of_likes }} | Comments: {{ recipe.recipe_comments.count }}</p>
+            <p>Likes: {{ recipe.number_of_likes }} | Comments: {{ recipe.number_of_comments }}</p>
             {% if user == recipe.author %}
             <a class="btn btn-warning" href="{% url 'edit_recipe' recipe.slug  %}">Edit</a>
             {% endif %}
@@ -23,7 +23,7 @@
         <div class="col-1">
             <!-- CI walk through project -->
             <strong>
-                {% if user.is_authenticated %}
+                {% if user.is_authenticated and user != recipe.author %}
                 <form class="d-inline" action="{% url 'recipe_like' recipe.slug %}" method="POST">
                     {% csrf_token %}
                     {% if liked %}
@@ -40,11 +40,11 @@
             </strong>
         </div>
         <div class="col-1">
-            {% with comments.count as total_comments %}
+            
             <strong class="text-secondary"><i class="far fa-comments"></i>
                 <!-- Our total_comments variable goes before the closing strong tag -->
-                {{ total_comments }}</strong>
-            {% endwith %}
+                {{ recipe.number_of_comments }}</strong>
+            
         </div>
     </div>
 
