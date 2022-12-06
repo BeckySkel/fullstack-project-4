@@ -31,6 +31,7 @@ class Recipe(models.Model):
     def __str__(self):
         return self.title
 
+    # https://stackoverflow.com/questions/33176569/slugfield-in-django-and-overriding-save
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
         super(Recipe, self).save(*args, **kwargs)
@@ -40,7 +41,7 @@ class Recipe(models.Model):
         return self.likes.count()
 
     def number_of_comments(self):
-        return self.recipe_comments.count()
+        return self.recipe_comments.filter(removed=False).count()
 
 
 class Comment(models.Model):

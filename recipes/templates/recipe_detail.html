@@ -72,10 +72,15 @@
     <div class="row mt-3">
         <div class="col-md-10 offset-1">
             {% for comment in comments %}
+            {% if not comment.removed %}
             <div class="bg-light bg-gradient border mt-1">
-                <h5>{{ comment.commenter }}</h5>
+                <h5>{{ comment.commenter }}</h5><span>{{ comment.created_on }}</span>
                 <p>{{ comment.body }}</p>
+                {% if user == comment.commenter %}
+                <a href="{% url 'delete_comment' comment.id %}">delete comment?</a>
+                {% endif %}
             </div>
+            {% endif %}
             {% endfor %}
         </div>
     </div>

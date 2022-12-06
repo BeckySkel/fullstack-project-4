@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.views import View
 from django.views.generic.detail import DetailView
 from django.http import HttpResponseRedirect
-from .models import Recipe
+from .models import Recipe, Comment
 from .forms import RecipeForm, CommentForm
 from django.contrib import messages
 from multiurl import ContinueResolving
@@ -72,6 +72,12 @@ class RecipeLike(View):
 
         return HttpResponseRedirect(reverse('recipe_detail', args=[slug]))
 
+
+def delete_comment(request, comment_id):
+    
+    comment = get_object_or_404(Comment, id=comment_id)
+    comment.delete()
+    return redirect('home')
 
 
 class AddRecipe(View):

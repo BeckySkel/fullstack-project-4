@@ -11,5 +11,6 @@ urlpatterns = [multiurl(
     path('<slug:slug>/', views.RecipeDetail.as_view(), name='recipe_detail'),
     # CI walkthrough
     path('<slug:slug>/like', views.RecipeLike.as_view(), name='recipe_like'),
+    path('delete/<comment_id>', views.delete_comment, name='delete_comment'),
     catch=(Http404, ContinueResolving),
 )]
