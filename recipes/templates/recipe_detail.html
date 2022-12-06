@@ -2,38 +2,93 @@
 {% block content %}
 {% load crispy_forms_tags %}
 
-{% if recipe.private %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-10 offset-md-1 mt-5">
+            <h2>{{ recipe.title }}</h2>
+            <h3>by {{ recipe.author }}</h3>
+            <p>created: {{ recipe.created_on }}
+                {% if recipe.created_on != recipe.updated_on %}
+                <span class="badge bg-highlight">modified: {{ recipe.updated_on }}</span>
+                {% endif %}
+            </p>
+            <p>Likes: {{ recipe.number_of_likes }} | Comments: {{ recipe.recipe_comments.count }}</p>
+            {% if user == recipe.author %}
+            <a class="btn btn-warning" href="{% url 'edit_recipe' recipe.slug  %}">Edit</a>
+            {% endif %}
+        </div>
+    </div>
+    <div class="row">
 
-    {% if user == recipe.author %}
-        This is your private recipe
-        user: {{ user.username }}
-        author: {{ recipe.author }}
-        recipe: {{ recipe }}
+        <div class="col-1">
+            <!-- CI walk through project -->
+            <strong>
+                {% if user.is_authenticated %}
+                <form class="d-inline" action="{% url 'recipe_like' recipe.slug %}" method="POST">
+                    {% csrf_token %}
+                    {% if liked %}
+                    <button type="submit" name="blogpost_id" value="{{recipe.slug}}" class="btn-like"><i class="fas fa-heart"></i></button>
+                    {% else %}
+                    <button type="submit" name="blogpost_id" value="{{recipe.slug}}" class="btn-like"><i class="far fa-heart"></i></button>
+                    {% endif %}
+                </form>
+                {% else %}
+                <span class="text-secondary"><i class="far fa-heart"></i></span>
+                {% endif %}
+            <!-- The number of likes goes before the closing strong tag -->
+            <span class="text-secondary">{{ recipe.number_of_likes }} </span>
+            </strong>
+        </div>
+        <div class="col-1">
+            {% with comments.count as total_comments %}
+            <strong class="text-secondary"><i class="far fa-comments"></i>
+                <!-- Our total_comments variable goes before the closing strong tag -->
+                {{ total_comments }}</strong>
+            {% endwith %}
+        </div>
+    </div>
 
-    {% else %}
 
-        Sorry this recipe is private :(
+    <div class="row">
+        <div class="col-md-5 offset-md-1 mt-5">
+            {{ recipe.ingredients }}
+        </div>
+        <div class="col-md-5 mt-5">
+            {{ recipe.steps }}
+        </div>
+    </div>
 
-    {% endif %}
 
-
-{% else %}
-
-    This recipe is public
-    author: {{ recipe.author }}
-    recipe: {{ recipe }}
-
-        {% for comment in comments %}
-            {{ comment }}
-        {% endfor %}
-    
+    <div class="row mt-5">
         {% if user.is_authenticated %}
-        <form method="POST" class="col-6 offset-3">
+        <form method="POST" class="col-10 offset-1">
             {{ comment_form | crispy }}
             {% csrf_token %}
-            <button type="submit" class="btn btn-warning btn-lg mt-5">Post</button>
+            <button type="submit" class="btn btn-warning mt-2">Post</button>
         </form>
         {% endif %}
-        
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-md-10 offset-1">
+            {% for comment in comments %}
+            <div class="bg-light bg-gradient border mt-1">
+                <h5>{{ comment.commenter }}</h5>
+                <p>{{ comment.body }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+
+
+
+
+{% if not recipe.private  %}
 {% endif %}
+
+
+
+
 {% endblock %}

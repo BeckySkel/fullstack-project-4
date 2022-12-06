@@ -19,4 +19,6 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ('body',)
-        # widgets = {'commenter': forms.HiddenInput(), 'recipe': forms.HiddenInput()}
+        widgets = {
+          'body': forms.Textarea(attrs={'rows':2, 'cols':15}),
+        }

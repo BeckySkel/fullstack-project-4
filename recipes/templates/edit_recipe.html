@@ -2,13 +2,14 @@
 {% block content %}
 {% load crispy_forms_tags %}
 
-    
+{% if user == recipe.author %}
     <h2>Edit Recipe</h2>
     <form method="POST" class="col-6 offset-3">
         {{ recipe_form | crispy }}
         {% csrf_token %}
         <button type="submit" class="btn btn-warning btn-lg mt-5">Post</button>
     </form>
+{% else %}
 
     <!-- <form method="GET" class="col-6 offset-3" action="/cgi-bin/utils.py">
         <div class="row">
@@ -29,7 +30,8 @@
     </form> -->
     
         <h2>You must be logged in as the owner edit this recipe!</h2>  
-          
+    
+{% endif %}
 
 
 <!-- <script>
