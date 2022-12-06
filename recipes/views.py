@@ -36,7 +36,7 @@ class RecipeDetail(View):
         liked = False
         if recipe.likes.filter(id=self.request.user.id).exists():
             liked = True
-        comment_form = CommentForm(data=request.POST)
+        comment_form = CommentForm(data=request.POST or None)
         
         if comment_form.is_valid():
             comment = comment_form.save(commit=False)
@@ -92,11 +92,15 @@ class AddRecipe(View):
 
     def post(self, request, *args, **kwargs):
 
-        recipe_form = RecipeForm(data=request.POST)
+        recipe_form = RecipeForm(data=request.POST or None)
         
         if recipe_form.is_valid():
             recipe_form.instance.author = request.user
-            recipe = recipe_form.save()
+            # https://www.geeksforgeeks.org/multiplechoicefield-django-forms/
+            temp = recipe_form.cleaned_data.get('tags')
+            recipe = recipe_form.save(commit=False)
+            recipe.tags = temp
+            recipe_form.save()
 
             slug = recipe_form.instance.slug
             
@@ -138,9 +142,13 @@ class EditRecipe(View):
         queryset = Recipe.objects.filter(removed=False)
         recipe = get_object_or_404(queryset, slug=slug)
 
-        recipe_form = RecipeForm(data=request.POST, instance=recipe)
+        recipe_form = RecipeForm(data=request.POST or None, instance=recipe)
         
         if recipe_form.is_valid():
+            # https://www.geeksforgeeks.org/multiplechoicefield-django-forms/
+            temp = recipe_form.cleaned_data.get('tags')
+            recipe = recipe_form.save(commit=False)
+            recipe.tags = temp
             updated_recipe = recipe_form.save()
             slug = updated_recipe.slug
             

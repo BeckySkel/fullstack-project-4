@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'home',
     'recipes',
     'profiles',
+    'utils',
 ]
 
 SITE_ID = 1

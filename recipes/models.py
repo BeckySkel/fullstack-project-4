@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
 from django.template.defaultfilters import slugify
+from utils.utils import TAGS
 # https://stackoverflow.com/questions/837828/how-do-i-create-a-slug-in-django
 
 
@@ -25,6 +26,7 @@ class Recipe(models.Model):
         related_name='recipe_likes',
         blank=True
         )
+    tags = models.CharField(max_length=200, blank=True)
     removed = models.BooleanField(default=False)
     private = models.BooleanField(default=False)
 
@@ -42,6 +44,9 @@ class Recipe(models.Model):
 
     def number_of_comments(self):
         return self.recipe_comments.filter(removed=False).count()
+
+    def list_of_tags(self):
+        return eval(self.tags)
 
 
 class Comment(models.Model):

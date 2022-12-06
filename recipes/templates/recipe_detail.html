@@ -13,6 +13,9 @@
                 {% endif %}
             </p>
             <p>Likes: {{ recipe.number_of_likes }} | Comments: {{ recipe.number_of_comments }}</p>
+            {% for tag in recipe.list_of_tags %}
+            <span class="badge bg-highlight">{{ tag }}</span>
+            {% endfor %}
             {% if user == recipe.author %}
             <a class="btn btn-warning" href="{% url 'edit_recipe' recipe.slug  %}">Edit</a>
             {% endif %}
