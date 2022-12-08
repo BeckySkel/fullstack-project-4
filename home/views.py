@@ -12,3 +12,18 @@ class HomePage(generic.ListView):
     queryset = Recipe.objects.all().filter(removed=False, private=False)
     template_name = "index.html"
     paginate_by = 9
+
+
+class BrowseByTag(View):
+    """"""
+    def get(self, request, tag, *args, **kwargs):
+        recipes = Recipe.objects.filter(removed=False, private=False, tags__contains=tag)
+
+        return render(
+            request,
+            'browse.html',
+            {
+                'recipes': recipes,
+                'tag': tag
+            },
+        )

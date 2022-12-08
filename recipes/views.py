@@ -160,6 +160,8 @@ class EditRecipe(View):
                 'image': recipe_form.instance.image,
                 'ingredients': recipe_form.instance.ingredients,
                 'steps': recipe_form.instance.steps,
+                'private': recipe_form.instance.private,
+                'tags': recipe_form.instance.tags,
                 }
             # https://docs.djangoproject.com/en/dev/ref/forms/api/#dynamic-initial-values
             # https://www.reddit.com/r/django/comments/4oie1d/how_to_automatically_prepopulate_data_in_forms/
