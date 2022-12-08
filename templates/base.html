@@ -83,8 +83,9 @@
                             </ul>
                         </li>
                     </ul>
-                    <form class="d-flex" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <form class="d-flex" role="search" method="POST" action="{% url 'search_results' %}">
+                        {% csrf_token %}
+                        <input class="form-control me-2" type="search" placeholder="Search" name="search-bar" aria-label="Search">
                         <button class="btn btn-outline-success bg-highlight fw-bold text-dark"
                             type="submit">Search</button>
                     </form>
