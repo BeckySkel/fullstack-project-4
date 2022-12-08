@@ -4,7 +4,7 @@ TAGS = [
     ('Dinner', 'Dinner'),
     ('Dessert', 'Dessert'),
     ('Quick and Easy', 'Quick & Easy'),
-    ('Low Calorie', 'Low Calorie'),
+    ('Low Calorie', 'low-calorie'),
     ('Healthy', 'Healthy'),
     ('Vegetarian', 'Vegetarian'),
     ('Vegan', 'Vegan'),

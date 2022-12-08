@@ -14,9 +14,30 @@ class HomePage(generic.ListView):
     paginate_by = 9
 
 
+TAGS = [
+    ('Breakfast', 'breakfast'),
+    ('Lunch', 'lunch'),
+    ('Dinner', 'dinner'),
+    ('Dessert', 'dessert'),
+    ('Quick and Easy', 'quick-and-easy'),
+    ('Low Calorie', 'low-calorie'),
+    ('Healthy', 'healthy'),
+    ('Vegetarian', 'vegetarian'),
+    ('Vegan', 'vegan'),
+    ('Low Carb', 'low-carb'),
+    ('Gluten Free', 'gluten-free'),
+    ('On a Budget', 'on-a-budget'),
+    ('Prep Ahead', 'prep-ahead'),
+]
+
+
 class BrowseByTag(View):
     """"""
-    def get(self, request, tag, *args, **kwargs):
+    def get(self, request, slug, *args, **kwargs):
+        for tuple in TAGS:
+            if slug in tuple:
+                tag = tuple[0]
+                
         recipes = Recipe.objects.filter(removed=False, private=False, tags__contains=tag)
 
         return render(
@@ -24,6 +45,7 @@ class BrowseByTag(View):
             'browse.html',
             {
                 'recipes': recipes,
-                'tag': tag
+                'tag': tag,
+                'slug': slug,
             },
         )
