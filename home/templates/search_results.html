@@ -3,15 +3,19 @@
 {% block content %}
 
 {% if search %}
-<h2>You searched for: {{ search }}</h2>
+{% if not recipes %}
+    <h2>No results for '{{ search }}'</h2>
+{% else %}        
+    <h2>Showing results for '{{ search }}'</h2>
+{% endif %}
 {% else %}
 <h2>Oops! You need to search for something!</h2>
 {% endif %}
-{{ recipes }}
-{{ all }}
+
 <div class="container">
     <div class="row">
         <div class="col-8 offset-2">
+            
             {% for recipe in recipes %}
             <div class="card" style="width: 18rem;">
                 <img src="{{ recipe.image }}" class="card-img-top" alt="Image of {{ recipe.title }}">
