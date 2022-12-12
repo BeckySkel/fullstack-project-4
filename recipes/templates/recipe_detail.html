@@ -16,9 +16,6 @@
             {% for tag in recipe.list_of_tags %}
             <span class="badge bg-highlight">{{ tag }}</span>
             {% endfor %}
-            {% if user == recipe.author %}
-            <a class="btn btn-warning" href="{% url 'edit_recipe' recipe.slug  %}">Edit</a>
-            {% endif %}
         </div>
     </div>
     <div class="row">
@@ -33,6 +30,14 @@
                     <button type="submit" name="blogpost_id" value="{{recipe.slug}}" class="btn-like"><i class="fas fa-heart"></i></button>
                     {% else %}
                     <button type="submit" name="blogpost_id" value="{{recipe.slug}}" class="btn-like"><i class="far fa-heart"></i></button>
+                    {% endif %}
+                </form>
+                <form class="d-inline" action="{% url 'recipe_save' recipe.slug %}" method="POST">
+                    {% csrf_token %}
+                    {% if saved %}
+                    <button type="submit" name="blogpost_id" value="{{recipe.slug}}" class="btn btn-warning">Saved!</button>
+                    {% else %}
+                    <button type="submit" name="blogpost_id" value="{{recipe.slug}}" class="btn btn-warning">Save</button>
                     {% endif %}
                 </form>
                 {% else %}

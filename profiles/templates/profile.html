@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>{{ profile }}</h2>
+
+<h3>Saved recipes:</h3>
+<ul>
+    {% for r in saved_recipes %}
+    <li>{{ r }}</li>
+    {% endfor %}
+</ul>
+
+<h3>Posted recipes:</h3>
+<ul>
+    {% for r in posted_recipes %}
+    <li>{{ r }}</li>
+    {% endfor %}
+</ul>
+
+
+{% endblock %}

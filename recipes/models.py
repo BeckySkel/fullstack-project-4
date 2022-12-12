@@ -39,14 +39,17 @@ class Recipe(models.Model):
         super(Recipe, self).save(*args, **kwargs)
 
     # code from CI 'I Think Therefore I Blog' WT project
-    def number_of_likes(self):
+    def count_likes(self):
         return self.likes.count()
 
-    def number_of_comments(self):
+    def count_comments(self):
         return self.recipe_comments.filter(removed=False).count()
 
     def list_of_tags(self):
         return eval(self.tags)
+    
+    def count_saved_by(self):
+        return self.saved_by.count()
 
 
 class Comment(models.Model):

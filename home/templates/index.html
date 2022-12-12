@@ -14,6 +14,7 @@
                   <span>{{ recipe.number_of_likes }}</span>
                   <span>{{ recipe.number_of_comments }}</span>
                   <a href="{% url 'recipe_detail' recipe.slug  %}" class="btn btn-primary">Cook!</a>
+                  <a href="{% url 'profile_page' recipe.author.profile.id  %}" class="btn btn-primary">{{ recipe.author.profile.id }}</a>
                 </div>
               </div>
             {% endfor %}

@@ -68,7 +68,7 @@
                                 {% if user.is_authenticated %}
                                 <li><a class="dropdown-item" href="#">Welcome {{ user.profile }}!</a></li>
                                 <li><a class="dropdown-item" href="#">Profile</a></li>
-                                <li><a class="dropdown-item" href="#">Dashboard <span
+                                <li><a class="dropdown-item" href="{% url 'profile_page' user.profile.id %}">Dashboard <span
                                             class="badge text-bg-secondary">{{ user.profile.number_of_notifications }}</span></a>
                                 </li>
                                 <li><a class="dropdown-item" href="{% url 'add_recipe' %}">Add Recipe</a></li>

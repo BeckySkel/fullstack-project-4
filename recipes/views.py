@@ -15,8 +15,11 @@ class RecipeDetail(View):
         recipe = get_object_or_404(queryset, slug=slug)
         comments = recipe.recipe_comments.filter(removed=False)
         liked = False
+        saved = False
         if recipe.likes.filter(id=self.request.user.id).exists():
             liked = True
+        if recipe.saved_by.filter(id=self.request.user.profile.id).exists():
+            saved = True
 
         return render(
             request,
@@ -25,7 +28,8 @@ class RecipeDetail(View):
                 'recipe': recipe,
                 'comments': comments,
                 'comment_form': CommentForm(),
-                'liked': liked
+                'liked': liked,
+                'saved': saved,
             },
         )
 
@@ -55,7 +59,8 @@ class RecipeDetail(View):
                 'recipe': recipe,
                 'comments': comments,
                 'comment_form': CommentForm(),
-                'liked': liked
+                'liked': liked,
+                'saved': saved,
             },
         )
 
@@ -69,6 +74,21 @@ class RecipeLike(View):
             recipe.likes.remove(request.user)
         else:
             recipe.likes.add(request.user)
+
+        return HttpResponseRedirect(reverse('recipe_detail', args=[slug]))
+
+
+class RecipeSave(View):
+
+    def post(self, request, slug, *args, **kwargs):
+        recipe = get_object_or_404(Recipe, slug=slug)
+        profile = request.user.profile
+        if recipe.saved_by.filter(id=request.user.profile.id).exists():
+            recipe.saved_by.remove(request.user.profile.id)
+            print('un-saved')
+        else:
+            recipe.saved_by.add(request.user.profile.id)
+            print('saved')
 
         return HttpResponseRedirect(reverse('recipe_detail', args=[slug]))
 

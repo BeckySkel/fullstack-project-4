@@ -16,6 +16,11 @@ class Profile(models.Model):
     last_name = models.CharField(max_length=50)
     profile_image = CloudinaryField('image', default='profile_placeholder')
     bio = models.TextField(blank=True)
+    saved = models.ManyToManyField(
+        Recipe,
+        related_name='saved_by',
+        blank=True
+        )
 
     def __str__(self):
         return self.user.username
@@ -23,8 +28,12 @@ class Profile(models.Model):
     def full_name(self):
         return f"{self.first_name} {self.last_name}"
 
-    def number_of_notifications(self):
+    def count_notifications(self):
         return self.notifications.count()
+
+    def count_saved_recipes(self):
+        return self.saved.count()
+
 
 
 class Notification(models.Model):
