@@ -1,7 +1,11 @@
-.navbar-brand {
-    color: #fff;
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+
+body {
+    font-family: 'Quicksand', sans-serif;
+}
+
+.navbar-brand > i {
     padding: 0.4rem;
-    border-radius: 0.5rem;
 }
 
 .bg-highlight {
@@ -12,6 +16,14 @@
     background-color: #4ACC9A;
 }
 
+.card-text {
+    height: 3rem;
+}
+
+.carousel-item {
+    background-color: #fcebae;
+}
+
 /* 
 #logo-r {
     color: #fff;
@@ -19,3 +31,11 @@
     font-size: 3rem;
     left: -0.2rem;
 } */
+
+.awesome {
+    font-size: 20rem;
+    color: #FF9B71;
+    padding: 1rem 10rem;
+    border: 10px grey solid;
+    display: inline-block;
+}

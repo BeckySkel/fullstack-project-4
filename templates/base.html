@@ -29,26 +29,61 @@
 <body>
     <header>
         <!-- Nav Bar template by Bootstrap -->
-        <nav class="navbar navbar-expand-lg bg-light bg-gradient fw-bold">
+        <nav class="navbar navbar-expand-lg bg-main bg-gradient fw-bold">
             <div class="container-fluid">
-                <a class="navbar-brand bg-gradient bg-main" href="{% url 'home' %}"><i
-                        class="fa-solid fa-bowl-food d-inline-block"></i> recipebook</a>
+                <a class="navbar-brand text-white text-lowercase fs-3" href="{% url 'home' %}"><i
+                        class="fa-solid fa-bowl-food d-inline-block"></i>Recipebook</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
                     aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+<!-- 
+                <div class="navbar-nav fs-4">
+                    <ul class="me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;"></ul>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" aria-current="page" href="{% url 'home' %}" aria-label="Home"><i
+                                class="fa-solid fa-house"></i></a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            <i class="fa-solid fa-book-open"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#"></a></li>
+                            <li><a class="dropdown-item" href="#">New</a></li>
+                            <li><a class="dropdown-item" href="#">Popular</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            {% for tag in tags %}
+                            <li><a class="dropdown-item" href="{% url 'browse' tag|slugify  %}">{{ tag }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    </ul>
+                    <form class="d-flex" role="search" method="POST" action="{% url 'search_results' %}">
+                        {% csrf_token %}
+                        <input class="form-control me-2" type="search" placeholder="Search recipes" name="search-bar"
+                            aria-label="Search">
+                        <button class="btn btn-light fw-bold text-dark" type="submit"><i
+                                class="fa-solid fa-magnifying-glass"></i></button>
+                    </form>
+                </div> -->
+
                 <div class="collapse navbar-collapse" id="navbarScroll">
-                    <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+                    <!-- navbar-nav-scroll -->
+                    <ul class="navbar-nav me-auto my-2 my-lg-0" style="--bs-scroll-height: 100px;">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
+                            <a class="nav-link text-light" aria-current="page" href="{% url 'home' %}" aria-label="Home">Home <i
+                                    class="fa-solid fa-house"></i></a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                                Browse
+                            <a class="nav-link dropdown-toggle text-light" href="#" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Browse <i class="fa-solid fa-book-open"></i>
                             </a>
                             <ul class="dropdown-menu">
-                                <!-- <li><a class="dropdown-item" href="#"></a></li> -->
                                 <li><a class="dropdown-item" href="#">New</a></li>
                                 <li><a class="dropdown-item" href="#">Popular</a></li>
                                 <li>
@@ -60,15 +95,18 @@
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown"
                                 aria-expanded="false">
-                                <i class="fa-regular fa-user"></i>
+                                Profile <i class="fa-solid fa-user"></i>
                             </a>
                             <ul class="dropdown-menu">
                                 {% if user.is_authenticated %}
-                                <li><a class="dropdown-item" href="#">Welcome {{ user.profile }}!</a></li>
+                                <!-- <li><a class="dropdown-item" href="#">Welcome {{ user.profile }}!</a></li> -->
+                                <li class="dropdown-item"><strong>Welcome {{ user.profile }}!</strong></li>
+
                                 <li><a class="dropdown-item" href="#">Profile</a></li>
-                                <li><a class="dropdown-item" href="{% url 'profile_page' user.profile.id %}">Dashboard <span
+                                <li><a class="dropdown-item" href="{% url 'profile_page' user.profile.id %}">Dashboard
+                                        <span
                                             class="badge text-bg-secondary">{{ user.profile.number_of_notifications }}</span></a>
                                 </li>
                                 <li><a class="dropdown-item" href="{% url 'add_recipe' %}">Add Recipe</a></li>
@@ -85,16 +123,17 @@
                     </ul>
                     <form class="d-flex" role="search" method="POST" action="{% url 'search_results' %}">
                         {% csrf_token %}
-                        <input class="form-control me-2" type="search" placeholder="Search" name="search-bar" aria-label="Search">
-                        <button class="btn btn-outline-success bg-highlight fw-bold text-dark"
-                            type="submit">Search</button>
+                        <input class="form-control me-2" type="search" placeholder="Search recipes" name="search-bar"
+                            aria-label="Search">
+                        <button class="btn btn-light fw-bold text-dark" type="submit"><i
+                                class="fa-solid fa-magnifying-glass"></i></button>
                     </form>
                 </div>
             </div>
         </nav>
     </header>
 
-    <main>
+    <main class="bg-light bg-gradient h-100">
         {% block content %}
         {% endblock %}
     </main>
