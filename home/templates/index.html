@@ -64,8 +64,8 @@
                       <span>{{ recipe.number_of_likes }}</span>
                       <span>{{ recipe.number_of_comments }}</span>
                       <a href="{% url 'recipe_detail' recipe.slug  %}" class="btn btn-primary">Cook!</a>
-                      <a href="{% url 'profile_page' recipe.author.profile.id  %}"
-                        class="btn btn-primary">{{ recipe.author.profile.id }}</a>
+                      <a href="{% url 'profile_page' recipe.author %}"
+                        class="btn btn-primary">{{ recipe.author }}</a>
                     </div>
                   </div>
                   {% endfor %}
@@ -89,8 +89,8 @@
                       <span>{{ recipe.number_of_likes }}</span>
                       <span>{{ recipe.number_of_comments }}</span>
                       <a href="{% url 'recipe_detail' recipe.slug  %}" class="btn btn-primary">Cook!</a>
-                      <a href="{% url 'profile_page' recipe.author.profile.id  %}"
-                        class="btn btn-primary">{{ recipe.author.profile.id }}</a>
+                      <a href="{% url 'profile_page' recipe.author.username %}"
+                        class="btn btn-primary">{{ recipe }}</a>
                     </div>
                   </div>
                   {% endfor %}

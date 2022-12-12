@@ -6,5 +6,5 @@ from multiurl import ContinueResolving
 
 
 urlpatterns = [multiurl(
-    path('<profile_id>/', views.ProfilePage.as_view(), name='profile_page'),
+    path('<profile>/', views.ProfilePage.as_view(), name='profile_page'),
 )]
