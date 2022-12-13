@@ -35,7 +35,6 @@ class Profile(models.Model):
         return self.saved.count()
 
 
-
 class Notification(models.Model):
     """
     Model for user notifications
@@ -48,3 +47,14 @@ class Notification(models.Model):
 
     def __str__(self):
         return f'Notification of {self.message} from {self.sender}'
+
+
+class Note(models.Model):
+    """"""
+
+    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, related_name='notes_for_recipe', blank=True, null=True)
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='notes_from_profile')
+    body = models.TextField()
+
+    def __str__(self):
+        return f'{self.profile} about {self.recipe}'

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Profile, Notification
+from .models import Profile, Notification, Note
 
 
 @admin.register(Profile)
@@ -14,3 +14,7 @@ class NotificationAdmin(admin.ModelAdmin):
     list_display = ('to', 'sender', 'sent', 'message')
     search_fields = ['to', 'sent', 'message']
     list_filter = ('to', 'sender', 'sent')
+
+@admin.register(Note)
+class NotificationAdmin(admin.ModelAdmin):
+    """"""

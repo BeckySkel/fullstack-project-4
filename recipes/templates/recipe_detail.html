@@ -12,7 +12,7 @@
                 <span class="badge bg-highlight">modified: {{ recipe.updated_on }}</span>
                 {% endif %}
             </p>
-            <p>Likes: {{ recipe.number_of_likes }} | Comments: {{ recipe.number_of_comments }}</p>
+            <p>Likes: {{ recipe.count_likes }} | Comments: {{ recipe.count_comments }} | Saves: {{ recipe.count_saved_by }}</p>
             {% for tag in recipe.list_of_tags %}
             <span class="badge bg-highlight">{{ tag }}</span>
             {% endfor %}
@@ -20,7 +20,7 @@
     </div>
     <div class="row">
 
-        <div class="col-1">
+        <div class="col-1 offset-1">
             <!-- CI walk through project -->
             <strong>
                 {% if user.is_authenticated and user != recipe.author %}
@@ -59,9 +59,11 @@
 
     <div class="row">
         <div class="col-md-5 offset-md-1 mt-5">
+            <h4>Ingredients:</h4>
             {{ recipe.ingredients }}
         </div>
         <div class="col-md-5 mt-5">
+            <h4>Steps:</h4>
             {{ recipe.steps }}
         </div>
     </div>
@@ -79,6 +81,7 @@
 
     <div class="row mt-3">
         <div class="col-md-10 offset-1">
+            <h4>Comments:</h4>
             {% for comment in comments %}
             {% if not comment.removed %}
             <div class="bg-light bg-gradient border mt-1">
@@ -90,6 +93,24 @@
             </div>
             {% endif %}
             {% endfor %}
+        </div>
+    </div>
+
+
+    <div class="row mt-3">
+        <div class="col-md-10 offset-1">
+            {% if notes %}
+            <h4>My Notes:</h4>
+            
+            {% for note in notes %}
+            {% if note.profile == user.profile %}
+            <div class="bg-light bg-gradient border mt-1">
+                <p>{{ note.body }}</p>
+                <a href="{% url 'delete_comment' note.id %}">delete note?</a>
+            </div>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
         </div>
     </div>
 </div>
