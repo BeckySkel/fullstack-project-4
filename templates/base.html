@@ -105,7 +105,7 @@
                                 <li class="dropdown-item"><strong>Welcome {{ user.profile }}!</strong></li>
 
                                 <li><a class="dropdown-item" href="#">Profile</a></li>
-                                <li><a class="dropdown-item" href="{% url 'profile_page' user.profile.id %}">Dashboard
+                                <li><a class="dropdown-item" href="{% url 'profile_page' user.profile %}">Dashboard
                                         <span
                                             class="badge text-bg-secondary">{{ user.profile.number_of_notifications }}</span></a>
                                 </li>

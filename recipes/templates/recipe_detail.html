@@ -20,7 +20,7 @@
     </div>
     <div class="row">
 
-        <div class="col-1 offset-1">
+        <div class="col-2 offset-1">
             <!-- CI walk through project -->
             <strong>
                 {% if user.is_authenticated and user != recipe.author %}
@@ -99,19 +99,30 @@
 
     <div class="row mt-3">
         <div class="col-md-10 offset-1">
-            {% if notes %}
+            {% if notes and saved %}
             <h4>My Notes:</h4>
             
             {% for note in notes %}
             {% if note.profile == user.profile %}
             <div class="bg-light bg-gradient border mt-1">
                 <p>{{ note.body }}</p>
-                <a href="{% url 'delete_comment' note.id %}">delete note?</a>
+                <a href="{% url 'delete_note' note.id %}">delete note?</a>
             </div>
             {% endif %}
             {% endfor %}
             {% endif %}
         </div>
+    </div>
+
+    <div class="row mt-5">
+        {% if user.is_authenticated and saved %}
+        <form method="POST" class="col-10 offset-1">
+            <h4>Add a note:</h4>
+            {{ comment_form | crispy }}
+            {% csrf_token %}
+            <button type="submit" class="btn btn-warning mt-2">Post</button>
+        </form>
+        {% endif %}
     </div>
 </div>
 

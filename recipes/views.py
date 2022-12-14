@@ -3,9 +3,10 @@ from django.views import View
 from django.views.generic.detail import DetailView
 from django.http import HttpResponseRedirect
 from .models import Recipe, Comment
-from .forms import RecipeForm, CommentForm
+from .forms import RecipeForm, CommentForm, NoteForm
 from django.contrib import messages
 from multiurl import ContinueResolving
+from profiles.models import Note
 
 
 class RecipeDetail(View):
@@ -29,6 +30,7 @@ class RecipeDetail(View):
                 'recipe': recipe,
                 'comments': comments,
                 'comment_form': CommentForm(),
+                'note_form': NoteForm(),
                 'liked': liked,
                 'saved': saved,
                 'notes': notes,
@@ -47,6 +49,7 @@ class RecipeDetail(View):
         if recipe.saved_by.filter(id=self.request.user.profile.id).exists():
             saved = True
         comment_form = CommentForm(data=request.POST or None)
+        note_form = NoteForm(data=request.POST or None)
         
         if comment_form.is_valid():
             comment = comment_form.save(commit=False)
@@ -54,9 +57,13 @@ class RecipeDetail(View):
             comment.commenter = request.user
             comment.recipe = recipe
             comment_form.save()
-            print('saved :)')
-        else:
-            print('failed :(')
+        
+        if note_form.is_valid():
+            note = note_form.save(commit=False)
+
+            note.profile = request.user.profile
+            note.recipe = recipe
+            note_form.save()
 
         return render(
             request,
@@ -65,6 +72,7 @@ class RecipeDetail(View):
                 'recipe': recipe,
                 'comments': comments,
                 'comment_form': CommentForm(),
+                'note_form': NoteForm(),
                 'liked': liked,
                 'saved': saved,
             },
@@ -91,10 +99,8 @@ class RecipeSave(View):
         profile = request.user.profile
         if recipe.saved_by.filter(id=request.user.profile.id).exists():
             recipe.saved_by.remove(request.user.profile.id)
-            print('un-saved')
         else:
             recipe.saved_by.add(request.user.profile.id)
-            print('saved')
 
         return HttpResponseRedirect(reverse('recipe_detail', args=[slug]))
 
@@ -103,7 +109,15 @@ def delete_comment(request, comment_id):
     
     comment = get_object_or_404(Comment, id=comment_id)
     comment.delete()
-    return redirect('home')
+    # https://stackoverflow.com/questions/50006147/how-to-return-redirect-to-previous-page-in-django-after-post-request
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+def delete_note(request, note_id):
+    
+    note = get_object_or_404(Note, id=note_id)
+    note.delete()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
 class AddRecipe(View):

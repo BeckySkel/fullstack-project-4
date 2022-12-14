@@ -13,5 +13,6 @@ urlpatterns = [multiurl(
     path('<slug:slug>/like', views.RecipeLike.as_view(), name='recipe_like'),
     path('<slug:slug>/save', views.RecipeSave.as_view(), name='recipe_save'),
     path('delete/<comment_id>', views.delete_comment, name='delete_comment'),
+    path('delete/<note_id>', views.delete_note, name='delete_note'),
     catch=(Http404, ContinueResolving),
 )]
