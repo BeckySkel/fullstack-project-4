@@ -1,41 +1,15 @@
 {% extends "base.html" %}
-
 {% block content %}
+
+<!-- Heading and intro text -->
 <div class="container">
   <div class="row text-center">
     <h1 class="mt-5">Welcome to recipebook!</h1>
-    <p class="mt-5 col-10 offset-1">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cupiditate blanditiis ex pariatur. Iure corporis,
-      provident labore inventore ex voluptatum vel, qui praesentium beatae quos amet dolorum voluptates dolore adipisci
-      accusamus.</p>
+    <p class="mt-5 col-10 offset-1">Recipebook is an online cookbook where users can share and save recipes. </p>
   </div>
-<!-- 
-    <div class="row">
-      <div class="col-8 offset-2 mt-5 justify-content-center d-flex">
-
-        {% for recipe in recipe_list %}
-        <div class="card" style="width: 18rem;">
-          <img src="{{ recipe.image }}" class="card-img-top" alt="Image of {{ recipe.title }}">
-          <div class="card-body">
-            <h5 class="card-title">{{ recipe.title }}</h5>
-            <p class="card-text">{{ recipe.caption }}</p>
-            <span>{{ recipe.number_of_likes }}</span>
-            <span>{{ recipe.number_of_comments }}</span>
-            <a href="{% url 'recipe_detail' recipe.slug  %}" class="btn btn-primary">Cook!</a>
-            <a href="{% url 'profile_page' recipe.author.profile.id  %}"
-              class="btn btn-primary">{{ recipe.author.profile.id }}</a>
-          </div>
-        </div>
-        {% endfor %}
-      </div>
-    </div> -->
-
-
-    <!-- carousel - new -->
+    <!-- Carousel - displays newest recipes -->
       <div class="row">
         <div class="mt-5">
-
-
-
           <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
             <div class="carousel-indicators">
               <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
@@ -49,33 +23,17 @@
             <div class="carousel-inner">
               <div class="carousel-item active">
                 <!-- cards -->
-                <div class="col-8 offset-2 mt-5 mb-5 justify-content-center d-flex">
+                <div class="col-8 offset-2 mt-1 mb-1 justify-content-center d-flex">
 
                   {% for recipe in recipe_list|slice:'0:3' %}
-                  <div class="card m-2" style="width: 18rem;">
-                    {% if "placeholder" in recipe.image.url %}
-                <img src="static/images/placeholder.png" class="card-img-top" alt="Placeholder image">
-                {% else %}
-                <img src=" {{ recipe.image.url }}" class="card-img-top" alt="Image of {{ recipe.title }}">
-                {% endif %}
-                    <div class="card-body">
-                      <h5 class="card-title">{{ recipe.title }}</h5>
-                      <p class="card-text">{{ recipe.caption }}</p>
-                      <span>{{ recipe.number_of_likes }}</span>
-                      <span>{{ recipe.number_of_comments }}</span>
-                      <a href="{% url 'recipe_detail' recipe.slug  %}" class="btn btn-primary">Cook!</a>
-                      <a href="{% url 'profile_page' recipe.author %}"
-                        class="btn btn-primary">{{ recipe.author }}</a>
-                    </div>
-                  </div>
+                  {% include "card.html" with recipe=recipe %}
                   {% endfor %}
                 </div>
-
                 <!-- end cards -->
               </div>
               <div class="carousel-item">
                 <div class="col-8 offset-2 mt-5 mb-5 justify-content-center d-flex">
-
+                  <!-- cards -->
                   {% for recipe in recipe_list|slice:'3:6' %}
                   <div class="card m-2" style="width: 18rem;">
                     {% if "placeholder" in recipe.image.url %}
@@ -95,6 +53,7 @@
                   </div>
                   {% endfor %}
                 </div>
+                <!-- end cards -->
   
               </div>
               <div class="carousel-item h-100">

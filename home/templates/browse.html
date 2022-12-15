@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-
 {% block content %}
 
 <h2>Browse by: {{ tag }}</h2>
@@ -9,18 +8,10 @@
     <div class="row">
         <div class="col-8 offset-2">
             {% for recipe in recipes %}
-            <div class="card" style="width: 18rem;">
-                <img src="{{ recipe.image }}" class="card-img-top" alt="Image of {{ recipe.title }}">
-                <div class="card-body">
-                  <h5 class="card-title">{{ recipe.title }}</h5>
-                  <p class="card-text">{{ recipe.caption }}</p>
-                  <span>{{ recipe.number_of_likes }}</span>
-                  <span>{{ recipe.number_of_comments }}</span>
-                  <a href="{% url 'recipe_detail' recipe.slug  %}" class="btn btn-primary">Cook!</a>
-                </div>
-              </div>
+            {% include "card.html" with recipe=recipe %}
             {% endfor %}
         </div>
     </div>
 </div>
+
 {% endblock %}

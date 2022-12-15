@@ -1,34 +1,55 @@
 {% extends "base.html" %}
-
 {% block content %}
 
-{% if search %}
-{% if not recipes %}
-    <h2>No results for '{{ search }}'</h2>
-{% else %}        
-    <h2>Showing results for '{{ search }}'</h2>
-{% endif %}
-{% else %}
-<h2>Oops! You need to search for something!</h2>
-{% endif %}
-
 <div class="container">
-    <div class="row">
-        <div class="col-8 offset-2">
-            
-            {% for recipe in recipes %}
-            <div class="card" style="width: 18rem;">
-                <img src="{{ recipe.image }}" class="card-img-top" alt="Image of {{ recipe.title }}">
-                <div class="card-body">
-                  <h5 class="card-title">{{ recipe.title }}</h5>
-                  <p class="card-text">{{ recipe.caption }}</p>
-                  <span>{{ recipe.number_of_likes }}</span>
-                  <span>{{ recipe.number_of_comments }}</span>
-                  <a href="{% url 'recipe_detail' recipe.slug  %}" class="btn btn-primary">Cook!</a>
-                </div>
-              </div>
-            {% endfor %}
+    <!-- Dynamic heading -->
+    <div class="row text-center mt-4">
+        <div class="col-10 offset-1">
+            {% if not search %}
+            <!-- Nothing searched -->
+            <span class="icon-xl">
+                <i class="fa-solid fa-circle-exclamation"></i>
+            </span>
+            <h2 class="fs-1">Oops! You need to search for something!</h2>
+            <h3>Use the search bar at the top or browse by tag below.</h3>
+            {% else %}
+            {% if not recipes %}
+            <!-- No search results -->
+            <span class="icon-xl">
+                <i class="fa-solid fa-circle-exclamation"></i>
+            </span>
+            <h2 class="fs-1">Sorry! No results for '{{ search }}'</h2>
+            <h3>Try again?</h3>
+            {% else %}
+            <!-- Search successful -->
+            <h2 class="fs-1 mt-2">Showing results for '{{ search }}'</h2>
+            {% endif %}
+            {% endif %}
+        </div>
+    </div>
+    <div class="row mt-4 justify-content-center d-flex">
+        {% for recipe in recipes %}
+            {% include "card.html" with recipe=recipe %}
+        {% endfor %}
+    </div>
+    <!-- Other options -->
+    <div class="row text-center">
+        <div class="col-10 offset-1 mt-5">
+            <h4>Can't find what you're looking for?</h4>
+            <p>You could try using broader search terms or why not try adding your own recipe!
+            </p>
+            <a class="btn btn-lg btn-warning mt-1">Add new recipe</a>
+            <h4 class="mt-4">Browse by tag</h4>
+            <ul class="list-inline">
+                {% for tag in tags %}
+                <li class="list-inline-item"><a class="btn btn-light bg-highlight"
+                        href="{% url 'browse' tag|slugify  %}">{{ tag }}</a></li>
+                {% endfor %}
+            </ul>
         </div>
     </div>
 </div>
+
+
+
 {% endblock %}

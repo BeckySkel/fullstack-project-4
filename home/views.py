@@ -7,24 +7,35 @@ from utils.utils import TAGS
 
 class HomePage(generic.ListView):
     """
-    View to display all recipes in the home page
+    List view to make public recipes available as
+    'recipe_list' template variable to the home page
     """
     # code insprired by CI walkthrough project
     model = Recipe
     queryset = Recipe.objects.all().filter(removed=False, private=False)
     template_name = "index.html"
-    paginate_by = 9
-
 
 
 class BrowseByTag(View):
-    """"""
+    """
+    Custom view to display recipes matching the selected tag. Tags are access
+    via a tuple of tuples called TAGS
+    
+    recipes: queryset, items from Recipe model whose tag field contains the
+    selected tag
+    tag: str, the tag name, as it appears to the user
+    slug: str, slugified version of the selected tag
+    """
     def get(self, request, slug, *args, **kwargs):
         for tuple in TAGS:
             if slug in tuple:
                 tag = tuple[0]
                 
-        recipes = Recipe.objects.filter(removed=False, private=False, tags__contains=tag)
+        recipes = Recipe.objects.filter(
+            removed=False,
+            private=False,
+            tags__contains=tag
+            )
 
         return render(
             request,
@@ -38,8 +49,15 @@ class BrowseByTag(View):
 
 
 class SearchResults(View):
-    """"""
-    # https://learn.codeinstitute.net/courses/course-v1:CodeInstitute+FST101+2021_T1/courseware/dc049b343a9b474f8d75822c5fda1582/22da66e7007d4b5a9bd53901c84034e8/
+    """
+    Custom view for displaying search results. Checks if the inputted string
+    appears in the title, caption, ingredients list or tags of a recipe.
+
+    search: str, input retrieved from search bar
+    recipes: queryset, items from Recipe model containing the search term
+    """
+    # Tutorial to retrieve search term available at
+    # https://www.youtube.com/watch?v=AGtae4L5BbI
     def post(self, request, *args, **kwargs):
         search = request.POST['search-bar']
         recipes = Recipe.objects.filter(
@@ -50,8 +68,13 @@ class SearchResults(View):
             removed=False,
             private=False
             )
-        all_recipes = Recipe.objects.all()
-        return render(request, 'search_results.html', {'search': search, 'recipes': recipes })
+
+        return render(
+            request,
+            'search_results.html',
+            {'search': search, 'recipes': recipes}
+            )
 
     def get(self, request, *args, **kwargs):
         return render(request, 'search_results.html')
+

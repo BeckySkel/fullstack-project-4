@@ -10,19 +10,27 @@ body {
 
 .bg-highlight {
     background-color: #FF9B71;
+    color: #fff;
 }
 
 .bg-main {
     background-color: #4ACC9A;
 }
 
-.card-text {
-    height: 3rem;
-}
-
 .carousel-item {
     background-color: #fcebae;
 }
+
+.card-body i {
+    margin-left: 0.5rem;
+    color: #4ACC9A;
+}
+
+.icon-xl {
+    font-size: 10rem;
+    color: #9c9c9c;
+}
+
 
 /* 
 #logo-r {
@@ -32,10 +40,10 @@ body {
     left: -0.2rem;
 } */
 
-.awesome {
+/* .awesome {
     font-size: 20rem;
     color: #FF9B71;
     padding: 1rem 10rem;
     border: 10px grey solid;
     display: inline-block;
-}
+} */
