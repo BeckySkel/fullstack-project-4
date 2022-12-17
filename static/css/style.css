@@ -17,9 +17,13 @@ body {
     background-color: #4ACC9A;
 }
 
-.carousel-item {
+.bg-container {
     background-color: #fcebae;
 }
+
+/* .carousel-item { */
+    /* background-color: #fcebae; */
+/* } */
 
 .card-body i {
     margin-left: 0.5rem;

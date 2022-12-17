@@ -1,14 +1,32 @@
 {% extends "base.html" %}
 {% block content %}
 
-<!-- Heading and intro text -->
+
 <div class="container">
+  <!-- Heading and intro text -->
   <div class="row text-center">
     <h1 class="mt-5">Welcome to recipebook!</h1>
-    <p class="mt-5 col-10 offset-1">Recipebook is an online cookbook where users can share and save recipes. </p>
+    <p class="mt-5 col-10 offset-1 fs-3">Recipebook combines is an online cookbook where users can share and save recipes. </p>
   </div>
+  <div class="row text-center">
+    {% if not recipe_list %}
+    <div class="col-8 offset-2 mt-5 pt-4 pb-4 bg-container bg-gradient rounded border border-warning border-opacity-50"></div>
+    <h2>Oh no! We haven't got any recipes to show you at the moment...</h2>
+    <p>Come back later or post your own recipe</p>
+    <a class="btn btn-lg btn-warning mt-1">Add new recipe</a>
+    </div>
+  </div class="row">
+    {% else %}
+    {% include "carousel.html" with recipes=recipe_list %}
+    {% endif %}
+    </div>
+  </div>
+
+
+
+
     <!-- Carousel - displays newest recipes -->
-      <div class="row">
+      <!-- <div class="row">
         <div class="mt-5">
           <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
             <div class="carousel-indicators">
@@ -20,20 +38,20 @@
                 aria-label="Slide 3"></button>
             </div>
             <h2 class="fs-2"><span class="badge bg-highlight position-relative top-40">New</span></h2>
-            <div class="carousel-inner">
+            <div class="carousel-inner bg-container bg-gradient rounded border border-warning border-opacity-50 pt-4 pb-5">
               <div class="carousel-item active">
-                <!-- cards -->
+                cards
                 <div class="col-8 offset-2 mt-1 mb-1 justify-content-center d-flex">
 
                   {% for recipe in recipe_list|slice:'0:3' %}
                   {% include "card.html" with recipe=recipe %}
                   {% endfor %}
                 </div>
-                <!-- end cards -->
+                end cards
               </div>
               <div class="carousel-item">
-                <div class="col-8 offset-2 mt-5 mb-5 justify-content-center d-flex">
-                  <!-- cards -->
+                <div class="col-8 offset-2 justify-content-center d-flex">
+                  cards
                   {% for recipe in recipe_list|slice:'3:6' %}
                   <div class="card m-2" style="width: 18rem;">
                     {% if "placeholder" in recipe.image.url %}
@@ -53,7 +71,7 @@
                   </div>
                   {% endfor %}
                 </div>
-                <!-- end cards -->
+                end cards
   
               </div>
               <div class="carousel-item h-100">
@@ -78,6 +96,8 @@
           </div>
 
         </div>
-      </div>
+      </div> -->
+  </div>
+    
 
     {% endblock %}

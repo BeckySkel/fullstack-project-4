@@ -2,7 +2,7 @@
 {% block content %}
 
 <div class="container">
-    <!-- Dynamic heading -->
+    <!-- Heading and info (dynamic) -->
     <div class="row text-center mt-4">
         <div class="col-10 offset-1">
             {% if not search %}
@@ -27,16 +27,18 @@
             {% endif %}
         </div>
     </div>
-    <div class="row mt-4 justify-content-center d-flex">
+    {% if recipes %}
+    <div class="row mt-4 pt-4 pb-4 justify-content-center d-flex bg-container bg-gradient rounded border border-warning border-opacity-50">
         {% for recipe in recipes %}
             {% include "card.html" with recipe=recipe %}
         {% endfor %}
     </div>
-    <!-- Other options -->
+    {% endif %}
+    <!-- Other options (fixed) -->
     <div class="row text-center">
         <div class="col-10 offset-1 mt-5">
             <h4>Can't find what you're looking for?</h4>
-            <p>You could try using broader search terms or why not try adding your own recipe!
+            <p>You could try using broader search terms or why not add your own recipe!
             </p>
             <a class="btn btn-lg btn-warning mt-1">Add new recipe</a>
             <h4 class="mt-4">Browse by tag</h4>
@@ -49,7 +51,5 @@
         </div>
     </div>
 </div>
-
-
 
 {% endblock %}
