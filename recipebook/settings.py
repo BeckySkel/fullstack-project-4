@@ -32,7 +32,8 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
-DEBUG = 'DEVELOPMENT' in os.environ
+# DEBUG = 'DEVELOPMENT' in os.environ
+DEBUG = ('DEBUGGING' in os.environ)
 
 ALLOWED_HOSTS = ['pp4-recipebook.herokuapp.com', 'localhost']
 
