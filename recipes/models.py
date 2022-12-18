@@ -52,8 +52,8 @@ class Recipe(models.Model):
         return self.saved_by.count()
 
     def short_caption(self):
-        if len(self.caption) > 28:
-            return f'{self.caption[:28]}...'
+        if len(self.caption) > 25:
+            return f'{self.caption[:25]}...'
         else:
             return self.caption
 

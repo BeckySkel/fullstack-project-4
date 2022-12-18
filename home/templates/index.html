@@ -6,21 +6,22 @@
   <!-- Heading and intro text -->
   <div class="row text-center">
     <h1 class="mt-5">Welcome to recipebook!</h1>
-    <p class="mt-5 col-10 offset-1 fs-3">Recipebook combines is an online cookbook where users can share and save recipes. </p>
+    <p class="mt-5 col-10 offset-1 fs-3">Where users can share and save their favourite recipes.</p>
   </div>
+  {% if not recipe_list %}
   <div class="row text-center">
-    {% if not recipe_list %}
     <div class="col-8 offset-2 mt-5 pt-4 pb-4 bg-container bg-gradient rounded border border-warning border-opacity-50"></div>
     <h2>Oh no! We haven't got any recipes to show you at the moment...</h2>
     <p>Come back later or post your own recipe</p>
     <a class="btn btn-lg btn-warning mt-1">Add new recipe</a>
-    </div>
-  </div class="row">
-    {% else %}
+  </div>
+  {% else %}
+  <div class="row">
+    
     {% include "carousel.html" with recipes=recipe_list %}
     {% endif %}
-    </div>
   </div>
+</div>
 
 
 

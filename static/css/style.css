@@ -21,13 +21,27 @@ body {
     background-color: #fcebae;
 }
 
-/* .carousel-item { */
-    /* background-color: #fcebae; */
-/* } */
+.card-body p {
+    height: 1rem;
+}
+
+.card-body span {
+    margin-right: 0.5rem;
+}
 
 .card-body i {
-    margin-left: 0.5rem;
     color: #4ACC9A;
+}
+
+.card-footer {
+    background-color: transparent;
+    border: 0;
+    padding: 0;
+}
+
+.carousel-control-next-icon,
+.carousel-control-prev-icon {
+    background-image: none;
 }
 
 .icon-xl {
@@ -35,19 +49,8 @@ body {
     color: #9c9c9c;
 }
 
-
-/* 
-#logo-r {
-    color: #fff;
-    position: relative;
-    font-size: 3rem;
-    left: -0.2rem;
-} */
-
-/* .awesome {
-    font-size: 20rem;
-    color: #FF9B71;
-    padding: 1rem 10rem;
-    border: 10px grey solid;
-    display: inline-block;
-} */
+.view-more {
+    background-color: transparent;
+    border: 0;
+    padding: 0;
+}
