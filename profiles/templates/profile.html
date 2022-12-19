@@ -1,28 +1,55 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h2>{{ profile }}</h2>
+<div class="container">
+    <div class="row text-center pt-5">
+        <h2 class="fs-1">Welcome {{ profile }}</h2>
+    </div>
 
-<h3>Saved recipes:</h3>
-<ul>
-    {% for r in saved_recipes %}
-    <li>{{ r }}</li>
-    {% endfor %}
-</ul>
+    <div class="row mt-4">
+        <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+            <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
+            <label class="btn btn-warning bg-highlight btn-tab rounded-top" for="btnradio1">Saved</label>
 
-<h3>Posted recipes:</h3>
-<ul>
-    {% for r in posted_recipes %}
-    <li>{{ r }}</li>
-    {% endfor %}
-</ul>
+            <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
+            <label class="btn btn-warning bg-highlight btn-tab rounded-top" for="btnradio2">Posted</label>
+        </div>
 
-<!-- creating placeholder image -->
-<!-- 
-<div class="text-center awesome">
-    <i class="fa-solid fa-kitchen-set"></i>
-    </div> -->
+        <div id="content" class="pt-5 pb-4 justify-content-center d-flex flex-wrap bg-container bg-gradient rounded border border-2 border-warning border-opacity-50">
+            <div id="saved" class="d-none">
+                {% if saved_recipes %}
+                {% for recipe in saved_recipes %}
+                {% include "card.html" with recipe=recipe %}
+                {% endfor %}
+                {% else %}
+                <p>You've not saved any recipes yet! Start browsing!</p>
+                {% endif %}
+            </div>
+
+        <div id="posted" class="d-none">
+            {% if posted_recipes %}
+                {% for recipe in posted_recipes %}
+                {% include "card.html" with recipe=recipe %}
+                {% endfor %}
+                {% else %}
+                <p>You've not posted any recipes yet!</p>
+                <a class="btn btn-lg btn-warning mt-1">Add new recipe</a>
+                {% endif %}
+        </div>
+    </div>
+</div>
+
+<script>
+    content = document.getElementById('content')
+    saved = document.getElementById('saved')
+    posted = document.getElementById('posted')
+
+    document.getElementById('btnradio1').addEventListener('click', function () {
+        content.innerHTML = saved.innerHTML;
+    })
+    document.getElementById('btnradio2').addEventListener('click', function () {
+        content.innerHTML = posted.innerHTML;
+    })
+</script>
 
 {% endblock %}
-
-

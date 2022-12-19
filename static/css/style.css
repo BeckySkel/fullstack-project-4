@@ -60,6 +60,10 @@ main {
     padding: 0;
 }
 
+.btn-tab {
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
 
 
 /* ----- Media Queries */

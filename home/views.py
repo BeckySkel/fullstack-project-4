@@ -28,13 +28,17 @@ class BrowseByTag(View):
     slug: str, slugified version of the selected tag
     """
     def get(self, request, slug, *args, **kwargs):
+
         if slug == 'new':
-            recipes = Recipe.objects.filter(removed=False, private=False).order_by('-created_on')
-            tag = 'new'
+            recipes = Recipe.objects.filter(removed=False, private=False)\
+                .order_by('-created_on')
+            tag = 'New'
         elif slug == 'popular':
+            # Order by count of ManyToMany field from
             # https://stackoverflow.com/questions/28254142/django-order-by-count-of-many-to-many-object
-            recipes = Recipe.objects.filter(removed=False, private=False).annotate(q_count=Count('likes')).order_by('-q_count')
-            tag = 'popular'
+            recipes = Recipe.objects.filter(removed=False, private=False)\
+                .annotate(q_count=Count('likes')).order_by('-q_count')
+            tag = 'Popular'
         else:
             for tuple in TAGS:
                 if slug in tuple:
@@ -68,12 +72,12 @@ class SearchResults(View):
     # Tutorial to retrieve search term available at
     # https://www.youtube.com/watch?v=AGtae4L5BbI
     def post(self, request, *args, **kwargs):
-        search = request.POST['search-bar']
+        searched = request.POST['search-bar']
         recipes = Recipe.objects.filter(
-            Q(title__icontains=search) |
-            Q(caption__icontains=search) |
-            Q(ingredients__icontains=search) |
-            Q(tags__icontains=search),
+            Q(title__icontains=searched) |
+            Q(caption__icontains=searched) |
+            Q(ingredients__icontains=searched) |
+            Q(tags__icontains=searched),
             removed=False,
             private=False
             )
@@ -81,7 +85,7 @@ class SearchResults(View):
         return render(
             request,
             'search_results.html',
-            {'search': search, 'recipes': recipes}
+            {'searched': searched, 'recipes': recipes}
             )
 
     def get(self, request, *args, **kwargs):

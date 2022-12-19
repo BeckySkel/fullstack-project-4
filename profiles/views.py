@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.views import View
 from django.db.models import Q
+from .forms import DashboardViewForm
 
 
 class ProfilePage(View):
@@ -22,6 +23,6 @@ class ProfilePage(View):
                 'recipes': recipes,
                 'saved_recipes': saved_recipes,
                 'posted_recipes': posted_recipes,
-                'profile': get_user,
+                'profile': get_user
             },
         )  
