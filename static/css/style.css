@@ -4,6 +4,11 @@ body {
     font-family: 'Quicksand', sans-serif;
 }
 
+main {
+    height: calc(100vh - );
+    padding-top: ;
+}
+
 .navbar-brand > i {
     padding: 0.4rem;
 }

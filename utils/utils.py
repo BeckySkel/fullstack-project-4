@@ -30,3 +30,6 @@ TAGS = [
     ('On a Budget', 'on-a-budget'),
     ('Prep Ahead', 'prep-ahead'),
 ]
+
+# TAGS_LIST = ["Breakfast", "Lunch", ...]
+# TAGS = [(tag, "-".join(tag.lower().split(" "))) for tag in TAGS_LIST]

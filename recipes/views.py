@@ -49,12 +49,8 @@ class RecipeDetail(View):
         recipe = get_object_or_404(queryset, slug=slug)
         comments = recipe.recipe_comments.filter(removed=False)
         notes = recipe.notes_for_recipe.filter(profile=request.user.profile)
-        liked = False
-        if recipe.likes.filter(id=self.request.user.id).exists():
-            liked = True
-        saved = False
-        if recipe.saved_by.filter(id=self.request.user.profile.id).exists():
-            saved = True
+        liked = recipe.likes.filter(id=self.request.user.id).exists()
+        saved = recipe.saved_by.filter(id=self.request.user.profile.id).exists()
         comment_form = CommentForm(data=request.POST or None)
         note_form = NoteForm(data=request.POST or None)
         

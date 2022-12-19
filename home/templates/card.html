@@ -1,7 +1,7 @@
 {% load static %}
 <div class="card m-2" style="width: 18rem;">
     {% if "placeholder" in recipe.image.url %}
-<img src="{% static '/images/placeholder.png' %}" class="card-img-top" alt="Placeholder image">
+<img src="{% static 'images/placeholder.png' %}" class="card-img-top" alt="Placeholder image">
 {% else %}
 <img src=" {{ recipe.image.url }}" class="card-img-top" alt="Image of {{ recipe.title }}">
 {% endif %}
