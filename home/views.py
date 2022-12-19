@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views import View, generic
 from recipes.models import Recipe
+from django.db.models import Count
 from django.db.models import Q
 from utils.utils import TAGS
 
@@ -27,15 +28,23 @@ class BrowseByTag(View):
     slug: str, slugified version of the selected tag
     """
     def get(self, request, slug, *args, **kwargs):
-        for tuple in TAGS:
-            if slug in tuple:
-                tag = tuple[0]
-                
-        recipes = Recipe.objects.filter(
-            removed=False,
-            private=False,
-            tags__contains=tag
-            )
+        if slug == 'new':
+            recipes = Recipe.objects.filter(removed=False, private=False).order_by('-created_on')
+            tag = 'new'
+        elif slug == 'popular':
+            # https://stackoverflow.com/questions/28254142/django-order-by-count-of-many-to-many-object
+            recipes = Recipe.objects.filter(removed=False, private=False).annotate(q_count=Count('likes')).order_by('-q_count')
+            tag = 'popular'
+        else:
+            for tuple in TAGS:
+                if slug in tuple:
+                    tag = tuple[0]
+                    
+            recipes = Recipe.objects.filter(
+                removed=False,
+                private=False,
+                tags__contains=tag
+                )
 
         return render(
             request,

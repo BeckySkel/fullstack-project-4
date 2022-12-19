@@ -27,7 +27,7 @@
 </head>
 
 <body class="bg-light bg-gradient h-100">
-    <header class="sticky-top">
+    <header class="fixed-top">
         <!-- Nav Bar template by Bootstrap -->
         <nav class="navbar navbar-expand-lg bg-main bg-gradient fw-bold">
             <div class="container-fluid">
@@ -84,8 +84,8 @@
                                 Browse <i class="fa-solid fa-book-open"></i>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">New</a></li>
-                                <li><a class="dropdown-item" href="#">Popular</a></li>
+                                <li><a class="dropdown-item" href="{% url 'browse' 'new'  %}">New</a></li>
+                                <li><a class="dropdown-item" href="{% url 'browse' 'popular'  %}">Popular</a></li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>

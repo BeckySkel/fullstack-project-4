@@ -16,8 +16,8 @@ class Recipe(models.Model):
         on_delete=models.CASCADE,
         related_name='recipe_posts'
         )
-    created_on = models.DateField(auto_now_add=True)
-    updated_on = models.DateField(auto_now=True)
+    created_on = models.DateTimeField(auto_now_add=True)
+    updated_on = models.DateTimeField(auto_now=True)
     ingredients = models.TextField()
     steps = models.TextField()
     image = CloudinaryField('image', default='placeholder')

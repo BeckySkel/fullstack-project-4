@@ -25,7 +25,7 @@
       </div>
       {% endif %}
       <!-- end of indicators  -->
-      <h2 class="fs-2"><span class="badge bg-highlight position-relative top-40">New</span></h2>
+      <h2 class="fs-2"><span class="badge bg-highlight position-relative top-40">{{ title }}</span></h2>
       <div class="carousel-inner bg-container bg-gradient rounded border border-warning border-opacity-50 pt-4 pb-5">
         <!-- Carousel slides (dynamic) -->
         {% if recipe_list|length < 6 %}
@@ -37,7 +37,7 @@
             {% endfor %}
             <div class="card m-2 align-self-center view-more" style="width: 18rem;">
               <div class="card-body">
-                <a href="#" class="fs-2 card-link stretched-link">Click to view more...</a>
+                <a href="{% url 'browse' title|slugify  %}" class="fs-2 card-link stretched-link">Click to view more...</a>
               </div>
             </div>
           </div>
@@ -58,7 +58,7 @@
             {% endfor %}
             <div class="card m-2 align-self-center view-more" style="width: 18rem;">
               <div class="card-body">
-                <a href="#" class="fs-2 card-link stretched-link">Click to view more...</a>
+                <a href="{% url 'browse' title|slugify  %}" class="fs-2 card-link stretched-link">Click to view more...</a>
               </div>
             </div>
           </div>
@@ -86,7 +86,7 @@
             {% endfor %}
             <div class="card m-2 align-self-center view-more" style="width: 18rem;">
               <div class="card-body">
-                <a href="#" class="fs-2 card-link stretched-link">Click to view more...</a>
+                <a href="{% url 'browse' title|slugify  %}" class="fs-2 card-link stretched-link">Click to view more...</a>
               </div>
             </div>
           </div>
