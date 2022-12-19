@@ -5,8 +5,8 @@ body {
 }
 
 main {
-    height: calc(100vh - );
-    padding-top: ;
+    min-height: calc(100vh - 7rem);
+    padding-top: 10vh;
 }
 
 .navbar-brand > i {
@@ -59,3 +59,20 @@ main {
     border: 0;
     padding: 0;
 }
+
+
+
+/* ----- Media Queries */
+@media screen and (max-width: 992px) {
+    .dropdown-menu {
+        max-height: 50vh;
+        overflow-y: scroll;
+    }
+
+    .footer-nav {
+        flex-direction: row;
+    }
+    .footer-nav li {
+        padding: 0 0.5rem;
+    }
+ }
