@@ -1,10 +1,10 @@
 from recipes.models import Recipe
-from profiles.models import Profile
+from profiles.models import Profile, Notification
 from django.contrib.auth.models import User
 from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.views import View
 from django.db.models import Q
-from .forms import DashboardViewForm
+from django.http import HttpResponseRedirect
 
 
 class ProfilePage(View):
@@ -25,4 +25,17 @@ class ProfilePage(View):
                 'posted_recipes': posted_recipes,
                 'profile': get_user
             },
-        )  
+        )
+
+def dismiss_notification(request, notification_id):
+    notification = get_object_or_404(Notification, id=notification_id)
+    
+    if request.user.profile == notification.to:
+        print('access granted')
+        print(notification.dismissed)
+        notification.dismissed = True
+        print(notification.dismissed)
+        notification.save(commit=False)
+
+    # https://stackoverflow.com/questions/50006147/how-to-return-redirect-to-previous-page-in-django-after-post-request
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))

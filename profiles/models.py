@@ -8,10 +8,14 @@ from django.db.models import Count
 class Profile(models.Model):
     """
     Model to store extra information about the user.
-    Created/deleted automatically when a new user is added/deleted 
+    Created/updated/deleted automatically when a new user is
+    added/updated/deleted 
     """
-
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
+    user = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE,
+        related_name='profile'
+        )
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     profile_image = CloudinaryField('image', default='profile_placeholder')
@@ -27,9 +31,9 @@ class Profile(models.Model):
 
     def full_name(self):
         return f"{self.first_name} {self.last_name}"
-
+    
     def count_notifications(self):
-        return self.notifications.count()
+        return self.notifications.filter(dismissed=False).count()
 
     def count_saved_recipes(self):
         return self.saved.count()
@@ -44,6 +48,7 @@ class Notification(models.Model):
     sender = models.ForeignKey(User, on_delete=models.CASCADE)
     sent = models.DateTimeField(auto_now_add=True)
     message = models.TextField()
+    dismissed = models.BooleanField(default=False)
 
     def __str__(self):
         return f'Notification of {self.message} from {self.sender}'

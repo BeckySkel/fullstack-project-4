@@ -7,4 +7,5 @@ from multiurl import ContinueResolving
 
 urlpatterns = [multiurl(
     path('<profile>/', views.ProfilePage.as_view(), name='profile_page'),
+    path('dismiss/<notification_id>', views.dismiss_notification, name='dismiss_notification'),
 )]

@@ -2,54 +2,66 @@
 {% block content %}
 
 <div class="container">
-    <div class="row text-center pt-5">
-        <h2 class="fs-1">Welcome {{ profile }}</h2>
+  <div class="row text-center pt-5">
+    <h2 class="fs-1">Welcome {{ profile }}</h2>
+    <p>View your saved and posted recipes below</p>
+    <p>
+      <a class="btn btn-outline-secondary" data-bs-toggle="collapse" href="#collapseExample" role="button"
+        aria-expanded="false" aria-controls="collapseExample">
+        Notifications <span class="badge text-bg-warning">{{ user.profile.count_notifications }}</span>
+      </a>
+    </p>
+    <div class="collapse" id="collapseExample">
+      <div class="card card-body">
+        {% for n in user.profile.notifications.all %}
+        {% if not n.dismissed %}
+        <div class="alert alert-secondary" role="alert">
+          {{ n }}
+          <button type="button" class="btn-close float-end" data-bs-dismiss="alert" aria-label="Dismiss"
+            style="transform: rotate(0);">
+            <a href="{% url 'dismiss_notification' n.id %}" class="stretched-link"></a>
+          </button>
+        </div>
+        {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-4">
+    <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+      <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
+      <label class="btn btn-warning bg-highlight btn-tab rounded-top" for="btnradio1">Saved <span
+          class="badge text-bg-warning">{{ profile.count_saved_recipes }}</span></label>
+
+      <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
+      <label class="btn btn-warning bg-highlight btn-tab rounded-top" for="btnradio2">Posted <span
+          class="badge text-bg-warning">{{ profile.recipe_posts.all.count }}</span></label>
     </div>
 
-    <div class="row mt-4">
-        <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-            <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
-            <label class="btn btn-warning bg-highlight btn-tab rounded-top" for="btnradio1">Saved</label>
+    <div id="content"
+      class="pt-5 pb-4 justify-content-center d-flex flex-wrap bg-container bg-gradient rounded border border-2 border-warning border-opacity-50">
+      <div id="saved" class="d-none">
+        {% if saved_recipes %}
+        {% for recipe in saved_recipes %}
+        {% include "card.html" with recipe=recipe %}
+        {% endfor %}
+        {% else %}
+        <p>You've not saved any recipes yet! Start browsing!</p>
+        {% endif %}
+      </div>
 
-            <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
-            <label class="btn btn-warning bg-highlight btn-tab rounded-top" for="btnradio2">Posted</label>
-        </div>
-
-        <div id="content" class="pt-5 pb-4 justify-content-center d-flex flex-wrap bg-container bg-gradient rounded border border-2 border-warning border-opacity-50">
-            <div id="saved" class="d-none">
-                {% if saved_recipes %}
-                {% for recipe in saved_recipes %}
-                {% include "card.html" with recipe=recipe %}
-                {% endfor %}
-                {% else %}
-                <p>You've not saved any recipes yet! Start browsing!</p>
-                {% endif %}
-            </div>
-
-        <div id="posted" class="d-none">
-            {% if posted_recipes %}
-                {% for recipe in posted_recipes %}
-                {% include "card.html" with recipe=recipe %}
-                {% endfor %}
-                {% else %}
-                <p>You've not posted any recipes yet!</p>
-                <a class="btn btn-lg btn-warning mt-1">Add new recipe</a>
-                {% endif %}
-        </div>
+      <div id="posted" class="d-none">
+        {% if posted_recipes %}
+        {% for recipe in posted_recipes %}
+        {% include "card.html" with recipe=recipe %}
+        {% endfor %}
+        {% else %}
+        <p>You've not posted any recipes yet!</p>
+        <a class="btn btn-lg btn-warning mt-1">Add new recipe</a>
+        {% endif %}
+      </div>
     </div>
-</div>
+  </div>
 
-<script>
-    content = document.getElementById('content')
-    saved = document.getElementById('saved')
-    posted = document.getElementById('posted')
-
-    document.getElementById('btnradio1').addEventListener('click', function () {
-        content.innerHTML = saved.innerHTML;
-    })
-    document.getElementById('btnradio2').addEventListener('click', function () {
-        content.innerHTML = posted.innerHTML;
-    })
-</script>
-
-{% endblock %}
+  {% endblock %}

@@ -6,7 +6,7 @@ from .models import Profile, Notification, Note
 class ProfileAdmin(admin.ModelAdmin):
     """"""
     # list_display = ('full_name', 'user')
-    search_fields = ['full_name', 'email']
+    search_fields = ['full_name', 'email', 'user']
 
 @admin.register(Notification)
 class NotificationAdmin(admin.ModelAdmin):
@@ -16,5 +16,5 @@ class NotificationAdmin(admin.ModelAdmin):
     list_filter = ('to', 'sender', 'sent')
 
 @admin.register(Note)
-class NotificationAdmin(admin.ModelAdmin):
+class NoteAdmin(admin.ModelAdmin):
     """"""
