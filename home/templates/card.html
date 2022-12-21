@@ -1,5 +1,17 @@
 {% load static %}
-<div class="card m-2" style="width: 18rem;">
+<div class="card m-2 text-start" style="width: 18rem;">
+  {% if user == recipe.author %}
+  {% if recipe.private %}
+  <div class="banner-container">
+    <div class="banner bg-secondary">Private</div>
+  </div>
+  {% else %}
+  <div class="banner-container">
+    <div class="banner bg-main">Public</div>
+  </div>
+  {% endif %}
+  {% endif %}
+
   {% if "placeholder" in recipe.image.url %}
   <img src="{% static 'images/recipe_placeholder.png' %}" class="card-img-top" alt="Placeholder image">
   {% else %}

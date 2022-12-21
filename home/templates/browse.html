@@ -6,9 +6,16 @@
         <h2 class="fs-1">Browse by: {{ tag }}</h2>
     </div>
     <div class="row mt-4 pt-4 pb-4 justify-content-center d-flex flex-wrap bg-container bg-gradient rounded border border-warning border-opacity-50">
+        {% if recipes %}
         {% for recipe in recipes %}
             {% include "card.html" with recipe=recipe %}
         {% endfor %}
+        {% else %}
+        <div class="text-center">
+        <p>Oh no! No {{ tag }} recipes yet, why not add your own?</p>
+        <a class="btn btn-lg btn-warning mt-1">Add new recipe</a>
+    </div>
+        {% endif %}
     </div>
 </div>
 

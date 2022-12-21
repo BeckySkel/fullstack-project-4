@@ -1,14 +1,27 @@
 // Profile page
 $(function(){
     saved = $('#saved').html();
+    console.log(saved);
     posted = $('#posted').html();
-
-    $('#content').html(saved);
+    console.log(posted);
+    info = $('#info').html();
+    console.log(info);
     
-    $('#btnradio1').click(function () {
+    // if (typeof saved === 'undefined') {
+    // $('#content').html(info);
+    // } else {
+    // $('#content').html(saved);
+    // }
+
+    $('#content').html((typeof saved === 'undefined') ? info : saved);
+    
+    $('#btnradiosaved').click(function () {
         $('#content').html(saved);
     })
-    $('#btnradio2').click(function () {
+    $('#btnradioposted').click(function () {
         $('#content').html(posted);
+    })
+    $('#btnradioinfo').click(function () {
+        $('#content').html(info);
     })
   });
