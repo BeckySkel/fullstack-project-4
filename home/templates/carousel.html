@@ -1,26 +1,26 @@
 <!-- Bootstrap carousel -->
 <div class="row">
   <div class="mt-5">
-    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
+    <div id="carousel{{title}}Indicators" class="carousel slide" data-bs-ride="true">
       <!-- Carousel indicators (dynamic) -->
       {% if recipe_list|length < 6 %}
       <!-- No indicators when only 1 slide present -->
       {% elif recipe_list|length < 9 %}
       <!-- 2 indicators when 2 slides present -->
       <div class="carousel-indicators">
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+        <button type="button" data-bs-target="#carousel{{title}}Indicators" data-bs-slide-to="0" class="active"
           aria-current="true" aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+        <button type="button" data-bs-target="#carousel{{title}}Indicators" data-bs-slide-to="1"
           aria-label="Slide 2"></button>
       </div>
       {% else %}
       <!-- 3 indicators when 3 slides present -->
       <div class="carousel-indicators">
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+        <button type="button" data-bs-target="#carousel{{title}}Indicators" data-bs-slide-to="0" class="active"
           aria-current="true" aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+        <button type="button" data-bs-target="#carousel{{title}}Indicators" data-bs-slide-to="1"
           aria-label="Slide 2"></button>
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+        <button type="button" data-bs-target="#carousel{{title}}Indicators" data-bs-slide-to="2"
           aria-label="Slide 3"></button>
       </div>
       {% endif %}
@@ -99,14 +99,14 @@
       <!-- No controls when only 1 slide present -->
       {% else %}
       <!-- Controls present with more than 1 slide available -->
-      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+      <button class="carousel-control-prev" type="button" data-bs-target="#carousel{{title}}Indicators"
         data-bs-slide="prev">
         <span class="carousel-control-prev-icon  fs-1 text-success" aria-hidden="true">
           <i class="fa-solid fa-chevron-left"></i>
         </span>
         <span class="visually-hidden">Previous</span>
       </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+      <button class="carousel-control-next" type="button" data-bs-target="#carousel{{title}}Indicators"
         data-bs-slide="next">
         <span class="carousel-control-next-icon fs-1 text-success" aria-hidden="true">
           <i class="fa-solid fa-chevron-right"></i>

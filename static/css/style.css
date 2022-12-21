@@ -65,6 +65,14 @@ main {
     border-bottom-left-radius: 0;
 }
 
+.profile-image {
+    margin-left: auto;
+    margin-right: auto;
+    object-fit: cover;
+    height: auto;
+    width: 100%;
+}
+
 
 /* ----- Media Queries */
 @media screen and (max-width: 992px) {
@@ -80,3 +88,4 @@ main {
         padding: 0 0.5rem;
     }
  }
+

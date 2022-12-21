@@ -1,9 +1,11 @@
 {% extends "base.html" %}
+{% load static %}
 {% block content %}
 
 <div class="container">
   <div class="row text-center pt-5">
-    <h2 class="fs-1">Welcome {{ profile }}</h2>
+    {% if user == profile %}
+    <h2 class="fs-1">Welcome {{ profile }}!</h2>
     <p>View your saved and posted recipes below</p>
     <p>
       <a class="btn btn-outline-secondary" data-bs-toggle="collapse" href="#collapseExample" role="button"
@@ -13,7 +15,7 @@
     </p>
     <div class="collapse" id="collapseExample">
       <div class="card card-body">
-        {% for n in user.profile.notifications.all %}
+        {% for n in profile.notifications.all %}
         {% if not n.dismissed %}
         <div class="alert alert-secondary" role="alert">
           {{ n }}
@@ -26,6 +28,26 @@
         {% endfor %}
       </div>
     </div>
+    {% else %}
+    <div class="col-4">
+      {% if "placeholder" in profile.profile_image.url %}
+      <img src="{% static 'images/profile_placeholder.png' %}" class="profile-image rounded-circle" alt="Placeholder image">
+      {% else %}
+      <img src="{{ profile.profile_image.url }}" class="profile-image rounded-circle" alt="{{ profile }}'s profile image">
+      {% endif %}     
+    </div>
+    <div class="col-8">
+      <h2>View {{ profile }}'s profile</h2>
+      <p>{{ profile.bio }}</p>
+    </div>
+    {% endif %}
+
+
+
+
+
+
+
   </div>
 
   <div class="row mt-4">
@@ -63,5 +85,12 @@
       </div>
     </div>
   </div>
+
+
+
+
+  <i class="awesome fa-solid fa-user"></i>
+
+
 
   {% endblock %}

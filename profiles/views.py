@@ -23,7 +23,7 @@ class ProfilePage(View):
                 'recipes': recipes,
                 'saved_recipes': saved_recipes,
                 'posted_recipes': posted_recipes,
-                'profile': get_user
+                'profile': get_user.profile
             },
         )
 
