@@ -109,22 +109,22 @@ class RecipeSave(View):
 
 
 def delete_comment(request, comment_id):
-    
     comment = get_object_or_404(Comment, id=comment_id)
-    comment.delete()
+    if request.user == comment.commenter:
+        comment.delete()
     # https://stackoverflow.com/questions/50006147/how-to-return-redirect-to-previous-page-in-django-after-post-request
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
 def delete_note(request, note_id):
-    
     note = get_object_or_404(Note, id=note_id)
-    note.delete()
+    if request.user == note.profile:
+        note.delete()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
 class AddRecipe(View):
-    
+    """"""
     def get(self, request, *args, **kwargs):
 
         return render(

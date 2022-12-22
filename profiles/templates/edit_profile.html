@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+{% load crispy_forms_tags %}
+
+{% if user == profile.user %}
+    <h2>Edit Profile</h2>
+    <form method="POST" class="col-6 offset-3">
+        {{ profile_form | crispy }}
+        {% csrf_token %}
+        <button type="submit" class="btn btn-warning btn-lg mt-5">Save</button>
+    </form>
+{% else %}
+<div class="row">
+    <div class="col-10 offset-1 text-center mt-5">
+        <h2>Sorry, there was an issue trying to access this page</h2>
+    </div>
+</div>    
+          
+    
+{% endif %}
+
+
+{% endblock %}

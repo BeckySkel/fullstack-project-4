@@ -81,7 +81,7 @@
                                 {% if user.is_authenticated %}
                                 <li class="dropdown-header"><strong>Welcome {{ user.profile }}!</strong></li>
 
-                                <li><a class="dropdown-item" href="#">Profile</a></li>
+                                <li><a class="dropdown-item" href="{% url 'edit_profile' user.profile %}">Edit Profile</a></li>
                                 <li><a class="dropdown-item" href="{% url 'profile_page' user.profile %}">Dashboard
                                         <span
                                             class="badge text-bg-secondary">{{ user.profile.count_notifications }}</span></a>
