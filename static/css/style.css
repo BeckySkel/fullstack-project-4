@@ -78,6 +78,18 @@ main {
     overflow-y: scroll;
 }
 
+.card-image {
+    height: 9rem;
+    overflow: hidden;
+    margin: 0.7rem 0.7rem 0;
+}
+
+.card-image img {
+    height: 9rem;
+    object-fit: cover;
+    object-position: center;
+}
+
 /* https://codepen.io/alexerlandsson/pen/NqXWwX */
 .banner-container {
 	width: 7rem;
