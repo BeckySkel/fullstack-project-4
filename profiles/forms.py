@@ -14,3 +14,4 @@ class ProfileForm(forms.ModelForm):
             'profile_image',
             'bio',
         )
+

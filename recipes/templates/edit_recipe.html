@@ -2,55 +2,17 @@
 {% block content %}
 {% load crispy_forms_tags %}
 
-{% if user == recipe.author %}
-    <h2>Edit Recipe</h2>
-    <form method="POST" class="col-6 offset-3">
-        {{ recipe_form | crispy }}
-        {% csrf_token %}
-        <button type="submit" class="btn btn-warning btn-lg mt-5">Post</button>
-    </form>
+{% if user.is_authenticated %}
+<h2 class="fs-1 text-center mt-5">Edit Recipe</h2>
+<form method="POST" class="col-6 offset-3">
+    {{ recipe_form | crispy }}
+    {% csrf_token %}
+    <button type="submit" class="btn btn-warning btn-lg mt-5">Post</button>
+</form>
+
 {% else %}
+<h2>You must be logged in as the owner edit this recipe!</h2>  
 
-    <!-- <form method="GET" class="col-6 offset-3" action="/cgi-bin/utils.py">
-        <div class="row">
-            <fieldset id="ingredients" class="col-6">
-                <legend>Ingredients</legend>
-                <button type="button" id="add-ingredient" class="btn btn-info">+</button>
-                <input type="text" class="ingredient textinput textInput form-control mt-2" id="ingredient-1" name="ingredient-1">
-            </fieldset>
-            <fieldset id="steps" class="col-6">
-                <legend>Steps</legend>
-                <button type="button" id="add-step" class="btn btn-info">+</button>
-                <input type="text" class="step textinput textInput form-control mt-2" id="step-1" name="step-1">
-            </fieldset>
-        </div>
-        <button type="submit" class="btn btn-warning btn-lg mt-5">Post</button>
-        {{ count = 
-        }}
-    </form> -->
-    
-        <h2>You must be logged in as the owner edit this recipe!</h2>  
-    
 {% endif %}
-
-
-<!-- <script>
-    let addIngredient = document.getElementById('add-ingredient');
-    let ingredients = document.getElementById('ingredients');
-
-    addIngredient.addEventListener('click', function () {
-        let previousIngredient = document.getElementById('ingredient-1');
-        let nextIngredient = previousIngredient.cloneNode();
-        let next = ingredients.getElementsByTagName('*').length - 1;
-        nextIngredient.id = 'ingredient-' + next;
-        ingredients.appendChild(nextIngredient);
-    });
-</script> -->
-
-<!-- <div id="div_id_title" class="form-group"> <label for="id_title" class=" requiredField">
-        Title<span class="asteriskField">*</span> </label>
-    <div> <input type="text" name="title" maxlength="100" class="textinput textInput form-control" required=""
-            id="id_title"> </div>
-</div> -->
 
 {% endblock %}
