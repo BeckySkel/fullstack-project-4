@@ -11,7 +11,7 @@ class ProfileAdmin(admin.ModelAdmin):
 @admin.register(Notification)
 class NotificationAdmin(admin.ModelAdmin):
     """"""
-    list_display = ('to', 'sender', 'sent', 'message')
+    list_display = ('to', 'sender', 'sent', 'message', 'dismissed')
     search_fields = ['to', 'sent', 'message']
     list_filter = ('to', 'sender', 'sent')
 

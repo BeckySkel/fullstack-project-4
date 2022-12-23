@@ -16,9 +16,9 @@ class Profile(models.Model):
         on_delete=models.CASCADE,
         related_name='profile'
         )
-    first_name = models.CharField(max_length=50)
-    last_name = models.CharField(max_length=50)
-    profile_image = CloudinaryField('image', default='profile_placeholder')
+    first_name = models.CharField(max_length=50, blank=True)
+    last_name = models.CharField(max_length=50, blank=True)
+    profile_image = CloudinaryField('image', default='profile_placeholder', blank=True)
     bio = models.TextField(blank=True)
     saved = models.ManyToManyField(
         Recipe,

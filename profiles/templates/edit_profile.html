@@ -2,8 +2,10 @@
 {% block content %}
 {% load crispy_forms_tags %}
 
+<div class="container">
+<div class="row">
 {% if user == profile.user %}
-    <h2>Edit Profile</h2>
+    <h2 class="fs-1 text-center mt-5">Edit Profile</h2>
     <form method="POST" class="col-6 offset-3">
         {{ profile_form | crispy }}
         {% csrf_token %}
@@ -14,8 +16,9 @@
     <div class="col-10 offset-1 text-center mt-5">
         <h2>Sorry, there was an issue trying to access this page</h2>
     </div>
-</div>    
-          
+</div>  
+</div>  
+</div>
     
 {% endif %}
 

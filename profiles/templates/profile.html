@@ -19,10 +19,10 @@
         {% for n in profile.notifications.all %}
         {% if not n.dismissed %}
         <div class="alert alert-secondary" role="alert">
-          {{ n }}
-          <button type="button" class="btn-close float-end" data-bs-dismiss="alert" aria-label="Dismiss"
+          {{ n }} {{ n.id }}
+          <button type="button" id="hide{{n.id}}" class="btn-close float-end" data-bs-dismiss="alert" aria-label="Dismiss"
             style="transform: rotate(0);">
-            <a href="{% url 'dismiss_notification' n.id %}" class="stretched-link"></a>
+            <a id="dismiss{{n.id}}" href="{% url 'dismiss_notification' n.id %}" class="stretched-link"></a>
           </button>
         </div>
         {% endif %}
@@ -115,17 +115,7 @@
 
 
 
-
-
-
 </div>
-
-
-
-
-
-
-
 
 
 {% endblock %}
