@@ -1,6 +1,10 @@
 {% load static %}
+
+<!-- Card used across the site to showcase recipes when user is browsing and searching -->
 <div class="card m-2 text-start p-0" style="width: 18rem;">
   {% if user == recipe.author %}
+  <!-- Banner to show if recipe is user's own and show if private or public (dynamic) -->
+  <!-- Idea and styling from https://codepen.io/alexerlandsson/pen/NqXWwX -->
   {% if recipe.private %}
   <div class="banner-container">
     <div class="banner bg-secondary">Private</div>
@@ -11,6 +15,7 @@
   </div>
   {% endif %}
   {% endif %}
+  <!-- Recipe image (dynamic) -->
   <div class="card-image">
   {% if "placeholder" in recipe.image.url %}
   <img src="{% static 'images/recipe_placeholder.png' %}" class="card-img-top" alt="Placeholder image">
@@ -18,6 +23,7 @@
   <img src=" {{ recipe.image.url }}" class="card-img-top" alt="Image of {{ recipe.title }}">
   {% endif %}
 </div>
+<!-- Quick info and stretched link -->
   <div class="card-body">
     <h5 class="card-title">{{ recipe.title }}</h5>
     <p class="card-text">{{ recipe.short_caption }}</p>
