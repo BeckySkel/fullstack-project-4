@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
 from django.template.defaultfilters import slugify
-from utils.utils import TAGS
+from utils.constants import TAGS
 # https://stackoverflow.com/questions/837828/how-do-i-create-a-slug-in-django
 
 

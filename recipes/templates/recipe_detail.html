@@ -7,9 +7,9 @@
     <!-- Recipe intro and photo -->
     <div class="row">
         <div
-            class="col-10 offset-1 recipe-info mt-5 py-3 px-3 bg-container bg-gradient rounded border border-warning border-opacity-50">
-            <div class="row">
-                <div class="col-md-7 d-flex flex-column">
+            class="col-10 offset-1 recipe-info mt-5 px-3 pb-3 bg-container bg-gradient rounded border border-warning border-opacity-50">
+            <div class="row flex-column-reverse flex-md-row">
+                <div class="col-md-7 d-flex flex-column pt-3">
                     <h2 class="fs-1">{{ recipe.title }}</h2>
                     <h3>by {{ recipe.author }}</h3>
 
@@ -99,7 +99,7 @@
                 </div>
 
                 <!-- Display image -->
-                <div class="col-md-5">
+                <div class="col-md-5 pt-3">
                     {% if "placeholder" in recipe.image.url %}
                     <img src="{% static 'images/recipe_placeholder.png' %}" class="card-img-top rounded"
                         alt="Placeholder image">
@@ -118,7 +118,7 @@
                 </a>
                 <!-- Collapsing container -->
                 <div class="collapse px-0" id="collapseNotes">
-                    <div class="card card-body notification-container">
+                    <div class="card card-body scroll-container">
                         {% if notes %}
                         <h4>My Notes:</h4>
                         {% for note in notes %}
@@ -144,14 +144,14 @@
     </div>
 
     <!-- Ingredients and steps -->
-    <div class="row justify-content-center">
+    <div class="row justify-content-center flex-column flex-md-row">
         <div
-            class="col-5 mt-2 py-3 bg-white bg-gradient rounded border border-secondary border-opacity-50">
+            class="col-10 offset-1 col-md-5 offset-md-0 mt-2 py-3 bg-white bg-gradient rounded border border-secondary border-opacity-50">
             <h4>Ingredients:</h4>
             {{ recipe.ingredients }}
         </div>
         <div
-            class="col-5 mt-2 py-3 bg-white bg-gradient rounded border border-secondary border-opacity-50">
+            class="col-10 offset-1 col-md-5 offset-md-0 mt-2 py-3 bg-white bg-gradient rounded border border-secondary border-opacity-50">
             <h4>Steps:</h4>
             {{ recipe.steps }}
         </div>

@@ -15,7 +15,7 @@
       </a>
     </p>
     <div class="collapse" id="collapseExample">
-      <div class="card card-body notification-container">
+      <div class="card card-body scroll-container">
         {% for n in profile.notifications.all %}
         {% if not n.dismissed %}
         <div class="alert alert-secondary" role="alert">
@@ -111,9 +111,6 @@
     </div>
   </div>
   {% endif %}
-
-
-
 
 </div>
 

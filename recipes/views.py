@@ -107,7 +107,6 @@ class RecipeSave(View):
             recipe.saved_by.add(request.user.profile.id)
             print('saved')
 
-
         return HttpResponseRedirect(reverse('recipe_detail', args=[slug]))
 
 
@@ -157,7 +156,7 @@ class AddRecipe(View):
 
             slug = recipe_form.instance.slug
             
-            return redirect(f'/recipes/{slug}')
+            redirect(reverse("recipe_detail", kwargs={"slug": slug}))
         else:
             data = {
                 'title': recipe_form.instance.title,

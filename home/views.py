@@ -1,9 +1,8 @@
 from django.shortcuts import render
 from django.views import View, generic
+from django.db.models import Count, Q
 from recipes.models import Recipe
-from django.db.models import Count
-from django.db.models import Q
-from utils.utils import TAGS
+from utils.constants import TAGS
 
 
 class HomePage(generic.ListView):
@@ -11,7 +10,7 @@ class HomePage(generic.ListView):
     List view to make public recipes available as
     'recipe_list' template variable to the home page
     """
-    # code insprired by CI walkthrough project
+    # code insprired by CI blog walkthrough project
     model = Recipe
     queryset = Recipe.objects.all().filter(removed=False, private=False)
     template_name = "index.html"
@@ -19,8 +18,8 @@ class HomePage(generic.ListView):
 
 class BrowseByTag(View):
     """
-    Custom view to display recipes matching the selected tag. Tags are access
-    via a tuple of tuples called TAGS
+    Custom view to display recipes matching the selected tag. Tags are accessed
+    via a tuple of tuples called TAGS in utils.constants
     
     recipes: queryset, items from Recipe model whose tag field contains the
     selected tag
@@ -28,7 +27,6 @@ class BrowseByTag(View):
     slug: str, slugified version of the selected tag
     """
     def get(self, request, slug, *args, **kwargs):
-
         if slug == 'new':
             recipes = Recipe.objects.filter(removed=False, private=False)\
                 .order_by('-created_on')
@@ -66,7 +64,7 @@ class SearchResults(View):
     Custom view for displaying search results. Checks if the inputted string
     appears in the title, caption, ingredients list or tags of a recipe.
 
-    search: str, input retrieved from search bar
+    searched: str, input retrieved from search bar
     recipes: queryset, items from Recipe model containing the search term
     """
     # Tutorial to retrieve search term available at

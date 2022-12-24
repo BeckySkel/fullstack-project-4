@@ -1,6 +1,6 @@
 from .models import Profile
 from django import forms
-from utils.utils import TAGS
+from utils.constants import TAGS
 from profiles.models import Note
 
 class ProfileForm(forms.ModelForm):

@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
 
+/* ----- General */
 body {
     font-family: 'Quicksand', sans-serif;
 }
@@ -9,8 +10,8 @@ main {
     padding-top: 10vh;
 }
 
-.navbar-brand > i {
-    padding: 0.4rem;
+.bg-main {
+    background-color: #4ACC9A;
 }
 
 .bg-highlight {
@@ -18,66 +19,12 @@ main {
     color: #fff;
 }
 
-.bg-main {
-    background-color: #4ACC9A;
-}
-
 .bg-container {
     background-color: #fcebae;
 }
 
-.card-body p {
-    height: 1rem;
-}
 
-.card-body span {
-    margin-right: 0.5rem;
-}
-
-.card-body i {
-    color: #4ACC9A;
-}
-
-.card-footer {
-    background-color: transparent;
-    border: 0;
-    padding: 0;
-}
-
-.carousel-control-next-icon,
-.carousel-control-prev-icon {
-    background-image: none;
-}
-
-.icon-xl {
-    font-size: 10rem;
-    color: #9c9c9c;
-}
-
-.view-more {
-    background-color: transparent;
-    border: 0;
-    padding: 0;
-}
-
-.btn-tab {
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: 0;
-}
-
-.profile-image {
-    margin-left: auto;
-    margin-right: auto;
-    object-fit: cover;
-    height: auto;
-    width: 100%;
-}
-
-.notification-container {
-    max-height: 50vh;
-    overflow-y: scroll;
-}
-
+/* ----- Recipe Cards */
 .card-image {
     height: 9rem;
     overflow: hidden;
@@ -85,9 +32,27 @@ main {
 }
 
 .card-image img {
-    height: 9rem;
+    height: 100%;
     object-fit: cover;
     object-position: center;
+}
+
+.card-caption {
+    height: 1rem;
+}
+
+.card-counter {
+    margin-right: 0.5rem;
+}
+
+.card-counter i {
+    color: #4ACC9A;.
+}
+
+.recipe-card .card-footer {
+    background-color: transparent;
+    border: 0;
+    padding: 0;
 }
 
 /* https://codepen.io/alexerlandsson/pen/NqXWwX */
@@ -133,23 +98,49 @@ main {
 }
 
 
+/* ----- Home & Browsing */
+.carousel-control-next-icon,
+.carousel-control-prev-icon {
+    background-image: none;
+}
+
+.view-more {
+    background-color: transparent;
+    border: 0;
+    padding: 0;
+}
+
+.icon-xl {
+    font-size: 10rem;
+    color: #9c9c9c;
+}
+
+
+/* ----- Profile */
+.btn-tab {
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.profile-image {
+    margin-left: auto;
+    margin-right: auto;
+    object-fit: cover;
+    height: auto;
+    width: 100%;
+}
+
+.scroll-container {
+    max-height: 50vh;
+    overflow-y: scroll;
+}
+
+
 /* ----- Media Queries */
 @media screen and (max-width: 992px) {
     .dropdown-menu {
         max-height: 50vh;
         overflow-y: scroll;
     }
-
-    .footer-nav {
-        flex-direction: row;
-    }
-    .footer-nav li {
-        padding: 0 0.5rem;
-    }
  }
 
- @media screen and (max-width: 768px) {
-    .recipe-info {
-        flex-direction: column-reverse;
-    }
- }

@@ -3,24 +3,14 @@
 {% load crispy_forms_tags %}
 
 <div class="container">
-<div class="row">
-{% if user == profile.user %}
-    <h2 class="fs-1 text-center mt-5">Edit Profile</h2>
-    <form method="POST" class="col-6 offset-3">
-        {{ profile_form | crispy }}
-        {% csrf_token %}
-        <button type="submit" class="btn btn-warning btn-lg mt-5">Save</button>
-    </form>
-{% else %}
-<div class="row">
-    <div class="col-10 offset-1 text-center mt-5">
-        <h2>Sorry, there was an issue trying to access this page</h2>
+    <div class="row">
+        <h2 class="fs-1 text-center mt-5">Edit Profile</h2>
+        <form method="POST" class="col-md-6 offset-md-3">
+            {{ profile_form | crispy }}
+            {% csrf_token %}
+            <button type="submit" class="btn btn-warning btn-lg mt-5">Save</button>
+        </form>
     </div>
-</div>  
-</div>  
 </div>
-    
-{% endif %}
-
 
 {% endblock %}
