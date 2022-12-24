@@ -6,9 +6,12 @@ from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.views import View
 from django.db.models import Q
 from django.http import HttpResponseRedirect
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 
 
-class EditProfile(View):
+
+class EditProfile(LoginRequiredMixin, View):
     """""" 
     def get(self, request, *args, **kwargs):
         get_user = User.objects.get(id=request.user.id)
@@ -67,7 +70,7 @@ class ProfilePage(View):
             },
         )
 
-
+@login_required
 def dismiss_notification(request, notification_id):
     notification = get_object_or_404(Notification, id=notification_id)
 

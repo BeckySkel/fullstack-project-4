@@ -134,7 +134,7 @@
                         <form method="POST" class="pt-3">
                             {{ note_form | crispy }}
                             {% csrf_token %}
-                            <button type="submit" class="btn btn-warning mt-2">Post</button>
+                            <button type="submit" class="btn btn-warning mt-2">Add note</button>
                         </form>
                     </div>
                 </div>
@@ -146,12 +146,12 @@
     <!-- Ingredients and steps -->
     <div class="row justify-content-center">
         <div
-            class="col-5 mt-2 py-3 bg-white bg-gradient rounded border border-secondary border-opacity-50 flex-shrink-1">
+            class="col-5 mt-2 py-3 bg-white bg-gradient rounded border border-secondary border-opacity-50">
             <h4>Ingredients:</h4>
             {{ recipe.ingredients }}
         </div>
         <div
-            class="col-5 mt-2 py-3 bg-white bg-gradient rounded border border-secondary border-opacity-50 flex-shrink-1">
+            class="col-5 mt-2 py-3 bg-white bg-gradient rounded border border-secondary border-opacity-50">
             <h4>Steps:</h4>
             {{ recipe.steps }}
         </div>
