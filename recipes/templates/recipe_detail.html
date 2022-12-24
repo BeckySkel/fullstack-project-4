@@ -7,187 +7,187 @@
     <!-- Recipe intro and photo -->
     <div class="row">
         <div
-            class="d-flex recipe-info mt-5 py-3 px-3 bg-container bg-gradient rounded border border-warning border-opacity-50">
-            <div class="col-md-7 d-flex flex-column">
-                <h2 class="fs-1">{{ recipe.title }}</h2>
-                <h3>by {{ recipe.author }}</h3>
+            class="col-10 offset-1 recipe-info mt-5 py-3 px-3 bg-container bg-gradient rounded border border-warning border-opacity-50">
+            <div class="row">
+                <div class="col-md-7 d-flex flex-column">
+                    <h2 class="fs-1">{{ recipe.title }}</h2>
+                    <h3>by {{ recipe.author }}</h3>
 
-                <!-- Created and updated -->
-                <p>created: {{ recipe.created_on }}
-                    {% if recipe.updated_on %}
-                    <span class="badge bg-highlight">modified: {{ recipe.updated_on }}</span>
+                    <!-- Created and updated -->
+                    <p>created: {{ recipe.created_on }}
+                        {% if recipe.updated_on %}
+                        <span class="badge bg-highlight">modified: {{ recipe.updated_on }}</span>
+                        {% endif %}
+                    </p>
+
+                    <p class="flex-grow-1">{{ recipe.caption }}</p>
+
+                    <!-- Tags -->
+                    <div>
+                        {% for tag in recipe.list_of_tags %}
+                        <span class="badge bg-highlight">
+                            <a class="text-decoration-none text-reset"
+                                href="{% url 'browse' tag|slugify  %}">{{ tag }}</a>
+                        </span>
+                        {% endfor %}
+                    </div>
+
+                    <!-- User interactions (dynamic) -->
+                    <div class="row mt-3 fw-semibold">
+                        {% if user.is_authenticated and user != recipe.author %}
+                        <!-- Like button and counter -->
+                        <!-- Code inspired by CI walkthough blog project -->
+                        <form class="d-inline col-2" action="{% url 'recipe_like' recipe.slug %}" method="POST">
+                            {% csrf_token %}
+                            <button type="submit" name="like_recipe" value="{{recipe.slug}}"
+                                class="border-0 bg-transparent px-0">
+                                {% if liked %}
+                                <i class="fas fa-heart"></i>
+                                {% else %}
+                                <i class="far fa-heart"></i>
+                                {% endif %}
+                            </button>
+                            <span>{{ recipe.count_likes }}</span>
+                        </form>
+
+                        <!-- Comment counter and link to comments -->
+                        <span class="col-2">
+                            <a href="#comments" class="text-decoration-none text-reset">
+                                <i class="far fa-comments"></i> {{ recipe.count_comments }}
+                            </a>
+                        </span>
+
+                        <!-- Save button and counter -->
+                        <form class="d-inline col-2 ms-auto" action="{% url 'recipe_save' recipe.slug %}" method="POST">
+                            {% csrf_token %}
+                            <button type="submit" name="save_recipe" value="{{recipe.slug}}"
+                                class="border-0 bg-transparent px-0 fw-semibold">
+                                {% if saved %}
+                                <i class="fa-solid fa-bookmark"></i> <span class="">Saved!</span>
+                                {% else %}
+                                <i class="fa-regular fa-bookmark"></i> <span class="">{{ recipe.count_saved_by }}</span>
+                                {% endif %}
+                            </button>
+                        </form>
+
+                        {% else %}
+
+                        <!-- Like, comment and save counters -->
+                        <span class="col-2"><i class="far fa-heart"></i> {{ recipe.count_likes }}</span>
+                        <span class="col-2">
+                            <a href="#comments" class="text-decoration-none text-reset">
+                                <i class="far fa-comments"></i> {{ recipe.count_comments }}
+                            </a>
+                        </span>
+                        <span class="col-2  ms-auto">
+                            <i class="fa-regular fa-bookmark"></i> {{ recipe.count_saved_by }}
+                        </span>
+
+                        {% endif %}
+                    </div>
+
+                    <!-- Edit button -->
+                    {% if user == recipe.author %}
+                    <div class="row mt-3 justify-content-around">
+                        <div class="col-12 d-flex">
+                            <a href="{% url 'edit_recipe' recipe.slug %}" class="btn btn-warning flex-grow-1">Edit</a>
+                            <a href="{% url 'delete_recipe' recipe.slug %}"
+                                class="btn btn-danger mx-2 flex-grow-1">Delete</a>
+                        </div>
+                    </div>
                     {% endif %}
-                </p>
-
-                <p class="flex-grow-1">{{ recipe.caption }}</p>
-
-                <!-- Tags -->
-                <div>
-                    {% for tag in recipe.list_of_tags %}
-                    <span class="badge bg-highlight">
-                        <a class="text-decoration-none text-reset" href="{% url 'browse' tag|slugify  %}">{{ tag }}</a>
-                    </span>
-                    {% endfor %}
                 </div>
 
-                <!-- User interactions (dynamic) -->
-                <div class="row mt-3 fw-semibold">
-                    {% if user.is_authenticated and user != recipe.author %}
-                    <!-- Like button and counter -->
-                    <!-- Code inspired by CI walkthough blog project -->
-                    <form class="d-inline col-2" action="{% url 'recipe_like' recipe.slug %}" method="POST">
-                        {% csrf_token %}
-                        <button type="submit" name="like_recipe" value="{{recipe.slug}}"
-                            class="border-0 bg-transparent px-0">
-                            {% if liked %}
-                            <i class="fas fa-heart"></i>
-                            {% else %}
-                            <i class="far fa-heart"></i>
-                            {% endif %}
-                        </button>
-                        <span>{{ recipe.count_likes }}</span>
-                    </form>
-
-                    <!-- Comment counter and link to comments -->
-                    <span class="col-2">
-                        <a href="#comments" class="text-decoration-none text-reset">
-                            <i class="far fa-comments"></i> {{ recipe.count_comments }}
-                        </a>
-                    </span>
-
-                    <!-- Save button and counter -->
-                    <form class="d-inline col-2 ms-auto" action="{% url 'recipe_save' recipe.slug %}" method="POST">
-                        {% csrf_token %}
-                        <button type="submit" name="save_recipe" value="{{recipe.slug}}"
-                            class="border-0 bg-transparent px-0">
-                            {% if saved %}
-                            <i class="fa-solid fa-bookmark"></i> Saved!
-                            {% else %}
-                            <i class="fa-regular fa-bookmark"></i> <span
-                                class="fw-semibold">{{ recipe.count_saved_by }}</span>
-                            {% endif %}
-                        </button>
-                    </form>
-
+                <!-- Display image -->
+                <div class="col-md-5">
+                    {% if "placeholder" in recipe.image.url %}
+                    <img src="{% static 'images/recipe_placeholder.png' %}" class="card-img-top rounded"
+                        alt="Placeholder image">
                     {% else %}
-
-                    <!-- Like, comment and save counters -->
-                    <span class="col-2"><i class="far fa-heart"></i> {{ recipe.count_likes }}</span>
-                    <span class="col-2">
-                        <a href="#comments" class="text-decoration-none text-reset">
-                            <i class="far fa-comments"></i> {{ recipe.count_comments }}
-                        </a>
-                    </span>
-                    <span class="col-2  ms-auto">
-                        <i class="fa-regular fa-bookmark"></i> {{ recipe.count_saved_by }}
-                    </span>
-
+                    <img src=" {{ recipe.image.url }}" class="card-img-top rounded" alt="Image of {{ recipe.title }}">
                     {% endif %}
                 </div>
-
-                <!-- Edit button -->
-                {% if user == recipe.author %}
-                <div class="row mt-3 justify-content-around">
-                    <div class="col-12 d-flex">
-                    <a href="{% url 'edit_recipe' recipe.slug %}" class="btn btn-warning flex-grow-1">Edit</a>
-                    <a href="{% url 'delete_recipe' recipe.slug %}" class="btn btn-danger mx-2 flex-grow-1">Delete</a>
-                </div>
-                </div>
-                {% endif %}
             </div>
 
-            <!-- Display image -->
-            <div class="col-md-5">
-                {% if "placeholder" in recipe.image.url %}
-                <img src="{% static 'images/recipe_placeholder.png' %}" class="card-img-top rounded"
-                    alt="Placeholder image">
-                {% else %}
-                <img src=" {{ recipe.image.url }}" class="card-img-top rounded" alt="Image of {{ recipe.title }}">
-                {% endif %}
+            <!-- Add Notes -->
+            {% if user.is_authenticated and saved %}
+            <div class="row mt-3 mx-1">
+                <a class="btn btn-outline-secondary btn-light" data-bs-toggle="collapse" href="#collapseNotes"
+                    role="button" aria-expanded="false" aria-controls="collapseNotes">
+                    Notes <span class="badge text-bg-warning">{{ notes.count }}</span>
+                </a>
+                <!-- Collapsing container -->
+                <div class="collapse px-0" id="collapseNotes">
+                    <div class="card card-body notification-container">
+                        {% if notes %}
+                        <h4>My Notes:</h4>
+                        {% for note in notes %}
+                        <div class="bg-light bg-gradient border mt-1 rounded px-2 py-2">
+                            <p>{{ note.body }}</p>
+                            <a href="{% url 'delete_note' note.id %}">delete</a>
+                        </div>
+                        {% endfor %}
+                        {% else %}
+                        <p class="pb-3">You've not added any notes for this recipe yet. Notes are personal to you and will not be shared publically. Add a note below if there is anything you'd like to remember when viewing this recipe.</p>
+                        {% endif %}
+                        <!-- Note form -->
+                        <form method="POST" class="pt-3">
+                            {{ note_form | crispy }}
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-warning mt-2">Post</button>
+                        </form>
+                    </div>
+                </div>
             </div>
+            {% endif %}
         </div>
     </div>
 
     <!-- Ingredients and steps -->
     <div class="row justify-content-center">
         <div
-            class="col-5 mt-2 mx-1 py-3 bg-light bg-gradient rounded border border-secondary border-opacity-50 flex-shrink-1">
+            class="col-5 mt-2 py-3 bg-white bg-gradient rounded border border-secondary border-opacity-50 flex-shrink-1">
             <h4>Ingredients:</h4>
             {{ recipe.ingredients }}
         </div>
         <div
-            class="col-5 mt-2 mx-1 py-3 bg-light bg-gradient rounded border border-secondary border-opacity-50 flex-shrink-1">
+            class="col-5 mt-2 py-3 bg-white bg-gradient rounded border border-secondary border-opacity-50 flex-shrink-1">
             <h4>Steps:</h4>
             {{ recipe.steps }}
         </div>
     </div>
 
-    <!-- Comments -->
+    <!-- Commenting -->
     <div class="row mt-5" id="comments">
-
         <h4 class="offset-1">Comments:</h4>
         <!-- Comment form -->
         {% if user.is_authenticated %}
-        <form method="POST" class="col-10 offset-1 mb-2">
+        <form method="POST" class="col-10 offset-1 mb-3">
             {{ comment_form | crispy }}
             {% csrf_token %}
             <button type="submit" class="btn btn-warning mt-2">Post</button>
         </form>
         {% endif %}
         <div class="col-10 offset-1">
+            <!-- Display comments -->
             {% for comment in comments %}
             {% if not comment.removed %}
-            <div class="bg-light bg-gradient border mt-1 px-2 py-3 rounded">
-                <h5>{{ comment.commenter }}</h5>
-                <span>{{ comment.created_on }}</span>
-                <p>{{ comment.body }}</p>
-                {% if user == comment.commenter %}
-                <a href="{% url 'delete_comment' comment.id %}">delete comment?</a>
-                {% endif %}
+            <div class="card bg-light bg-gradient mb-2">
+                <div class="card-header">
+                    <h5 class="card-title d-inline">{{ comment.commenter }}</h5>
+                    <span class="fs-6">{{ comment.created_on }}</span>
+                </div>
+                <div class="card-body">
+                    <p>{{ comment.body }}</p>
+                    {% if user == comment.commenter %}
+                    <a class="card-link" href="{% url 'delete_comment' comment.id %}">delete</a>
+                    {% endif %}
+                </div>
             </div>
             {% endif %}
             {% endfor %}
         </div>
     </div>
-
-
-    <div class="row mt-3">
-        <div class="col-md-10 offset-1">
-            {% if notes and saved %}
-            <h4>My Notes:</h4>
-
-            {% for note in notes %}
-            {% if note.profile == user.profile %}
-            <div class="bg-light bg-gradient border mt-1">
-                <p>{{ note.body }}</p>
-                <a href="{% url 'delete_note' note.id %}">delete note?</a>
-            </div>
-            {% endif %}
-            {% endfor %}
-            {% endif %}
-        </div>
-    </div>
-
-    <div class="row mt-5">
-        {% if user.is_authenticated and saved %}
-        <form method="POST" class="col-10 offset-1">
-            <h4>Add a note:</h4>
-            {{ comment_form | crispy }}
-            {% csrf_token %}
-            <button type="submit" class="btn btn-warning mt-2">Post</button>
-        </form>
-        {% endif %}
-    </div>
-</div>
-
-
-
-
-
-{% if not recipe.private  %}
-{% endif %}
-
-
 
 
 {% endblock %}

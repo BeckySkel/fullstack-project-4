@@ -130,7 +130,7 @@ def delete_recipe(request, slug):
     recipe = get_object_or_404(Recipe, slug=slug)
     if request.user == recipe.author:
         recipe.delete()
-    return render(request, 'index.html')
+    return render(request, 'home')
 
 
 class AddRecipe(View):
