@@ -7,6 +7,7 @@ from .forms import RecipeForm, CommentForm, NoteForm
 from django.contrib import messages
 from multiurl import ContinueResolving
 from profiles.models import Note
+from datetime import datetime
 
 
 class RecipeDetail(View):
@@ -24,10 +25,8 @@ class RecipeDetail(View):
         
         notes = recipe.notes_for_recipe.filter(profile=profile)
                     
-        liked = False
-        saved = False
-        if recipe.likes.filter(id=self.request.user.id).exists():
-            liked = True
+        liked = recipe.likes.filter(id=self.request.user.id).exists()
+        saved = recipe.saved_by.filter(id=self.request.user.profile.id).exists()
         
 
         return render(
@@ -51,6 +50,7 @@ class RecipeDetail(View):
         notes = recipe.notes_for_recipe.filter(profile=request.user.profile)
         liked = recipe.likes.filter(id=self.request.user.id).exists()
         saved = recipe.saved_by.filter(id=self.request.user.profile.id).exists()
+        print(saved)
         comment_form = CommentForm(data=request.POST or None)
         note_form = NoteForm(data=request.POST or None)
         
@@ -102,8 +102,11 @@ class RecipeSave(View):
         profile = request.user.profile
         if recipe.saved_by.filter(id=request.user.profile.id).exists():
             recipe.saved_by.remove(request.user.profile.id)
+            print('unsaved')
         else:
             recipe.saved_by.add(request.user.profile.id)
+            print('saved')
+
 
         return HttpResponseRedirect(reverse('recipe_detail', args=[slug]))
 
@@ -121,6 +124,13 @@ def delete_note(request, note_id):
     if request.user == note.profile:
         note.delete()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+def delete_recipe(request, slug):
+    recipe = get_object_or_404(Recipe, slug=slug)
+    if request.user == recipe.author:
+        recipe.delete()
+    return render(request, 'index.html')
 
 
 class AddRecipe(View):
@@ -191,6 +201,7 @@ class EditRecipe(View):
             # https://www.geeksforgeeks.org/multiplechoicefield-django-forms/
             temp = recipe_form.cleaned_data.get('tags')
             recipe = recipe_form.save(commit=False)
+            recipe.updated_on = datetime.now()
             recipe.tags = temp
             updated_recipe = recipe_form.save()
             slug = updated_recipe.slug

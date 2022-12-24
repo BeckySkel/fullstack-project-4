@@ -148,3 +148,8 @@ main {
     }
  }
 
+ @media screen and (max-width: 768px) {
+    .recipe-info {
+        flex-direction: column-reverse;
+    }
+ }

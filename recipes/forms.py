@@ -22,6 +22,9 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ('body',)
+        labels = {
+          'body': 'Write a comment'
+        }
         # https://stackoverflow.com/questions/6536373/how-can-i-set-the-size-of-rows-columns-in-textfield-in-django-models
         widgets = {
           'body': forms.Textarea(attrs={'rows':2, 'cols':15}),
@@ -32,6 +35,9 @@ class NoteForm(forms.ModelForm):
     class Meta:
         model = Note
         fields = ('body',)
+        labels = {
+          'body': 'Write a note'
+        }
         # https://stackoverflow.com/questions/6536373/how-can-i-set-the-size-of-rows-columns-in-textfield-in-django-models
         widgets = {
           'body': forms.Textarea(attrs={'rows':2, 'cols':15}),
