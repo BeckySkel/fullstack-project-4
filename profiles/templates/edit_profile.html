@@ -2,13 +2,17 @@
 {% block content %}
 {% load crispy_forms_tags %}
 
+<!-- Form to edit user's profile -->
 <div class="container">
     <div class="row">
         <h2 class="fs-1 text-center mt-5">Edit Profile</h2>
         <form method="POST" class="col-10 offset-1 col-lg-6 offset-lg-3">
             {{ profile_form | crispy }}
             {% csrf_token %}
-            <button type="submit" class="btn btn-warning btn-lg mt-5">Save</button>
+            <button type="submit" class="btn btn-warning btn-lg mt-4">Save</button>
+            {% if skip %}
+            <a href="{% url 'home' %}" class="btn btn-secondary btn-lg mt-4 float-end">Skip</a>
+            {% endif %}
         </form>
     </div>
 </div>

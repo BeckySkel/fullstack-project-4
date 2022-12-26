@@ -18,18 +18,23 @@ class EditProfile(LoginRequiredMixin, View):
 
         profile_form = ProfileForm(instance=get_user.profile)
         
+        skip = request.META.get('HTTP_REFERER').endswith('/accounts/signup/')
+        
         return render(
             request,
             'edit_profile.html',
             {
                 'profile_form': profile_form,
-                'profile': get_user.profile
+                'profile': get_user.profile,
+                'skip': skip
             })
 
     def post(self, request, *args, **kwargs):
         get_user = User.objects.get(username=request.user)
 
         profile_form = ProfileForm(data=request.POST or None, instance=get_user.profile)
+
+        skip = request.META.get('HTTP_REFERER').endswith('/accounts/signup/')
 
         if profile_form.is_valid():
             profile_form.save(commit=False)
@@ -39,7 +44,7 @@ class EditProfile(LoginRequiredMixin, View):
 
             return render(request, 'profile.html',
             {
-                'profile': get_user.profile
+                'profile': get_user.profile,
             })
         else:
             return render(
@@ -47,7 +52,8 @@ class EditProfile(LoginRequiredMixin, View):
                 'edit_profile.html',
                 {
                     'profile_form': profile_form,
-                    'profile': get_user.profile
+                    'profile': get_user.profile,
+                    'skip': skip
                 })
 
 
