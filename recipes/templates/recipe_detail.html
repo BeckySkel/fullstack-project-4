@@ -11,7 +11,7 @@
             <div class="row flex-column-reverse flex-md-row">
                 <div class="col-md-7 d-flex flex-column pt-3">
                     <h2 class="fs-1">{{ recipe.title }}</h2>
-                    <h3>by {{ recipe.author }}</h3>
+                    <h3>by <a href="{% url 'profile_page' recipe.author %}" class="text-reset">{{ recipe.author }}</a></h3>
 
                     <!-- Created and updated -->
                     <p>created: {{ recipe.created_on }}

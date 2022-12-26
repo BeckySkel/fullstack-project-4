@@ -2,19 +2,21 @@
 {% block content %}
 {% load crispy_forms_tags %}
 
-{% if user.is_authenticated %}
-<h2 class="fs-1 text-center mt-5">Add a Recipe</h2>
-<form method="POST" class="col-10 offset-1 col-lg-6 offset-lg-3">
-    {{ recipe_form | crispy }}
-    {% csrf_token %}
-    <button type="submit" class="btn btn-warning btn-lg mt-5">Post</button>
-</form>
-
-{% else %}
-<h2>You must be logged in to add a recipe!</h2>
-<a href="{% url 'account_login' %}">Login</a>
-<a href="{% url 'account_signup' %}">Sign up</a>
-
-{% endif %}
+<!-- Add recipe form -->
+<div class="container overflow-hidden">
+    <div class="row">
+        <!-- User must be logged in -->
+        {% if user.is_authenticated %}
+        <h2 class="fs-1 text-center mt-5">Add a Recipe</h2>
+        <div class="col-10 offset-1 col-lg-6 offset-lg-3">
+            <form method="POST">
+                {{ recipe_form | crispy }}
+                {% csrf_token %}
+                <button type="submit" class="btn btn-warning btn-lg mt-5">Post</button>
+            </form>
+        </div>
+        {% endif %}
+    </div>
+</div>
 
 {% endblock %}

@@ -2,117 +2,141 @@
 {% load static %}
 {% block content %}
 
+<!-- Profile Page -->
 <div class="container">
-  <div class="row text-center pt-5">
-    {% if user.profile == profile %}
-    <!-- Viewing own profile -->
-    <h2 class="fs-1">Welcome {{ profile }}!</h2>
-    <p>View your saved and posted recipes below</p>
-    <p>
-      <a class="btn btn-outline-secondary" data-bs-toggle="collapse" href="#collapseExample" role="button"
-        aria-expanded="false" aria-controls="collapseExample">
-        Notifications <span class="badge text-bg-warning">{{ profile.count_notifications }}</span>
-      </a>
-    </p>
-    <div class="collapse" id="collapseExample">
-      <div class="card card-body scroll-container">
-        {% for n in profile.notifications.all %}
-        {% if not n.dismissed %}
-        <div class="alert alert-secondary" role="alert">
-          {{ n }} {{ n.id }}
-          <button type="button" id="hide{{n.id}}" class="btn-close float-end" data-bs-dismiss="alert" aria-label="Dismiss"
-            style="transform: rotate(0);">
-            <a id="dismiss{{n.id}}" href="{% url 'dismiss_notification' n.id %}" class="stretched-link"></a>
-          </button>
-        </div>
-        {% endif %}
-        {% endfor %}
-      </div>
-    </div>
-    <div class="row mt-4">
-      <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-        <input type="radio" class="btn-check" name="btnradio" id="btnradiosaved" autocomplete="off" checked>
-        <label class="btn btn-warning bg-highlight btn-tab rounded-top" for="btnradiosaved">Saved <span
-            class="badge text-bg-warning">{{ profile.count_saved_recipes }}</span></label>
-
-        <input type="radio" class="btn-check" name="btnradio" id="btnradioposted" autocomplete="off">
-        <label class="btn btn-warning bg-highlight btn-tab rounded-top" for="btnradioposted">Posted <span
-            class="badge text-bg-warning">{{ profile.user.recipe_posts.all.count }}</span></label>
-      </div>
-
-      <div id="content"
-        class="pt-5 pb-4 justify-content-center d-flex flex-wrap bg-container bg-gradient rounded border border-2 border-warning border-opacity-50">
-        <div id="saved" class="d-none">
-          {% if saved_recipes %}
-          {% for recipe in saved_recipes %}
-          {% include "card.html" with recipe=recipe %}
-          {% endfor %}
+  <div class="row">
+    <div
+      class="col-sm-10 offset-sm-1 mt-5 px-3 pb-3 bg-container bg-gradient rounded border border-warning border-opacity-50">
+      <div class="row">
+        <!-- Display profile image -->
+        <div class="col-md-5 pt-3">
+          {% if "placeholder" in profile.profile_image.url %}
+          <img src="{% static 'images/profile_placeholder.png' %}" class="profile-image card-img-top rounded"
+            alt="Placeholder image">
           {% else %}
-          <p>You've not saved any recipes yet! Start browsing!</p>
+          <img src="{{ profile.profile_image.url }}" class="profile-image card-img-top rounded"
+            alt="{{ profile }}'s profile image">
           {% endif %}
         </div>
 
-        <div id="posted" class="d-none">
-          {% if posted_recipes %}
-          {% for recipe in posted_recipes %}
-          {% include "card.html" with recipe=recipe %}
-          {% endfor %}
-          {% else %}<p>You've not posted any recipes yet!</p>
-          <a class="btn btn-lg btn-warning mt-1">Add new recipe</a>
-          {% endif %}
+        <!-- Profile Info -->
+        <div class="col-md-7 d-flex flex-column pt-3">
+          <h3>{{ profile }}</h3>
+          <p>
+            joined: <span class="badge bg-highlight">{{ profile.user.date_joined }}</span>
+          </p>
+
+          <p>
+            <strong>Bio:</strong> {{ profile.bio }}
+          </p>
+          <p>
+            <strong>Recipes:</strong> {{ profile.user.recipe_posts.all.count }}
+          </p>
+
+
+          <!-- <table>
+            <tr>
+              <td class="align-top pe-2"><strong>Bio:</strong></td>
+              <td class="align-top text-wrap">{{ profile.bio }}</td>
+            </tr>
+            <tr>
+              <td class="align-top pe-2"><strong>Recipes:</strong></td>
+              <td class="align-top">{{ profile.user.recipe_posts.all.count }}</td>
+            </tr>
+          </table> -->
+
+          <!-- User options -->
+          {% if user == profile.user %}
+          <div class="row mt-3 justify-content-around align-items-end mt-auto">
+            <div class="col-12 d-flex">
+              <!-- Edit profile -->
+              <a href="{% url 'edit_profile' %}" class="btn btn-warning flex-grow-1 m-1">Edit Profile</a>
+              <!-- Show/hide notifications -->
+              <a class="btn btn-light btn-outline-secondary flex-grow-1 m-1" data-bs-toggle="collapse"
+                href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                Notifications <span class="badge text-bg-danger">{{ profile.count_notifications }}</span>
+              </a>
+            </div>
+          </div>
+
         </div>
       </div>
-    </div>
-    {% else %}
-    <!-- Viewing other user's profile -->
-    <h2>View {{ profile }}'s profile</h2>
-    <div class="row mt-4">
-      <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-        <input type="radio" class="btn-check" name="btnradio" id="btnradioinfo" autocomplete="off" checked>
-        <label class="btn btn-warning bg-highlight btn-tab rounded-top" for="btnradioinfo">Info</label>
-
-        <input type="radio" class="btn-check" name="btnradio" id="btnradioposted" autocomplete="off">
-        <label class="btn btn-warning bg-highlight btn-tab rounded-top" for="btnradioposted">Public Recipes <span
-            class="badge text-bg-warning">{{ profile.recipe_posts.all.count }}</span></label>
-      </div>
-
-      <div id="content"
-        class="pt-5 pb-4 justify-content-center d-flex flex-wrap bg-container bg-gradient rounded border border-2 border-warning border-opacity-50">
-        <div id="info" class="d-none">
-          <div class="col-4">
-            {% if "placeholder" in profile.profile_image.url %}
-            <img src="{% static 'images/profile_placeholder.png' %}" class="profile-image" alt="Placeholder image">
-            {% else %}
-            <img src="{{ profile.profile_image.url }}" class="profile-image" alt="{{ profile }}'s profile image">
+      <div class="row">
+        <!-- Collapsible notification display -->
+        <div class="collapse mt-2" id="collapseExample">
+          <div class="card card-body scroll-container">
+            {% for n in profile.notifications.all %}
+            {% if not n.dismissed %}
+            <div class="alert alert-secondary" role="alert">
+              {{ n }} {{ n.id }}
+              <button type="button" id="hide{{n.id}}" class="btn-close float-end" data-bs-dismiss="alert"
+                aria-label="Dismiss" style="transform: rotate(0);">
+                <a id="dismiss{{n.id}}" href="{% url 'dismiss_notification' n.id %}" class="stretched-link"></a>
+              </button>
+            </div>
             {% endif %}
+            {% endfor %}
           </div>
-          <div class="col-8">
-            <table>
-              <tr>
-                <td><strong>Bio:</strong></td>
-                <td>
-                  <p>{{ profile.bio }}</p>
-                </td>
-              </tr>
-            </table>
-          </div>
-        </div>
-
-        <div id="posted" class="d-none">
-          {% if posted_recipes %}
-          {% for recipe in posted_recipes %}
-          {% include "card.html" with recipe=recipe %}
-          {% endfor %}
-          {% else %}
-          <p>{{ profile }} hasn't posted any public recipes yet</p>
-          {% endif %}
         </div>
       </div>
+      {% else %}
     </div>
   </div>
   {% endif %}
-
+</div>
 </div>
 
+<!-- Saved and Posted recipes (toggle buttons and container with dynamic contents) -->
+<div class="row mt-3">
+  {% if user == profile.user %}
+  <!-- Toggle -->
+  <div class="btn-group col-10 offset-1 d-flex" role="group" aria-label="Basic radio toggle button group">
+    <input type="radio" class="btn-check" name="btnradio" id="btnradiosaved" autocomplete="off" checked>
+    <label class="btn btn-warning bg-highlight btn-tab rounded-top" for="btnradiosaved">Saved <span
+        class="badge text-bg-warning">{{ profile.count_saved_recipes }}</span></label>
+
+    <input type="radio" class="btn-check" name="btnradio" id="btnradioposted" autocomplete="off">
+    <label class="btn btn-warning bg-highlight btn-tab rounded-top" for="btnradioposted">Posted <span
+        class="badge text-bg-warning">{{ profile.user.recipe_posts.all.count }}</span></label>
+  </div>
+  <!-- Recipe cards display (dynamic) -->
+  <div id="content"
+    class="col-sm-10 offset-sm-1 pt-5 pb-4 justify-content-center d-flex flex-wrap bg-container bg-gradient rounded border border-warning border-opacity-50">
+    <!-- Saved recipes (default view) -->
+    <div id="saved" class="d-none">
+      {% if saved_recipes %}
+      {% for recipe in saved_recipes %}
+      {% include "card.html" with recipe=recipe %}
+      {% endfor %}
+      {% else %}
+      <p>You've not saved any recipes yet! Start browsing!</p>
+      {% endif %}
+    </div>
+
+    <!-- Posted recipes -->
+    <div id="posted" class="d-none">
+      {% if posted_recipes %}
+      {% for recipe in posted_recipes %}
+      {% include "card.html" with recipe=recipe %}
+      {% endfor %}
+      {% else %}<p>You've not posted any recipes yet!</p>
+      <a class="btn btn-lg btn-warning mt-1">Add new recipe</a>
+      {% endif %}
+    </div>
+  </div>
+  {% else %}
+  <div
+    class="col-sm-10 offset-sm-1 pt-5 pb-4 justify-content-center d-flex flex-wrap bg-container bg-gradient rounded border border-warning border-opacity-50">
+    {% if public_recipes %}
+    {% for recipe in public_recipes %}
+    {% include "card.html" with recipe=recipe %}
+    {% endfor %}
+    {% else %}
+    <p>{{ profile }} hasn't posted any public recipes yet</p>
+    {% endif %}
+  </div>
+  {% endif %}
+</div>
+</div>
 
 {% endblock %}

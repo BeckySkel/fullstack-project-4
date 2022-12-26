@@ -72,8 +72,7 @@ class ProfilePage(View):
             {
                 'saved_recipes': saved_recipes,
                 'posted_recipes': posted_recipes,
-                'profile': get_user.profile,
-                'small': small
+                'profile': get_user.profile
             },
         )
 
