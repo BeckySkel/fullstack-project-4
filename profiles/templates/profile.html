@@ -115,8 +115,8 @@
   {% else %}
   <div
     class="col-sm-10 offset-sm-1 pt-5 pb-4 justify-content-center d-flex flex-wrap bg-container bg-gradient rounded border border-warning border-opacity-50">
-    {% if public_recipes %}
-    {% for recipe in public_recipes %}
+    {% if posted_recipes %}
+    {% for recipe in posted_recipes %}
     {% include "card.html" with recipe=recipe %}
     {% endfor %}
     {% else %}

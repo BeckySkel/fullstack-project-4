@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
 from recipes.models import Recipe
-from django.db.models import Count    
+from django.db.models import Count
 
 
 class Profile(models.Model):
@@ -18,7 +18,6 @@ class Profile(models.Model):
         )
     first_name = models.CharField(max_length=50, blank=True)
     last_name = models.CharField(max_length=50, blank=True)
-    # profile_image = CloudinaryField('image', default='profile_placeholder')
     profile_image = models.ImageField(upload_to='images/', blank=True)
     bio = models.TextField(blank=True)
     saved = models.ManyToManyField(
@@ -32,7 +31,7 @@ class Profile(models.Model):
 
     def full_name(self):
         return f"{self.first_name} {self.last_name}"
-    
+
     def count_notifications(self):
         return self.notifications.filter(dismissed=False).count()
 
@@ -43,9 +42,12 @@ class Profile(models.Model):
 class Notification(models.Model):
     """
     Model for user notifications
+    Created by admin actions and dismissed by user
     """
-    
-    to = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='notifications')
+    to = models.ForeignKey(
+        Profile,
+        on_delete=models.CASCADE,
+        related_name='notifications')
     sender = models.ForeignKey(User, on_delete=models.CASCADE)
     sent = models.DateTimeField(auto_now_add=True)
     message = models.TextField()
@@ -56,10 +58,21 @@ class Notification(models.Model):
 
 
 class Note(models.Model):
-    """"""
-
-    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, related_name='notes_for_recipe', blank=True, null=True)
-    profile = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='notes_from_profile')
+    """
+    Model for notes attached to other user's recipes but private to the user
+    who wrote them
+    """
+    recipe = models.ForeignKey(
+        Recipe,
+        on_delete=models.CASCADE,
+        related_name='notes_for_recipe',
+        blank=True, null=True
+        )
+    profile = models.ForeignKey(
+        Profile,
+        on_delete=models.CASCADE,
+        related_name='notes_from_profile'
+        )
     body = models.TextField()
 
     def __str__(self):
