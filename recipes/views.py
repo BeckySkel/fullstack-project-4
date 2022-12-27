@@ -79,7 +79,7 @@ class RecipeDetail(View):
                 comment.commenter = request.user
                 comment.recipe = recipe
                 comment_form.save()
-                
+
         # https://openclassrooms.com/en/courses/7107341-intermediate-django/7264795-include-multiple-forms-on-a-page
         if 'new_note' in request.POST:
             note_form = NoteForm(data=request.POST or None)
@@ -106,7 +106,8 @@ class RecipeDetail(View):
 
 # code from CI Think Blog walkthrough project
 class RecipeLike(View):
-    
+    """
+    """   
     def post(self, request, slug, *args, **kwargs):
         recipe = get_object_or_404(Recipe, slug=slug)
         if recipe.likes.filter(id=request.user.id).exists():

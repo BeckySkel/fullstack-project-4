@@ -5,6 +5,8 @@ from profiles.models import Note
 
 
 class RecipeForm(forms.ModelForm):
+    """
+    """
     tags = forms.MultipleChoiceField(
       choices=TAGS,
       widget=forms.CheckboxSelectMultiple()

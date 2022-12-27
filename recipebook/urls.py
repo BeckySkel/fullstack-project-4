@@ -23,3 +23,6 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
     path('profiles/', include('profiles.urls')),
 ]
+
+# https://www.geeksforgeeks.org/django-creating-a-404-error-page/
+handler404 = 'home.views.error_404_view'
