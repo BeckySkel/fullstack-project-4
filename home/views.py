@@ -5,15 +5,26 @@ from recipes.models import Recipe
 from utils.constants import TAGS
 
 
-class HomePage(generic.ListView):
+class HomePage(View):
     """
-    List view to make public recipes available as
+    Custom,view to make public recipes available as
     'recipe_list' template variable to the home page
     """
-    # code insprired by CI blog walkthrough project
-    model = Recipe
-    queryset = Recipe.objects.all().filter(removed=False, private=False)
-    template_name = "index.html"
+    def get(self, request, *args, **kwargs):
+        new_recipes = Recipe.objects.filter(removed=False, private=False).order_by('-created_on')
+        # Order by count of ManyToMany field from
+        # https://stackoverflow.com/questions/28254142/django-order-by-count-of-many-to-many-object
+        popular_recipes = Recipe.objects.filter(removed=False, private=False)\
+                .annotate(q_count=Count('likes')).order_by('-q_count')
+
+        return render(
+                request,
+                'index.html',
+                {
+                    'new_recipes': new_recipes,
+                    'popular_recipes': popular_recipes,
+                },
+            )
 
 
 class BrowseByTag(View):
@@ -92,15 +103,11 @@ class SearchResults(View):
 
 # https://www.geeksforgeeks.org/django-creating-a-404-error-page/
 def error_404_view(request, exception):
-   
-    # we add the path to the the 404.html file
-    # here. The name of our HTML file is 404.html
+
     return render(request, '404.html')
 
 
 # https://www.geeksforgeeks.org/django-creating-a-404-error-page/
-def error_500_view(request, exception):
-   
-    # we add the path to the the 404.html file
-    # here. The name of our HTML file is 404.html
+def error_500_view(request):
+
     return render(request, '500.html')
