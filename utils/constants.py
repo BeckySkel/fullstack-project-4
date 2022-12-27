@@ -15,4 +15,3 @@ TAGS_LIST = [
     ]
 # Idea for better code consistency and less error-prone tags provided by Reuben Ferrante (CI Mentor)
 TAGS = [(tag, "-".join(tag.lower().split(" "))) for tag in TAGS_LIST]
-print(TAGS)

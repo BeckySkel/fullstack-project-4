@@ -10,27 +10,38 @@ from profiles.models import Note
 from datetime import datetime
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
+import json
 
 
 class RecipeDetail(View):
+    """
+    Custom view to display full recipe detail
+    
+    recipe: object, object from Recipe model matching the requested slug
+    comments: queryset, items from Comment model with matching recipe
+    foreign key
+    comment_form: form, form for users to add comments to Comment model
+    note_form: form, form for users to add comments to Note model
+    liked: boolean, True if user has like recipe
+    saved: boolean, True if user has saved recipe
+    notes: queryset, items from Note model with matching recipe foreign key
+    """
 
     def get(self, request, slug, *args, **kwargs):
         queryset = Recipe.objects.filter(removed=False)
         recipe = get_object_or_404(queryset, slug=slug)
         comments = recipe.recipe_comments.filter(removed=False)
+        liked = recipe.likes.filter(id=request.user.id).exists()
+
         try:
             profile = request.user.profile
-            if recipe.saved_by.filter(id=profile.id).exists():
-                saved = True
+            saved = recipe.saved_by.filter(id=request.user.profile.id).exists()
         except AttributeError:
             profile = None
-        
-        notes = recipe.notes_for_recipe.filter(profile=profile)
-                    
-        liked = recipe.likes.filter(id=self.request.user.id).exists()
-        saved = recipe.saved_by.filter(id=self.request.user.profile.id).exists()
-        
+            saved = False
 
+        notes = recipe.notes_for_recipe.filter(profile=profile)
+        
         return render(
             request,
             'recipe_detail.html',
@@ -49,26 +60,34 @@ class RecipeDetail(View):
         queryset = Recipe.objects.filter(removed=False)
         recipe = get_object_or_404(queryset, slug=slug)
         comments = recipe.recipe_comments.filter(removed=False)
-        notes = recipe.notes_for_recipe.filter(profile=request.user.profile)
-        liked = recipe.likes.filter(id=self.request.user.id).exists()
-        saved = recipe.saved_by.filter(id=self.request.user.profile.id).exists()
-        print(saved)
-        comment_form = CommentForm(data=request.POST or None)
-        note_form = NoteForm(data=request.POST or None)
-        
-        if comment_form.is_valid():
-            comment = comment_form.save(commit=False)
+        liked = recipe.likes.filter(id=request.user.id).exists()
 
-            comment.commenter = request.user
-            comment.recipe = recipe
-            comment_form.save()
-        
-        if note_form.is_valid():
-            note = note_form.save(commit=False)
+        try:
+            profile = request.user.profile
+            saved = recipe.saved_by.filter(id=request.user.profile.id).exists()
+        except AttributeError:
+            profile = None
+            saved = False
 
-            note.profile = request.user.profile
-            note.recipe = recipe
-            note_form.save()
+        notes = recipe.notes_for_recipe.filter(profile=profile)
+
+        # https://openclassrooms.com/en/courses/7107341-intermediate-django/7264795-include-multiple-forms-on-a-page
+        if 'commenting' in request.POST:
+            comment_form = CommentForm(data=request.POST or None)
+            if comment_form.is_valid():
+                comment = comment_form.save(commit=False)
+                comment.commenter = request.user
+                comment.recipe = recipe
+                comment_form.save()
+                
+        # https://openclassrooms.com/en/courses/7107341-intermediate-django/7264795-include-multiple-forms-on-a-page
+        if 'new_note' in request.POST:
+            note_form = NoteForm(data=request.POST or None)
+            if note_form.is_valid():
+                note = note_form.save(commit=False)
+                note.profile = request.user.profile
+                note.recipe = recipe
+                note_form.save()
 
         return render(
             request,
@@ -80,6 +99,7 @@ class RecipeDetail(View):
                 'note_form': NoteForm(),
                 'liked': liked,
                 'saved': saved,
+                'notes': notes,
             },
         )
 
@@ -176,13 +196,15 @@ class AddRecipe(LoginRequiredMixin, View):
                 )
 
 
-class EditRecipe(View):
+class EditRecipe(LoginRequiredMixin, View):
     
     def get(self, request, slug, *args, **kwargs):
         queryset = Recipe.objects.filter(removed=False)
         recipe = get_object_or_404(queryset, slug=slug)
 
-        recipe_form = RecipeForm(instance=recipe)
+        tags = recipe.tags.translate({ord(i): None for i in "][,'"}).split()
+
+        recipe_form = RecipeForm(instance=recipe, initial={'tags': tags})
         
         return render(
             request,
@@ -207,7 +229,7 @@ class EditRecipe(View):
             updated_recipe = recipe_form.save()
             slug = updated_recipe.slug
             
-            return redirect(f'/recipes/{slug}')
+            redirect(reverse("recipe_detail", kwargs={"slug": slug}))
         else:
             data = {
                 'title': recipe_form.instance.title,
@@ -222,7 +244,7 @@ class EditRecipe(View):
             # https://www.reddit.com/r/django/comments/4oie1d/how_to_automatically_prepopulate_data_in_forms/
             return render(
                 request,
-                'add_recipe.html',
+                'edit_recipe.html',
                 {'recipe_form': RecipeForm(data)}
                 )
 
