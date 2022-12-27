@@ -10,7 +10,7 @@
       <div class="row">
         <!-- Display profile image -->
         <div class="col-md-5 pt-3">
-          {% if "placeholder" in profile.profile_image.url %}
+          {% if not profile.profile_image %}
           <img src="{% static 'images/profile_placeholder.png' %}" class="profile-image card-img-top rounded"
             alt="Placeholder image">
           {% else %}
@@ -32,18 +32,6 @@
           <p>
             <strong>Recipes:</strong> {{ profile.user.recipe_posts.all.count }}
           </p>
-
-
-          <!-- <table>
-            <tr>
-              <td class="align-top pe-2"><strong>Bio:</strong></td>
-              <td class="align-top text-wrap">{{ profile.bio }}</td>
-            </tr>
-            <tr>
-              <td class="align-top pe-2"><strong>Recipes:</strong></td>
-              <td class="align-top">{{ profile.user.recipe_posts.all.count }}</td>
-            </tr>
-          </table> -->
 
           <!-- User options -->
           {% if user == profile.user %}

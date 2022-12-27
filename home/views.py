@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views import View, generic
+from django.views import View
 from django.db.models import Count, Q
 from recipes.models import Recipe
 from utils.constants import TAGS
@@ -7,15 +7,20 @@ from utils.constants import TAGS
 
 class HomePage(View):
     """
-    Custom,view to make public recipes available as
-    'recipe_list' template variable to the home page
+    View to make public recipes available as template variables
+    to the home page
+
+    new_recipe: queryset, all recipes in order of newest to oldest
+    popular_recipes: queryset, all recipes in order of popularity
     """
     def get(self, request, *args, **kwargs):
-        new_recipes = Recipe.objects.filter(removed=False, private=False).order_by('-created_on')
+        new_recipes = Recipe.objects.filter(removed=False, private=False)\
+            .order_by('-created_on')
+
         # Order by count of ManyToMany field from
         # https://stackoverflow.com/questions/28254142/django-order-by-count-of-many-to-many-object
         popular_recipes = Recipe.objects.filter(removed=False, private=False)\
-                .annotate(q_count=Count('likes')).order_by('-q_count')
+            .annotate(q_count=Count('likes')).order_by('-q_count')
 
         return render(
                 request,
@@ -52,7 +57,7 @@ class BrowseByTag(View):
             for tuple in TAGS:
                 if slug in tuple:
                     tag = tuple[0]
-                    
+
             recipes = Recipe.objects.filter(
                 removed=False,
                 private=False,
@@ -101,13 +106,19 @@ class SearchResults(View):
         return render(request, 'search_results.html')
 
 
-# https://www.geeksforgeeks.org/django-creating-a-404-error-page/
 def error_404_view(request, exception):
+    """
+    Custome 404 page
 
+    Tutorial at https://www.geeksforgeeks.org/django-creating-a-404-error-page/
+    """
     return render(request, '404.html')
 
 
-# https://www.geeksforgeeks.org/django-creating-a-404-error-page/
 def error_500_view(request):
+    """
+    Custome 500 page
 
+    Inspired by https://www.geeksforgeeks.org/django-creating-a-404-error-page/
+    """
     return render(request, '500.html')

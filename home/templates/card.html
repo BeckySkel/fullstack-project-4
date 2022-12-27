@@ -1,8 +1,5 @@
 {% load static %}
 
-
-<!-- possible ribbon https://codepen.io/nxworld/pen/oLdoWb -->
-
 <!-- Bootstrap card used across the site to showcase recipes when user is browsing and searching -->
 <div class="card recipe-card m-2 text-start p-0 flex-grow-0" style="width: 18rem;">
   {% if user == recipe.author %}
@@ -29,7 +26,7 @@
   <!-- Quick info and stretched link -->
   <div class="card-body">
     <h5 class="card-title">{{ recipe.title }}</h5>
-    <p class="card-text card-caption">{{ recipe.short_caption }}</p>
+    <p class="card-text card-caption text-truncate">{{ recipe.caption }}</p>
     <div class="card-footer">
       <span class="card-counter"><i class="fa-solid fa-heart"></i> {{ recipe.count_likes }}</span>
       <span class="card-counter"><i class="fa-solid fa-comment"></i> {{ recipe.count_comments }}</span>

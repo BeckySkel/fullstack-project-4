@@ -1,6 +1,5 @@
 <!-- Bootstrap carousel -->
-<!-- <div class="row">
-  <div class="mt-5 col-12"> -->
+<h3 class="fs-4 badge bg-highlight mt-2">{{ title }}</h3>
 <div id="carousel{{title}}Indicators" class="carousel slide" data-bs-ride="true">
   <!-- Carousel indicators (dynamic) -->
   {% if recipes_list|length < 6 %}
@@ -25,16 +24,16 @@
   </div>
   {% endif %}
   <!-- end of indicators  -->
-  <h3 class="fs-2"><span class="badge bg-highlight position-relative top-40">{{ title }}</span></h3>
   <div class="carousel-inner bg-container bg-gradient rounded border border-warning border-opacity-50 pt-4 pb-5">
     <!-- Carousel slides (dynamic) -->
     {% if recipe_list|length < 6 %}
     <!-- Single carousel slide with 2 recipe cards and link to rest -->
     <div class="carousel-item active">
-      <div class="col-8 offset-2 mt-1 mb-1 justify-content-center d-flex">
+      <div class="col-8 offset-2 my-1 justify-content-center d-flex">
         {% for recipe in recipe_list|slice:'0:2' %}
         {% include "card.html" with recipe=recipe %}
         {% endfor %}
+        <!-- Link to view all recipes -->
         <div class="card m-2 align-self-center view-more" style="width: 18rem;">
           <div class="card-body">
             <a href="{% url 'browse' title|slugify  %}" class="fs-2 card-link stretched-link">Click to view more...</a>
@@ -45,20 +44,21 @@
     {% elif recipe_list|length < 9 %}
     <!-- 2 carousel slides with 5 recipe cards and link to rest -->
     <div class="carousel-item active">
-      <div class="col-8 offset-2 mt-1 mb-1 justify-content-center d-flex">
+      <div class="col-8 offset-2 my-1 justify-content-center d-flex">
         {% for recipe in recipe_list|slice:'0:3' %}
         {% include "card.html" with recipe=recipe %}
         {% endfor %}
       </div>
     </div>
     <div class="carousel-item">
-      <div class="col-8 offset-2 mt-1 mb-1 justify-content-center d-flex">
+      <div class="col-8 offset-2 my-1 justify-content-center d-flex">
         {% for recipe in recipe_list|slice:'3:5' %}
         {% include "card.html" with recipe=recipe %}
         {% endfor %}
+        <!-- Link to view all recipes -->
         <div class="card m-2 align-self-center view-more" style="width: 18rem;">
           <div class="card-body">
-            <a href="{% url 'browse' title|slugify  %}" class="fs-2 card-link stretched-link">Click to view more...</a>
+            <a href="{% url 'browse' title|slugify %}" class="fs-2 card-link stretched-link">Click to view more...</a>
           </div>
         </div>
       </div>
@@ -66,24 +66,25 @@
     {% else %}
     <!-- 3 carousel slides with 8 recipe cards and link to rest -->
     <div class="carousel-item active">
-      <div class="col-8 offset-2 mt-1 mb-1 justify-content-center d-flex">
+      <div class="col-8 offset-2 my-1 justify-content-center d-flex">
         {% for recipe in recipe_list|slice:'0:3' %}
         {% include "card.html" with recipe=recipe %}
         {% endfor %}
       </div>
     </div>
     <div class="carousel-item">
-      <div class="col-8 offset-2 mt-1 mb-1 justify-content-center d-flex">
+      <div class="col-8 offset-2 my-1 justify-content-center d-flex">
         {% for recipe in recipe_list|slice:'3:6' %}
         {% include "card.html" with recipe=recipe %}
         {% endfor %}
       </div>
     </div>
     <div class="carousel-item">
-      <div class="col-8 offset-2 mt-1 mb-1 justify-content-center d-flex">
+      <div class="col-8 offset-2 my-1 justify-content-center d-flex">
         {% for recipe in recipe_list|slice:'6:8' %}
         {% include "card.html" with recipe=recipe %}
         {% endfor %}
+        <!-- Link to view all recipes -->
         <div class="card m-2 align-self-center view-more" style="width: 18rem;">
           <div class="card-body">
             <a href="{% url 'browse' title|slugify  %}" class="fs-2 card-link stretched-link">Click to view more...</a>
@@ -101,7 +102,7 @@
   <!-- Controls present with more than 1 slide available -->
   <button class="carousel-control-prev" type="button" data-bs-target="#carousel{{title}}Indicators"
     data-bs-slide="prev">
-    <span class="carousel-control-prev-icon  fs-1 text-success" aria-hidden="true">
+    <span class="carousel-control-prev-icon fs-1 text-success" aria-hidden="true">
       <i class="fa-solid fa-chevron-left"></i>
     </span>
     <span class="visually-hidden">Previous</span>

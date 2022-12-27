@@ -10,8 +10,8 @@
             class="col-10 offset-1 recipe-info mt-5 px-3 pb-3 bg-container bg-gradient rounded border border-warning border-opacity-50">
             <div class="row flex-column-reverse flex-md-row">
                 <div class="col-md-7 d-flex flex-column pt-3">
-                    <h2 class="fs-1">{{ recipe.title }}</h2>
-                    <h3>by <a href="{% url 'profile_page' recipe.author %}" class="text-reset">{{ recipe.author }}</a></h3>
+                    <h2 class="fs-1 text-break">{{ recipe.title }}</h2>
+                    <h3 class="text-break">by <a href="{% url 'profile_page' recipe.author %}" class="text-reset">{{ recipe.author }}</a></h3>
 
                     <!-- Created and updated -->
                     <p>created: {{ recipe.created_on }}
@@ -20,7 +20,7 @@
                         {% endif %}
                     </p>
 
-                    <p class="flex-grow-1">{{ recipe.caption }}</p>
+                    <p class="flex-grow-1 text-break">{{ recipe.caption }}</p>
 
                     <!-- Tags -->
                     <div>
@@ -37,7 +37,7 @@
                         {% if user.is_authenticated and user != recipe.author %}
                         <!-- Like button and counter -->
                         <!-- Code inspired by CI walkthough blog project -->
-                        <form class="d-inline col-2" action="{% url 'recipe_like' recipe.slug %}" method="POST">
+                        <form class="d-inline col-3" action="{% url 'recipe_like' recipe.slug %}" method="POST">
                             {% csrf_token %}
                             <button type="submit" name="like_recipe" value="{{recipe.slug}}"
                                 class="border-0 bg-transparent px-0">
@@ -51,14 +51,14 @@
                         </form>
 
                         <!-- Comment counter and link to comments -->
-                        <span class="col-2">
+                        <span class="col-3">
                             <a href="#comments" class="text-decoration-none text-reset">
                                 <i class="far fa-comments"></i> {{ recipe.count_comments }}
                             </a>
                         </span>
 
                         <!-- Save button and counter -->
-                        <form class="d-inline col-2 ms-auto" action="{% url 'recipe_save' recipe.slug %}" method="POST">
+                        <form class="d-inline col-5 ms-auto" action="{% url 'recipe_save' recipe.slug %}" method="POST">
                             {% csrf_token %}
                             <button type="submit" name="save_recipe" value="{{recipe.slug}}"
                                 class="border-0 bg-transparent px-0 fw-semibold">
@@ -73,13 +73,13 @@
                         {% else %}
 
                         <!-- Like, comment and save counters -->
-                        <span class="col-2"><i class="far fa-heart"></i> {{ recipe.count_likes }}</span>
-                        <span class="col-2">
+                        <span class="col-3"><i class="far fa-heart"></i> {{ recipe.count_likes }}</span>
+                        <span class="col-3">
                             <a href="#comments" class="text-decoration-none text-reset">
                                 <i class="far fa-comments"></i> {{ recipe.count_comments }}
                             </a>
                         </span>
-                        <span class="col-2  ms-auto">
+                        <span class="col-5 ms-auto">
                             <i class="fa-regular fa-bookmark"></i> {{ recipe.count_saved_by }}
                         </span>
 

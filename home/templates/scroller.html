@@ -1,19 +1,17 @@
 <!-- Scroller -->
-<div class="row mt-5">
-  <div>
-    <h3 class="fs-2"><span class="badge bg-highlight position-relative top-40">{{ title }}</span></h3>
+<h3 class="fs-4 badge bg-highlight mt-2">{{ title }}</h3>
 
-    <div class="bg-container bg-gradient rounded border border-warning border-opacity-50 pt-4 pb-5">
-      <div class="my-1 mx-3 row flex-nowrap overflow-auto">
-        {% for recipe in recipe_list|slice:'0:8' %}
-        {% include "card.html" with recipe=recipe %}
-        {% endfor %}
-        <div class="card m-2 align-self-center view-more" style="width: 18rem;">
-          <div class="card-body">
-            <a href="{% url 'browse' title|slugify  %}" class="fs-2 card-link stretched-link">Click to view
-              more...</a>
-          </div>
-        </div>
+<div class="bg-container bg-gradient rounded border border-warning border-opacity-50 pt-2 pb-3">
+  <!-- Displays recipes cards horizontally within x-scrollable container -->
+  <div class="my-1 mx-2 row flex-nowrap overflow-auto">
+    {% for recipe in recipe_list|slice:'0:8' %}
+    {% include "card.html" with recipe=recipe %}
+    {% endfor %}
+    <!-- Link to view all recipes -->
+    <div class="card m-2 align-self-center view-more" style="width: 18rem;">
+      <div class="card-body">
+        <a href="{% url 'browse' title|slugify  %}" class="fs-2 card-link stretched-link">Click to view
+          more...</a>
       </div>
     </div>
   </div>

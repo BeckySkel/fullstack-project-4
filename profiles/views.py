@@ -31,14 +31,11 @@ class EditProfile(LoginRequiredMixin, View):
     def post(self, request, *args, **kwargs):
         get_user = User.objects.get(username=request.user)
 
-        profile_form = ProfileForm(data=request.POST or None, instance=get_user.profile)
+        profile_form = ProfileForm(request.POST, request.FILES, instance=get_user.profile)
 
         skip = request.META.get('HTTP_REFERER').endswith('/accounts/signup/')
 
-        if profile_form.is_valid():
-            profile_form.save(commit=False)
-            if not profile_form.instance.profile_image:
-                profile_form.instance.profile_image = 'profile_placeholder'
+        if profile_form.is_valid():  
             profile_form.save()
 
             return render(request, 'profile.html',

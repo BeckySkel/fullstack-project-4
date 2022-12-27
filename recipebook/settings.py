@@ -9,7 +9,9 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 from pathlib import Path
 import os
 import dj_database_url
@@ -166,6 +168,12 @@ STATIC_URL = '/static/'
 
 MEDIA_URL = '/media/'
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+# CLOUDINARY_STORAGE = {
+#     'CLOUD_NAME': os.environ.get('CLOUDINARY_CLOUD_NAME'),
+#     'API_KEY': os.environ.get('CLOUDINARY_API_KEY'),
+#     'API_SECRET': os.environ.get('CLOUDINARY_API_SECRET')
+# }
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

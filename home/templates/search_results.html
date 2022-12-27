@@ -30,7 +30,7 @@
 
         {% if recipes %}
         <div
-            class="mt-4 pt-4 pb-4 justify-content-center d-flex bg-container bg-gradient rounded border border-warning border-opacity-50 flex-wrap">
+            class="mt-4 py-4 justify-content-center d-flex bg-container bg-gradient rounded border border-warning border-opacity-50 flex-wrap">
             {% for recipe in recipes %}
             {% include "card.html" with recipe=recipe %}
             {% endfor %}
