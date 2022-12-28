@@ -9,9 +9,6 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-# import cloudinary
-# import cloudinary.uploader
-# import cloudinary.api
 from pathlib import Path
 import os
 import dj_database_url
@@ -19,6 +16,7 @@ from django.contrib.messages import constants as messages
 if os.path.isfile('env.py'):
     import env
 
+# Fixing mime-type bug from 
 # https://stackoverflow.com/questions/35557129/css-not-loading-wrong-mime-type-django
 import mimetypes
 mimetypes.add_type("text/css", ".css", True)
@@ -37,7 +35,6 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
 DEBUG = ('DEBUGGING' in os.environ)
 
 ALLOWED_HOSTS = ['pp4-recipebook.herokuapp.com', 'localhost']
@@ -118,16 +115,10 @@ WSGI_APPLICATION = 'recipebook.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
 DATABASES = {
     'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
 }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators

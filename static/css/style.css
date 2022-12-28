@@ -135,9 +135,8 @@ https://codepen.io/alexerlandsson/pen/NqXWwX */
     margin-left: auto;
     margin-right: auto;
     object-fit: cover;
-    /* height: auto; */
-    height: 30vh;
-    /* max-height: 30vh; */
+    height: auto;
+    max-height: 30vh;
     width: 100%;
 }
 

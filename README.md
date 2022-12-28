@@ -77,9 +77,6 @@
 
 ### Research
 - Before any planning, I conducted research into both social media and recipes websites and took note of the conventional layouts and formats as well as which features I thought enhanced the user's experience and would be good to include for my target audience(s).
-  - [Facebook](https://www.facebook.com/) for social features
-  - [Jamie Oliver](https://www.jamieoliver.com/) for design inspiration
-  - [BBC GoodFood](https://www.bbcgoodfood.com/) for recipe presentation
 
 ### Future Features
 
@@ -231,20 +228,39 @@
 - [CSS](https://en.wikipedia.org/wiki/CSS)
 - [Git](https://en.wikipedia.org/wiki/Git) for version control
 - [JavaScript](https://en.wikipedia.org/wiki/JavaScript)
+- [Python](https://en.wikipedia.org/wiki/Python_(programming_language))
+
+#### Imported modules
+- [os](https://docs.python.org/3/library/os.html)
+
+#### Installed Libraries
+- [cloudinary](https://pypi.org/project/cloudinary/)
+- [dj3-cloudinary-storage](https://pypi.org/project/dj3-cloudinary-storage/)
+- [gunicorn](https://pypi.org/project/gunicorn/)
+- [oauthlib](https://pypi.org/project/oauthlib/)
+- [psycopg2](https://pypi.org/project/psycopg2/)
+- [whitenoise](https://pypi.org/project/whitenoise/)
+
+#### Frameworks
+- [Django](https://www.djangoproject.com/)
 
 #### Other resources
 - [Gitpod](https://www.gitpod.io/) to alter and manage website files
 - [Github](https://github.com/) to create and store website files
-- [Github Pages](https://pages.github.com/) to deploy site
+- [Heroku](https://dashboard.heroku.com/apps) to deploy web application
 - [Chrome Devtools](https://developer.chrome.com/docs/devtools/) to test site throughout process
 - [Balsamiq](https://balsamiq.com/) to create wireframes
 - [Coolors](https://coolors.co/) to choose a colour scheme
-- [CSS Gradient](https://cssgradient.io/#:~:text=Gradients%20are%20CSS%20elements%20of,be%20in%20a%20background%20element.) to help with CSS gradients for website backgrounds
+- [Bootstrap](https://getbootstrap.com/docs/5.0/getting-started/introduction/) to help with styling and responsive design
+- [Cloudinary](https://cloudinary.com/) for database and staic file storage
 - [Google Fonts](https://fonts.google.com/) for the website font (Cabin)
 - [Font Awesome](https://fontawesome.com/) used to add icons
+- [Pexels](https://www.pexels.com/) for submitted recipe examples
 - [Favicon.io](https://favicon.io/favicon-generator/) used to create favicon
-- [Code Institute](https://codeinstitute.net/) fullstack developer course to learn how to create
+- [Code Institute](https://codeinstitute.net/) fullstack developer course to provide learning materials
 - [W3Schools](https://www.w3schools.com/) for help with common coding issues
+- [Geeks For Geeks](https://www.geeksforgeeks.org/)  for help with common coding issues
+- [Stack Overflow](https://stackoverflow.com/) for help with common coding issues
 - [Am I Responsive?](https://ui.dev/amiresponsive) for device simulations
 
 ---
@@ -254,57 +270,78 @@
 
 #### Colour scheme
 
-![The colour scheme I used for the standard display](/assets/images/colour-scheme.png)
+![The colour scheme I used for the standard display](static/images/colour-scheme.png)
 
-- The colour-scheme is vibrant but soft to provide a pleasing display without distracting from the game-play.
-- For the upgrades, bolder colours and patterns were chosen to improve player customisation and feeling of reward and excitement.
-- I used [Coolors](https://coolors.co/) to help pick a colour scheme and [CSS Gradient](https://cssgradient.io/#:~:text=Gradients%20are%20CSS%20elements%20of,be%20in%20a%20background%20element.) to help with coding the CSS gradients.
-- There is a 135 degree angled gradient across all backgrounds ranging from more subtle to very striking.
-- For the standard displa, the base colours are pale blue, mint green and a warm off-white with mustard and lime green acting as highlights.
-
+- The colour-scheme is vibrant but soft to provide a pleasing display and compliment any recipe images displayed on the site.
+- Bootstrap border and background colours were used on secondary features. Bootstrap button colours also used.
+- I used [Coolors](https://coolors.co/) to help pick a colour scheme.
 
 #### Imagery
-- There are currently no images used in this site.
+- Images are uploaded by the users and stored in Cloudinary database.
+- There are placeholder images for both recipes and profiles if image field empty
+- Example recipes uploaded with images from Pexels
+
+![Placeholder for recipe image](static/images/recipe_placeholder.png)
+![Placeholder for profile image](static/images/profile_placeholder.png)
 
 #### Typography
-- All text is in the Cabin font. It is a humanist sans which is clear and easily read at both larger and smaller font sizes. It’s classic-yet-modern style pairs well with the softer colours and rounded edges of the website.
+- All text is in the Quicksand font. It is a display sans serif with rounded terminals. It is designed for display purposes but kept legible enough to use in small sizes as well[*](https://fonts.google.com/specimen/Quicksand/about?query=quicksand). It pairs well with the softer colours and rounded corners of the design.
 - Sans serif has been used as the fallback option since it is the closest web-safe font.
 
 #### Icons
-- [Font Awesome](https://fontawesome.com/) icons were used for navigation buttons as well as for the main game display.
+- [Font Awesome](https://fontawesome.com/) icons were used for navigation buttons as well as in creation of the placeholder images.
 
 ### Deployment
-- This site was deployed on Github Pages, following the below steps:
-    1. Acces the Github repository [here](https://github.com/BeckySkel/javascript-project-2)
-    2. Navigate to the **Settings** tab (far right tab)
-    3. Open the **Pages** information
-    4. Select branch **main**
-    5. Wait for site to deploy (this make take a few minutes) 
-- Access the live site [here](https://beckyskel.github.io/javascript-project-2/)
+- This site was developed using [Gitpod](https://www.gitpod.io/), stored on [Github](https://github.com/) and deployed with [Heroku](https://dashboard.heroku.com/apps).
+
+- Testing on Gitpod:
+    1. In the terminal, type "python3 manage.py runserver" and press enter to begin the application
+    2. Click "Open in Browser" on the pop-up
+    3. Once finished, use Ctrl + C in the terminal to close the application
+
+- Deploying on Heroku:
+    1. From the homescreen, click "New" and select "Create new app"
+    2. Choose app name, select region and click "Create"
+    3. Go to "Settings" and add PORT : 8000 to the Config Vars (CLOUDINARY_URL : {cloudinary url}, DATABASE_URL: {postgres url}, SECRET_KEY: {django secure key} also added but excluded from Github for security reasons)
+    4. Add heroku/python buildpack
+    5. Go to "Deploy" and connect Github repository
+    6. Select "Enable Automatic Deploys" and click "Deploy Branch"
 
 ---
 ## Credits
 
 ### Content
 - Websites used for initial research:
-     - [](https://www.rpsgame.org/random)
-     - [](https://www.online-stopwatch.com/chance-games/rock-paper-scissors/)
-     - [](https://www.twoplayergames.org/game/rock-paper-scissors)
-- Issue with trying to display the chosen weapon icon by using code to map the index in an array solved with code from [Borislav Hadzhiev](https://bobbyhadz.com/blog/javascript-array-find-index-of-object-by-property)
-- CSS Code for colourful 3D heading from [Mandy Michael](code for 3D effect from https://codepen.io/mandymichael/pen/VprZaq)
-- Code for preloading and preconnecting links suggested by [Chrome Devtools](https://developer.chrome.com/docs/devtools/) Lighthouse feature
-- 3D buttons inspired by [Arron Hunt](https://codepen.io/arronhunt/pen/WWOOeO) but heavily edited by myself to suit my design
+  - [Facebook](https://www.facebook.com/) for social features
+  - [Jamie Oliver](https://www.jamieoliver.com/) for design inspiration
+  - [BBC GoodFood](https://www.bbcgoodfood.com/) for recipe presentation
+- Code for ordering by count of ManyToMany field (used when browsing by popularity) from [https://stackoverflow.com/questions/28254142/django-order-by-count-of-many-to-many-object](https://stackoverflow.com/questions/28254142/django-order-by-count-of-many-to-many-object)
+- Retrieving search term from search bar to display matches from [https://www.youtube.com/watch?v=AGtae4L5BbI](https://www.youtube.com/watch?v=AGtae4L5BbI)
+- Custom error pages from tutorial at [https://www.geeksforgeeks.org/django-creating-a-404-error-page/](https://www.geeksforgeeks.org/django-creating-a-404-error-page/)
+- Signals tutorial and code to connect Profile database to User inspired by [https://www.youtube.com/watch?v=Kc1Q_ayAeQk](https://www.youtube.com/watch?v=Kc1Q_ayAeQk)
+- Recipe card banner to show private/public recipes provided by [https://codepen.io/alexerlandsson/pen/NqXWwX](https://codepen.io/alexerlandsson/pen/NqXWwX)
+- Idea for TAGS list -> tuple for better code consistency and less error-prone tags provided by Reuben Ferrante (CI Mentor)
+- Saving new slug when updating a recipe at [https://stackoverflow.com/questions/33176569/slugfield-in-django-and-overriding-save](https://stackoverflow.com/questions/33176569/slugfield-in-django-and-overriding-save)
+- Lking posts as well as counting likes and saves inspired by [Code Institute](https://codeinstitute.net/) 'I Think Therefore I Blog' walkthrough project.
+- Code for multiple forms in one template from [https://openclassrooms.com/en/courses/7107341-intermediate-django/7264795-include-multiple-forms-on-a-page](https://openclassrooms.com/en/courses/7107341-intermediate-django/7264795-include-multiple-forms-on-a-page)
+- Formatting textarea widget from [https://stackoverflow.com/questions/6536373/how-can-i-set-the-size-of-rows-columns-in-textfield-in-django-models](https://stackoverflow.com/questions/6536373/how-can-i-set-the-size-of-rows-columns-in-textfield-in-django-models)
+- How to return to same page from [https://stackoverflow.com/questions/50006147/how-to-return-redirect-to-previous-page-in-django-after-post-request](https://stackoverflow.com/questions/50006147/how-to-return-redirect-to-previous-page-in-django-after-post-request)
+- Idea for holding temporary data and cleaning before saving from [https://www.geeksforgeeks.org/multiplechoicefield-django-forms/](https://www.geeksforgeeks.org/multiplechoicefield-django-forms/)
+- Prepopulating form after failed attempt from [https://www.reddit.com/r/django/comments/4oie1d/how_to_automatically_prepopulate_data_in_forms/](https://www.reddit.com/r/django/comments/4oie1d/how_to_automatically_prepopulate_data_in_forms/) and [https://docs.djangoproject.com/en/dev/ref/forms/api/#dynamic-initial-values](https://docs.djangoproject.com/en/dev/ref/forms/api/#dynamic-initial-values)
+- Fixing mime-type bug in settings file from [https://stackoverflow.com/questions/35557129/css-not-loading-wrong-mime-type-django](https://stackoverflow.com/questions/35557129/css-not-loading-wrong-mime-type-django)
+
 
 ### Media
 - All icons from [Font Awesome](https://fontawesome.com/)
-- All CSS gradients achieved with [CSS Gradient](https://cssgradient.io/#:~:text=Gradients%20are%20CSS%20elements%20of,be%20in%20a%20background%20element.)
+- All uploaded images from [Pexels](https://www.pexels.com/)
 
 ### Acknowledgements
-- [Code Institute](https://codeinstitute.net/) for providing excellent learning content and project idea
+- [Code Institute](https://codeinstitute.net/) for providing excellent learning content
 - Reuben Ferrante as my mentor and providing vital feedback throughout the project's development
-- [W3Schools](https://www.w3schools.com/) for quick and easy guidance on HTML and CSS
-- The users of [Stack Overflow](https://stackoverflow.com/) for asking and answering some of the harder JavaScript questions
-- Other CI students for sharing their work and providing inspiration and guidance
+- [W3Schools](https://www.w3schools.com/) for quick and easy tutorials on programming languages
+- [Geeks For Geeks](https://www.geeksforgeeks.org/) for quick and easy tutorials on programming languages
+- The users of [Stack Overflow](https://stackoverflow.com/) for asking and answering some of the harder Django questions
+- Other CI students for sharing their work and providing inspiration and guidance through the Slack channels
 
 ---
 
