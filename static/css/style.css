@@ -72,8 +72,10 @@ https://codepen.io/alexerlandsson/pen/NqXWwX */
 	position: absolute;
 	top: -0.3rem;
 	left: -0.3rem;
-	&:after {
-		content: "";
+}
+
+.banner-container::after {
+    content: "";
 		display: block;
 		width: 0.6rem;
 		height: 0.3rem;
@@ -82,18 +84,19 @@ https://codepen.io/alexerlandsson/pen/NqXWwX */
 		top: 0;
 		right: 0;
 		z-index: -1;
-	}
-	&:before {
-		content: "";
-		display: block;
-		height: 0.6rem;
-		width: 0.3rem;
-		position: absolute;
-		bottom: 0;
-		left: 0;
-		z-index: -1;
-	}
 }
+
+.banner-container::before {
+    content: "";
+    display: block;
+    height: 0.6rem;
+    width: 0.3rem;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+}
+
 
 .banner {
 	width: 10rem;

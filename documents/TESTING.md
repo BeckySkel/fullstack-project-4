@@ -2,33 +2,31 @@
 
 ## HTML and CSS Validation Testing
 
-- All pages were passed through either the [W3C CSS validator](), [W3C HTML Validator](), [JSHint JavaScript Linter]() or [pep8online Python Linter]() (depending on relevance).
+- All pages were passed through either the [W3C CSS validator](https://jigsaw.w3.org/css-validator/), [W3C HTML Validator](https://validator.w3.org/nu/), [JSHint JavaScript Linter]() or [pep8online Python Linter]() (depending on relevance).
 - Any issues found have been rectified and all pages now pass with no errors to show. Any warnings received explained below.
 
-###  W3C HTML Validator
+
+###  W3C HTML Validator (Validate by URI)
 
 #### Homepage (https://pp4-recipebook.herokuapp.com/)
 [Document checking completed. No errors or warnings to show.](https://validator.w3.org/nu/?doc=https%3A%2F%2Fpp4-recipebook.herokuapp.com%2F)
 
 #### Browsing pages
-##### New (full) ()
+##### New (full) (https://pp4-recipebook.herokuapp.com/browse/new)
 [Document checking completed. No errors or warnings to show.](https://validator.w3.org/nu/?doc=https%3A%2F%2Fpp4-recipebook.herokuapp.com%2Fbrowse%2Fnew)
-##### Gluten Free (empty) ()
+##### Gluten Free (empty) (https://pp4-recipebook.herokuapp.com/browse/gluten-free)
 [Document checking completed. No errors or warnings to show.](https://validator.w3.org/nu/?doc=https%3A%2F%2Fpp4-recipebook.herokuapp.com%2Fbrowse%2Fgluten-free)
 
-#### Search Results ()
+#### Search Results (https://pp4-recipebook.herokuapp.com/search/)
 [Document checking completed. No errors or warnings to show.](https://validator.w3.org/nu/?doc=https%3A%2F%2Fpp4-recipebook.herokuapp.com%2Fsearch%2F)
 
-#### Search Results ()
-[Document checking completed. No errors or warnings to show.](https://validator.w3.org/nu/?doc=https%3A%2F%2Fpp4-recipebook.herokuapp.com%2Fsearch%2F)
-
-#### Login ()
+#### Login (https://pp4-recipebook.herokuapp.com/accounts/login/)
 [Document checking completed. No errors or warnings to show.](https://validator.w3.org/nu/?doc=https%3A%2F%2Fpp4-recipebook.herokuapp.com%2Faccounts%2Flogin%2F)
 
-#### Logout ()
+#### Logout (https://pp4-recipebook.herokuapp.com/accounts/logout/)
 [Document checking completed. No errors or warnings to show.](https://validator.w3.org/nu/?doc=https%3A%2F%2Fpp4-recipebook.herokuapp.com%2Faccounts%2Flogout%2F)
 
-#### Register ()
+#### Register (https://pp4-recipebook.herokuapp.com/accounts/signup/)
 [Document checking completed. No errors or warnings to show.](https://validator.w3.org/nu/?doc=https%3A%2F%2Fpp4-recipebook.herokuapp.com%2Faccounts%2Fsignup%2F)
 
 #### Edit Profile (https://pp4-recipebook.herokuapp.com/profiles/edit_profile/)
@@ -47,71 +45,17 @@
 - 1 Info instance: *Trailing slash on void elements has no effect and interacts badly with unquoted attribute values*. Line created with model form/crispy forms so unable to edit.
 
 #### Recipe Detail (https://pp4-recipebook.herokuapp.com/recipes/fried-rice/)
-[Document checking completed. No errors or warnings to show.]()
+[Document checking completed. No errors or warnings to show.](https://validator.w3.org/nu/?doc=https%3A%2F%2Fpp4-recipebook.herokuapp.com%2Frecipes%2Ffried-rice%2F)
 
-#### 404 Error ()
-[Document checking completed. No errors or warnings to show.]()
-
-#### 500 Error ()
-[Document checking completed. No errors or warnings to show.]()
+#### 404 Error (https://pp4-recipebook.herokuapp.com/recipes/404/)
+[Document checking completed. No errors or warnings to show.](https://validator.w3.org/nu/?doc=https%3A%2F%2Fpp4-recipebook.herokuapp.com%2Frecipes%2F404%2F)
 
 
-
-
-
-
-
-
-
-
-
-#### card.html
-![Feedback from run through the W3 HTML validator for card.html](/assets/images/card-w3c-result.png)
-
-#### carousel.html
-![Feedback from run through the W3 HTML validator for carousel.html](/assets/images/carousel-w3c-result.png)
-
-#### scroller.html
-![Feedback from run through the W3 HTML validator for scroller.html](/assets/images/scroller-w3c-result.png)
-
-#### search_results.html
-![Feedback from run through the W3 HTML validator for search_results.html](/assets/images/search-w3c-result.png)
-
-#### profile.html
-![Feedback from run through the W3 HTML validator for profile.html](/assets/images/profile-w3c-result.png)
-
-#### edit_profile.html
-![Feedback from run through the W3 HTML validator for edit_profile.html](/assets/images/edit_profile-w3c-result.png)
-
-#### recipe_detail.html
-![Feedback from run through the W3 HTML validator for recipe_detail.html](/assets/images/recipe-w3c-result.png)
-
-#### add_recipe.html
-![Feedback from run through the W3 HTML validator for add_recipe.html](/assets/images/add_recipe-w3c-result.png)
-
-#### edit_recipe.html
-![Feedback from run through the W3 HTML validator for edit_recipe.html](/assets/images/edit_recipe-w3c-result.png)
-
-#### 404.html
-![Feedback from run through the W3 HTML validator for 404.html](/assets/images/404-w3c-result.png)
-
-#### 500.html
-![Feedback from run through the W3 HTML validator for 500.html](/assets/images/500-w3c-result.png)
-
-
-
-
-
-
-###  W3C CSS Validator
+###  W3C CSS Validator (Validate by direct input)
 
 #### style.css
-![Feedback from run through the W3 CSS validator for style.css](/assets/images/css-w3c-result.png)
-
-
-
-
-
+- Google Fonts import at top removed for validation
+![Feedback from run through the W3 CSS validator for style.css](/static/images/css-w3c-result.png)
 
 
 ###  JSHint Validator
