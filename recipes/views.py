@@ -56,53 +56,54 @@ class RecipeDetail(View):
         )
 
     def post(self, request, slug, *args, **kwargs):
-        queryset = Recipe.objects.filter(removed=False)
-        recipe = get_object_or_404(queryset, slug=slug)
-        comments = recipe.recipe_comments.filter(removed=False)
-        liked = recipe.likes.filter(id=request.user.id).exists()
+        if request.user.is_authenticated:
+            queryset = Recipe.objects.filter(removed=False)
+            recipe = get_object_or_404(queryset, slug=slug)
+            comments = recipe.recipe_comments.filter(removed=False)
+            liked = recipe.likes.filter(id=request.user.id).exists()
 
-        try:
-            profile = request.user.profile
-            saved = recipe.saved_by.filter(id=request.user.profile.id).exists()
-        except AttributeError:
-            profile = None
-            saved = False
+            try:
+                profile = request.user.profile
+                saved = recipe.saved_by.filter(id=request.user.profile.id).exists()
+            except AttributeError:
+                profile = None
+                saved = False
 
-        notes = recipe.notes_for_recipe.filter(profile=profile)
+            notes = recipe.notes_for_recipe.filter(profile=profile)
 
-        # Code to host multiple forms on single template from
-        # https://openclassrooms.com/en/courses/7107341-intermediate-django/7264795-include-multiple-forms-on-a-page
-        if 'commenting' in request.POST:
-            comment_form = CommentForm(data=request.POST or None)
-            if comment_form.is_valid():
-                comment = comment_form.save(commit=False)
-                comment.commenter = request.user
-                comment.recipe = recipe
-                comment_form.save()
+            # Code to host multiple forms on single template from
+            # https://openclassrooms.com/en/courses/7107341-intermediate-django/7264795-include-multiple-forms-on-a-page
+            if 'commenting' in request.POST:
+                comment_form = CommentForm(data=request.POST or None)
+                if comment_form.is_valid():
+                    comment = comment_form.save(commit=False)
+                    comment.commenter = request.user
+                    comment.recipe = recipe
+                    comment_form.save()
 
-        # Code to host multiple forms on single template from
-        # https://openclassrooms.com/en/courses/7107341-intermediate-django/7264795-include-multiple-forms-on-a-page
-        if 'new_note' in request.POST:
-            note_form = NoteForm(data=request.POST or None)
-            if note_form.is_valid():
-                note = note_form.save(commit=False)
-                note.profile = request.user.profile
-                note.recipe = recipe
-                note_form.save()
+            # Code to host multiple forms on single template from
+            # https://openclassrooms.com/en/courses/7107341-intermediate-django/7264795-include-multiple-forms-on-a-page
+            if 'new_note' in request.POST:
+                note_form = NoteForm(data=request.POST or None)
+                if note_form.is_valid():
+                    note = note_form.save(commit=False)
+                    note.profile = request.user.profile
+                    note.recipe = recipe
+                    note_form.save()
 
-        return render(
-            request,
-            'recipe_detail.html',
-            {
-                'recipe': recipe,
-                'comments': comments,
-                'comment_form': CommentForm(),
-                'note_form': NoteForm(),
-                'liked': liked,
-                'saved': saved,
-                'notes': notes,
-            },
-        )
+            return render(
+                request,
+                'recipe_detail.html',
+                {
+                    'recipe': recipe,
+                    'comments': comments,
+                    'comment_form': CommentForm(),
+                    'note_form': NoteForm(),
+                    'liked': liked,
+                    'saved': saved,
+                    'notes': notes,
+                },
+            )
 
 
 class AddRecipe(LoginRequiredMixin, View):
