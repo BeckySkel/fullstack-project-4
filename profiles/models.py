@@ -54,7 +54,7 @@ class Notification(models.Model):
     dismissed = models.BooleanField(default=False)
 
     def __str__(self):
-        return f'Notification of {self.message} from {self.sender}'
+        return self.message
 
 
 class Note(models.Model):
