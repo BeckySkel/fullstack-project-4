@@ -6,6 +6,7 @@ from profiles.models import Note
 
 class RecipeForm(forms.ModelForm):
     """
+    Recipe creator/editor form
     """
     tags = forms.MultipleChoiceField(
       choices=TAGS,
@@ -25,6 +26,10 @@ class RecipeForm(forms.ModelForm):
 
 
 class CommentForm(forms.ModelForm):
+    """
+    Form to post public comments to recipes
+    """
+    # Code for multiple forms in one template from
     # https://openclassrooms.com/en/courses/7107341-intermediate-django/7264795-include-multiple-forms-on-a-page
     commenting = forms.BooleanField(widget=forms.HiddenInput, initial=True)
 
@@ -34,13 +39,18 @@ class CommentForm(forms.ModelForm):
         labels = {
           'body': 'Write a comment'
         }
+        # Formatting textarea widget from
         # https://stackoverflow.com/questions/6536373/how-can-i-set-the-size-of-rows-columns-in-textfield-in-django-models
         widgets = {
-          'body': forms.Textarea(attrs={'rows':2, 'cols':15}),
+          'body': forms.Textarea(attrs={'rows': 2, 'cols': 15}),
         }
 
 
 class NoteForm(forms.ModelForm):
+    """
+    Form to add private notes to recipes
+    """
+    # Code for multiple forms in one template from
     # https://openclassrooms.com/en/courses/7107341-intermediate-django/7264795-include-multiple-forms-on-a-page
     new_note = forms.BooleanField(widget=forms.HiddenInput, initial=True)
 
@@ -50,7 +60,8 @@ class NoteForm(forms.ModelForm):
         labels = {
           'body': 'Write a note'
         }
+        # Formatting textarea widget from
         # https://stackoverflow.com/questions/6536373/how-can-i-set-the-size-of-rows-columns-in-textfield-in-django-models
         widgets = {
-          'body': forms.Textarea(attrs={'rows':2, 'cols':15}),
+          'body': forms.Textarea(attrs={'rows': 2, 'cols': 15}),
         }

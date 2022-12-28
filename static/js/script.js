@@ -1,6 +1,7 @@
+// Runs when page loads
 $(function () {
 
-    // Checks if a profile page
+    // Checks if viewing a profile page and ads event listeners to posed and saved toggle
     if (new RegExp('/profiles/.' + '*' + '/profile/').test(location.href)) {
         saved = $('#saved').html();
         posted = $('#posted').html();

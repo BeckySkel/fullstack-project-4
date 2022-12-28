@@ -20,6 +20,7 @@
                         {% endif %}
                     </p>
 
+                    <!-- Caption -->
                     <p class="flex-grow-1 text-break">{{ recipe.caption }}</p>
 
                     <!-- Tags -->
@@ -100,7 +101,7 @@
 
                 <!-- Display image -->
                 <div class="col-md-5 pt-3">
-                    {% if "placeholder" in recipe.image.url %}
+                    {% if not recipe.image %}
                     <img src="{% static 'images/recipe_placeholder.png' %}" class="card-img-top rounded"
                         alt="Placeholder image">
                     {% else %}
@@ -148,12 +149,12 @@
         <div
             class="col-10 offset-1 col-md-5 offset-md-0 mt-2 py-3 bg-white bg-gradient rounded border border-secondary border-opacity-50">
             <h4>Ingredients:</h4>
-            {{ recipe.ingredients }}
+            <pre>{{ recipe.ingredients }}</pre>
         </div>
         <div
             class="col-10 offset-1 col-md-5 offset-md-0 mt-2 py-3 bg-white bg-gradient rounded border border-secondary border-opacity-50">
             <h4>Steps:</h4>
-            {{ recipe.steps }}
+            <pre>{{ recipe.steps }}</pre>
         </div>
     </div>
 

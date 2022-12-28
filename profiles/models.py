@@ -9,7 +9,7 @@ class Profile(models.Model):
     """
     Model to store extra information about the user.
     Created/updated/deleted automatically when a new user is
-    added/updated/deleted 
+    added/updated/deleted
     """
     user = models.OneToOneField(
         User,

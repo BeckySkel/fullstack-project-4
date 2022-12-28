@@ -9,21 +9,21 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-lg-4 col-md-8 mt-5 offset-lg-4 offset-md-2">
+    <div class="col-lg-4 col-md-8 mt-5 offset-lg-4 offset-md-2 border rounded p-3">
 
-      <h2>{% trans "Sign In" %}</h2>
+      <h2 class="fs-1 text-center">{% trans "Sign In" %}</h2>
 
-      <p>{% blocktrans %}If you have not created an account yet, then please
+      <p class="mt-3">{% blocktrans %}If you have not created an account yet, then please
         <a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
 
-      <form class="login" method="POST" action="{% url 'account_login' %}">
+      <form class="login mt-3" method="POST" action="{% url 'account_login' %}">
         {% csrf_token %}
         {{ form.as_p }}
         {% if redirect_field_value %}
         <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
         {% endif %}
+        <button class="btn btn-warning bg-highlight" type="submit">{% trans "Sign In" %}</button>
         <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
-        <button class="btn btn-info" type="submit">{% trans "Sign In" %}</button>
       </form>
     </div>
   </div>

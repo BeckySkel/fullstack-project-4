@@ -13,5 +13,7 @@ TAGS_LIST = [
     'On a Budget',
     'Prep Ahead'
     ]
-# Idea for better code consistency and less error-prone tags provided by Reuben Ferrante (CI Mentor)
+
+# Idea for list -> tuple for better code consistency and
+# less error-prone tags provided by Reuben Ferrante (CI Mentor)
 TAGS = [(tag, "-".join(tag.lower().split(" "))) for tag in TAGS_LIST]

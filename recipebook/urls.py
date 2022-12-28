@@ -24,6 +24,7 @@ urlpatterns = [
     path('profiles/', include('profiles.urls')),
 ]
 
+# Adding custom error pages from
 # https://www.geeksforgeeks.org/django-creating-a-404-error-page/
 handler404 = 'home.views.error_404_view'
 handler500 = 'home.views.error_500_view'

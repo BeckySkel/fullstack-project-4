@@ -17,7 +17,7 @@
   {% endif %}
   <!-- Recipe image (dynamic) -->
   <div class="card-image">
-    {% if "placeholder" in recipe.image.url %}
+    {% if not recipe.image %}
     <img src="{% static 'images/recipe_placeholder.png' %}" class="card-img-top" alt="Placeholder image">
     {% else %}
     <img src=" {{ recipe.image.url }}" class="card-img-top" alt="Image of {{ recipe.title }}">

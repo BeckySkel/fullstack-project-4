@@ -1,8 +1,15 @@
+/* Import Quicksand font from Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+
 
 /* ----- General */
 body {
     font-family: 'Quicksand', sans-serif;
+}
+
+pre {
+    font-family: 'Quicksand', sans-serif;
+    white-space: pre-wrap;
 }
 
 main {
@@ -47,7 +54,7 @@ main {
 }
 
 .card-counter i {
-    color: #4ACC9A;.
+    color: #4ACC9A;
 }
 
 .recipe-card .card-footer {
@@ -56,7 +63,8 @@ main {
     padding: 0;
 }
 
-/* https://codepen.io/alexerlandsson/pen/NqXWwX */
+/* Banner idea and code from 
+https://codepen.io/alexerlandsson/pen/NqXWwX */
 .banner-container {
 	width: 7rem;
 	height: 7rem;

@@ -3,11 +3,12 @@ from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
 from django.template.defaultfilters import slugify
 from utils.constants import TAGS
-# https://stackoverflow.com/questions/837828/how-do-i-create-a-slug-in-django
 
 
 class Recipe(models.Model):
-
+    """
+    Model to store user-submitted recipes
+    """
     title = models.CharField(max_length=100, unique=True)
     slug = models.SlugField(max_length=100, unique=True)
     caption = models.TextField(blank=True, null=True)
@@ -20,7 +21,7 @@ class Recipe(models.Model):
     updated_on = models.DateTimeField(blank=True, null=True)
     ingredients = models.TextField()
     steps = models.TextField()
-    image = CloudinaryField('image', default='placeholder')
+    image = models.ImageField(upload_to='images/', blank=True)
     likes = models.ManyToManyField(
         User,
         related_name='recipe_likes',
@@ -38,7 +39,7 @@ class Recipe(models.Model):
         self.slug = slugify(self.title)
         super(Recipe, self).save(*args, **kwargs)
 
-    # code from CI 'I Think Therefore I Blog' WT project
+    # Code inspired by CI 'I Think Therefore I Blog' WT project
     def count_likes(self):
         return self.likes.count()
 
@@ -46,7 +47,7 @@ class Recipe(models.Model):
         return self.recipe_comments.filter(removed=False).count()
 
     def list_of_tags(self):
-        return eval(self.tags)
+        return self.tags.translate({ord(i): None for i in "][,'"}).split()
     
     def count_saved_by(self):
         return self.saved_by.count()

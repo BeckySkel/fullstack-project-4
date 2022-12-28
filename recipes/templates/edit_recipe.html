@@ -8,13 +8,11 @@
         <!-- User must be logged in as owner -->
         {% if user.is_authenticated and user == recipe.author %}
         <h2 class="fs-1 text-center mt-5">Edit Recipe</h2>
-        <div class="col-10 offset-1 col-lg-6 offset-lg-3">
-            <form method="POST">
-                {{ recipe_form | crispy }}
-                {% csrf_token %}
-                <button type="submit" class="btn btn-warning btn-lg mt-5">Post</button>
-            </form>
-        </div>
+        <form method="POST" class="col-10 offset-1 col-lg-6 offset-lg-3" enctype="multipart/form-data">
+            {{ recipe_form | crispy }}
+            {% csrf_token %}
+            <button type="submit" class="btn btn-warning btn-lg mt-5">Post</button>
+        </form>
         {% else %}
         <!-- User not owner -->
         <h2 class="fs-1 text-center mt-5">You must be logged in as the owner of the recipe to edit it!</h2>
