@@ -48,15 +48,25 @@ class Recipe(models.Model):
 
     def list_of_tags(self):
         return self.tags.translate({ord(i): None for i in "][,'"}).split()
-    
+
     def count_saved_by(self):
         return self.saved_by.count()
-        
+
 
 class Comment(models.Model):
-    """"""
-    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, related_name='recipe_comments')
-    commenter = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_comments')
+    """
+    Model stores comments and links to recipe via foreign key
+    """
+    recipe = models.ForeignKey(
+        Recipe,
+        on_delete=models.CASCADE,
+        related_name='recipe_comments'
+        )
+    commenter = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='user_comments'
+        )
     body = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
     removed = models.BooleanField(default=False)
