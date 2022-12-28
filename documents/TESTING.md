@@ -7,14 +7,63 @@
 
 ###  W3C HTML Validator
 
-#### base.html
-![Feedback from run through the W3 HTML validator for base.html](/assets/images/base-w3c-result.png)
+#### Homepage (https://pp4-recipebook.herokuapp.com/)
+[Document checking completed. No errors or warnings to show.](https://validator.w3.org/nu/?doc=https%3A%2F%2Fpp4-recipebook.herokuapp.com%2F)
 
-#### index.html
-![Feedback from run through the W3 HTML validator for index.html](/assets/images/index-w3c-result.png)
+#### Browsing pages
+##### New (full) ()
+[Document checking completed. No errors or warnings to show.](https://validator.w3.org/nu/?doc=https%3A%2F%2Fpp4-recipebook.herokuapp.com%2Fbrowse%2Fnew)
+##### Gluten Free (empty) ()
+[Document checking completed. No errors or warnings to show.](https://validator.w3.org/nu/?doc=https%3A%2F%2Fpp4-recipebook.herokuapp.com%2Fbrowse%2Fgluten-free)
 
-#### browse.html
-![Feedback from run through the W3 HTML validator for browse.html](/assets/images/browse-w3c-result.png)
+#### Search Results ()
+[Document checking completed. No errors or warnings to show.](https://validator.w3.org/nu/?doc=https%3A%2F%2Fpp4-recipebook.herokuapp.com%2Fsearch%2F)
+
+#### Search Results ()
+[Document checking completed. No errors or warnings to show.](https://validator.w3.org/nu/?doc=https%3A%2F%2Fpp4-recipebook.herokuapp.com%2Fsearch%2F)
+
+#### Login ()
+[Document checking completed. No errors or warnings to show.](https://validator.w3.org/nu/?doc=https%3A%2F%2Fpp4-recipebook.herokuapp.com%2Faccounts%2Flogin%2F)
+
+#### Logout ()
+[Document checking completed. No errors or warnings to show.](https://validator.w3.org/nu/?doc=https%3A%2F%2Fpp4-recipebook.herokuapp.com%2Faccounts%2Flogout%2F)
+
+#### Register ()
+[Document checking completed. No errors or warnings to show.](https://validator.w3.org/nu/?doc=https%3A%2F%2Fpp4-recipebook.herokuapp.com%2Faccounts%2Fsignup%2F)
+
+#### Edit Profile (https://pp4-recipebook.herokuapp.com/profiles/edit_profile/)
+[Document checking completed. No errors or warnings to show.](https://validator.w3.org/nu/?doc=https%3A%2F%2Fpp4-recipebook.herokuapp.com%2Fprofiles%2Fedit_profile%2F)
+- 1 Info instance: *Trailing slash on void elements has no effect and interacts badly with unquoted attribute values*. Line created with model form/crispy forms so unable to edit.
+
+#### Profile (https://pp4-recipebook.herokuapp.com/profiles/recipebook/profile/)
+[Document checking completed. No errors or warnings to show.](https://validator.w3.org/nu/?doc=https%3A%2F%2Fpp4-recipebook.herokuapp.com%2Fprofiles%2Frecipebook%2Fprofile%2F)
+
+#### Add Recipe (https://pp4-recipebook.herokuapp.com/recipes/add_recipe/)
+[Document checking completed. No errors or warnings to show.](https://validator.w3.org/nu/?doc=https%3A%2F%2Fpp4-recipebook.herokuapp.com%2Frecipes%2Fadd_recipe%2F)
+- 1 Info instance: *Trailing slash on void elements has no effect and interacts badly with unquoted attribute values*. Line created with model form/crispy forms so unable to edit.
+
+#### Edit Recipe (https://pp4-recipebook.herokuapp.com/recipes/fried-rice/edit)
+[Document checking completed. No errors or warnings to show.](https://validator.w3.org/nu/?doc=https%3A%2F%2Fpp4-recipebook.herokuapp.com%2Frecipes%2Ffried-rice%2Fedit)
+- 1 Info instance: *Trailing slash on void elements has no effect and interacts badly with unquoted attribute values*. Line created with model form/crispy forms so unable to edit.
+
+#### Recipe Detail (https://pp4-recipebook.herokuapp.com/recipes/fried-rice/)
+[Document checking completed. No errors or warnings to show.]()
+
+#### 404 Error ()
+[Document checking completed. No errors or warnings to show.]()
+
+#### 500 Error ()
+[Document checking completed. No errors or warnings to show.]()
+
+
+
+
+
+
+
+
+
+
 
 #### card.html
 ![Feedback from run through the W3 HTML validator for card.html](/assets/images/card-w3c-result.png)

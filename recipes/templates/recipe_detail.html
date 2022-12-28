@@ -11,7 +11,8 @@
             <div class="row flex-column-reverse flex-md-row">
                 <div class="col-md-7 d-flex flex-column pt-3">
                     <h2 class="fs-1 text-break">{{ recipe.title }}</h2>
-                    <h3 class="text-break">by <a href="{% url 'profile_page' recipe.author %}" class="text-reset">{{ recipe.author }}</a></h3>
+                    <h3 class="text-break">by <a href="{% url 'profile_page' recipe.author %}"
+                            class="text-reset">{{ recipe.author }}</a></h3>
 
                     <!-- Created and updated -->
                     <p>created: {{ recipe.created_on }}
@@ -129,7 +130,9 @@
                         </div>
                         {% endfor %}
                         {% else %}
-                        <p class="pb-3">You've not added any notes for this recipe yet. Notes are personal to you and will not be shared publically. Add a note below if there is anything you'd like to remember when viewing this recipe.</p>
+                        <p class="pb-3">You've not added any notes for this recipe yet. Notes are personal to you and
+                            will not be shared publically. Add a note below if there is anything you'd like to remember
+                            when viewing this recipe.</p>
                         {% endif %}
                         <!-- Note form -->
                         <form method="POST" class="pt-3">
@@ -189,6 +192,7 @@
             {% endfor %}
         </div>
     </div>
+</div>
 
 
 {% endblock %}
