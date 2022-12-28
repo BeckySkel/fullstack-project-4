@@ -39,7 +39,7 @@
 ### Target Audience
 - This site is targeted towards anyone who enjoys cooking - beginner or advanced - who would like to either share their own recipes with others or search for some new ones to try.
 
-- View [User Personas](static/documents/personas.pdf)
+- View [User Personas](documents/personas.pdf)
 
 ### User Stories
 
@@ -101,7 +101,7 @@
 ### Testing
 - Throughout the project, I relied heavily on [Chrome Devtools](https://developer.chrome.com/docs/devtools/) to help me view this project on different screen sizes so that I could adjust elements, create media queries (by adding bootstrap classes) for responsive design and debug JavaScript by logging outcomes to the console.
 - Code was also run through validators and automatic tests were run through Django
-- Please follow [this link](static/documents/TESTING.md) for full list of tests carried out on this website
+- Please follow [this link](documents/TESTING.md) for full list of tests carried out on this website
 
 ---
 ## Structure
