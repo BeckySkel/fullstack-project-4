@@ -108,8 +108,11 @@
 
 ### Wireframes
 - After looking at common designs and features and deciding what I would like to include, I mapped out the intended features of the website using [Balsamiq](https://balsamiq.com/) to create wireframes of some of the page views.
-- [View the wireframes here](static/documents/wireframes.pdf)
+- [View the wireframes here](documents/wireframes.pdf)
 - The key differences between planning and the final product are presentation of the nav bar and the forms.
+
+### Flowchart
+- [Lucid](https://lucid.app/) was used to create a flowchart to map out the functions and processes of the application. Follow [this link](/assets/documents/flowchart.pdf) to view
 
 ### Information architecture
 - Recipebook is a blog-style site with multiple pages which relies on the MVC framework: Django to present information from a recipe database and provide CRUD functionality.
@@ -119,6 +122,13 @@
 - All pages are responsive thanks to bootstrap classes.
 - Browsing/search results pages present the related recipes in a large flex container.
 - Profile pages can be viewed by either clicking the author/username at the top of the recipe detail page or selecting Dashboard from the Profile dropdown menu in the navbar (this will show your own profile if logged in).
+
+### Data model
+- The app is linked to a Google Sheets database and uses a variety of functions to interact with and manipulate the data.
+- The database is split into 2 worksheets: users & entries.
+- In the 'users' worksheet exists a table with each user's user id (their unique identifier, used to acceess the correct data), their name, username, password (both used to provide a level of security before accessing the data), their chosen goal month and goal amount for their savings budget (both used to calculate how much they should be saving each month in order to reach their goals).
+- The 'entries' sheet holds a table with the entry id (unique identifier of the entry, used by the app to locate the correct entry when editing), the user's id (their unique identifier), the entry number (used by the user to interact with the entry), the month, incoming and outgoing data (all used to store and display the user's saving data) and the net savings calculated from the incoming and outgoing amounts.
+- The majority of the functions use the user_id to locate the correct user's data to be manipulated but some also use indexing.
 
 ---
 ## Skeleton
