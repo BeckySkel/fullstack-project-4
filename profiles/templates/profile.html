@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load cloudinary %}
 {% block content %}
 
 <!-- Profile Page -->
@@ -126,5 +127,23 @@
   {% endif %}
 </div>
 </div>
+
+<script>
+  // Adds event listeners to posed and saved toggle to update content in container
+  saved = document.getElementById('saved').innerHTML;
+  posted = document.getElementById('posted').innerHTML;
+  content = document.getElementById('content');
+
+  content.innerHTML = saved;
+
+  document.getElementById('btnradioposted').addEventListener('click', function () {
+    content.innerHTML = posted;
+  })
+
+  document.getElementById('btnradiosaved').addEventListener('click', function () {
+    content.innerHTML = saved;
+  })
+</script>
+
 
 {% endblock %}

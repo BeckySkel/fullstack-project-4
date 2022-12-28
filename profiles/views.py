@@ -8,6 +8,7 @@ from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
+from cloudinary import CloudinaryImage
 
 
 class EditProfile(LoginRequiredMixin, View):
@@ -89,13 +90,16 @@ class ProfilePage(View):
             saved_recipes = None
             posted_recipes = recipes.filter(author=get_user, private=False)
 
+        image = CloudinaryImage().image(quality='auto', fetch_format='auto')
+
         return render(
             request,
             'profile.html',
             {
                 'saved_recipes': saved_recipes,
                 'posted_recipes': posted_recipes,
-                'profile': get_user.profile
+                'profile': get_user.profile,
+                'image': image
             },
         )
 

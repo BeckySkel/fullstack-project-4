@@ -70,96 +70,18 @@
 
 
 
+
+
+
 ---
 ## Lighthouse
 - All pages were ran through Lighthouse on Chrome Devtools for both desktop and mobile device display. Ran in incognito mode. Any issues were dealt with and all now have a high passing mark.
 
-#### index.html
-- Desktop
+### Desktop
+- Click [here]() to see Lighthouse scores on desktop
 
-![Screenshot of Lighthouse score for standard display of index.html on desktop](/assets/images/index-desktop.png)
-
-- Mobile
-
-![Screenshot of Lighthouse score for standard display of index.html on mobile](/assets/images/index-mobile.png)
-
-#### browse.html
-- Desktop
-
-![Screenshot of Lighthouse score for standard display of index.html on desktop](/assets/images/index-desktop.png)
-
-- Mobile
-
-![Screenshot of Lighthouse score for standard display of index.html on mobile](/assets/images/index-mobile.png)
-
-#### search_results.html
-- Desktop
-
-![Screenshot of Lighthouse score for standard display of index.html on desktop](/assets/images/index-desktop.png)
-
-- Mobile
-
-![Screenshot of Lighthouse score for standard display of index.html on mobile](/assets/images/index-mobile.png)
-
-#### edit_profile.html
-- Desktop
-
-![Screenshot of Lighthouse score for standard display of index.html on desktop](/assets/images/index-desktop.png)
-
-- Mobile
-
-![Screenshot of Lighthouse score for standard display of index.html on mobile](/assets/images/index-mobile.png)
-
-#### profile.html
-##### Own profile
-- Desktop
-
-![Screenshot of Lighthouse score for standard display of index.html on desktop](/assets/images/index-desktop.png)
-
-- Mobile
-
-![Screenshot of Lighthouse score for standard display of index.html on mobile](/assets/images/index-mobile.png)
-##### Other's profile
-- Desktop
-
-![Screenshot of Lighthouse score for standard display of index.html on desktop](/assets/images/index-desktop.png)
-
-- Mobile
-
-![Screenshot of Lighthouse score for standard display of index.html on mobile](/assets/images/index-mobile.png)
-
-#### add_recipe.html
-- Desktop
-
-![Screenshot of Lighthouse score for standard display of index.html on desktop](/assets/images/index-desktop.png)
-
-- Mobile
-
-![Screenshot of Lighthouse score for standard display of index.html on mobile](/assets/images/index-mobile.png)
-
-#### edit_recipe.html
-- Desktop
-
-![Screenshot of Lighthouse score for standard display of index.html on desktop](/assets/images/index-desktop.png)
-
-- Mobile
-
-![Screenshot of Lighthouse score for standard display of index.html on mobile](/assets/images/index-mobile.png)
-
-#### recipe_detail.html
-- Desktop
-
-![Screenshot of Lighthouse score for standard display of index.html on desktop](/assets/images/index-desktop.png)
-
-- Mobile
-
-![Screenshot of Lighthouse score for standard display of index.html on mobile](/assets/images/index-mobile.png)
-
-
-
-
-
-
+### Mobile
+- Click [here]() to see Lighthouse scores on mobile
 
 ---
 ## Automatic testing

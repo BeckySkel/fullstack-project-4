@@ -3,4 +3,6 @@ from .forms import ProfileForm
 
 
 class TestProfileForm(TestCase):
-    
+
+    def test_no_inputs_required(self):
+        
