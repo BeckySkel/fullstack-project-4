@@ -32,8 +32,8 @@
             <form class="d-flex" role="search" method="POST" action="{% url 'search_results' %}">
                 {% csrf_token %}
                 <input class="form-control me-2" type="search" placeholder="Search recipes" name="search-bar"
-                    aria-label="Search">
-                <button class="btn btn-light fw-bold text-dark btn-outline-secondary" type="submit"><i
+                    aria-label="Input search">
+                <button class="btn btn-light fw-bold text-dark btn-outline-secondary" type="submit" aria-label="Search"><i
                         class="fa-solid fa-magnifying-glass"></i></button>
             </form>
             <!-- Browse by tag -->
