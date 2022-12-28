@@ -83,37 +83,45 @@
 
 ### Future Features
 
-#### Audio Feedback
-- I'd like to include audio feedback of the result of each battle. Positive sounds for a win and negative sounds for loss. This would aid in communication the outcome of the battle to the player and would be especially useful to visually impaired players in particular. A toggle to turn audio on and off would be included in the settings menu.
+#### Categorising Recipes
+- In the future, I'd like to give the users an option to file their saved recipes into different categorised folders. This would involve adding a "New Folder" form where user's could create their own categories and a drop down on the save buton where users could select the folder/category they'd like to save the recipe to. These folders and their contents would then be available from the user's dashboard.
 
-#### Image Upgrade
-- Another upgrade which could be included would be swapping out the [Font Awesome](https://fontawesome.com/) icons for photos/realistic images or other art-styles such as pixelated/retro.
+#### Nutritional Info
+- Another helpful feature would be to add nutritional information to the recipes. This would either be an input from the recipe poster or, to make it more efficient and accurate, a connection to a nutrition API. The ingredients input would have to be changed to seperate the ingredients into their own inputs so that the API could be called based on the value.
 
-#### Multiplayer
-- I'd like to include online-play so that people from around the world can compete with each other 1 vs 1 matches or in knock-out tournaments. This would keep things interesting for the player and improve the replayability. 
-- A local multiplayer option would be another desirable option. Players could use letter keys to select their weapon (e.g. a, s & d for player 1 and j, k & l for player 2).
+#### Difficulty
+- Either inputted by the poster at time of creation or voted on by the community (or both), the recipe could be assigned a difficulty (beginner, intermediate or pro) so that user's can select based on their current abilities. There is currently already a 'Quick & Easy' tag so this could be extended to include other difficulty tags.
 
-#### More Levels
-- I'd like to add up to 10 levels and more upgrades to choose from so that the player can play for longer and has more choice of customisation.
+#### Time Requirements
+- Similarly to difficulty, the time requirememnts (prep and cook times) could be added to the recipe so that users can select based on their available time. Could be input by poster and/or voted on by community.
+
+#### Shopping List
+- A shopping list feature could be added to combine ingredients from multiple recipes into 1 printable list to save times for the user.
+
+#### Required Servings
+- Adding a counter to increment the required portions and thus adjusting the ingredient amounts. Similarly to the nutritional info, this would require splitting the ingredients into their own inputs and seperate amounts to make the mathematical adjustments possible. 
 
 ### Testing
-- Throughout the project, I relied heavily on [Chrome Devtools](https://developer.chrome.com/docs/devtools/) to help me view this project on different screen sizes so that I could adjust elements, create media queries for responsive design and debug JavaScript by logging outcomes to the console. 
-- Please follow [this link](assets/documents/TESTING.md) for full list of tests carried out on this website
+- Throughout the project, I relied heavily on [Chrome Devtools](https://developer.chrome.com/docs/devtools/) to help me view this project on different screen sizes so that I could adjust elements, create media queries (by adding bootstrap classes) for responsive design and debug JavaScript by logging outcomes to the console.
+- Code was also run through validators and automatic tests were run through Django
+- Please follow [this link](static/documents/TESTING.md) for full list of tests carried out on this website
 
 ---
 ## Structure
 
 ### Wireframes
-- After looking at common designs and features and deciding what I would like to include, I mapped out the intended features of the website using [Balsamiq](https://balsamiq.com/) to create wireframes of each page view.
-- [View the wireframes here](assets/documents/wireframes.pdf)
-- The key differences between planning and the final product are presentation of the settings menu & game rules. Originally I had planned to display these through an extending footer which would slide up from the bottom when one of the links were clicked and shrunk back down once no longer in use. This developed into a message band that slides from top to bottom instead.
+- After looking at common designs and features and deciding what I would like to include, I mapped out the intended features of the website using [Balsamiq](https://balsamiq.com/) to create wireframes of some of the page views.
+- [View the wireframes here](static/documents/wireframes.pdf)
+- The key differences between planning and the final product are presentation of the nav bar and the forms.
 
 ### Information architecture
-- Ultimate RPs is a single-page website which relies on JavaScript to manipulate the DOM and display different areas of the site in pop-up messages.
-- The useful information is presented in an animated message container that slides in from the top of the screen and slides out through the bottom of the screen once the user has read the displayed information and interacted with the appropriate buttons. 
-- The main game area is permanently displayed in the centre of the screen, tucked behind any displayed messages until the user is ready to resume playing. There are only 3 to 5 buttons to interact with but these manipulate various sections of the screen to display the user's choice, computer's choice, the outcome of the game and the amount of wins, losses and draws the user has achieved throughout their session.
-- Once a player reaches the next level by incrementing the progress bar to fill the container, a message is displayed via the sliding message container letting the player know that they have leveled-up and offers them 3 upgrades to choose from. Once the player has chosen, the message slides out and the upgrade is applied.
-- In the top right of the page is 2 buttons which call the settings menu where a player can enable and disable their unlocked upgrades, or the rules on how to play the game. Both icons temporarily disappear when a message is displayed to avoid overlapping messages.
+- Recipebook is a blog-style site with multiple pages which relies on the MVC framework: Django to present information from a recipe database and provide CRUD functionality.
+- Recipes are presented as cards whilst browsing and full page views when viewing. the cards link to the recipe viewer.
+- Recipes can be browsed using tags or searching in the search bar in the top right of the navbar.
+- The home page displays 2 carousels with recipe cards for the newest and most popular recipes with a 'View more...' link on the last card (maximum 9 cards).
+- All pages are responsive thanks to bootstrap classes.
+- Browsing/search results pages present the related recipes in a large flex container.
+- Profile pages can be viewed by either clicking the author/username at the top of the recipe detail page or selecting Dashboard from the Profile dropdown menu in the navbar (this will show your own profile if logged in).
 
 ---
 ## Skeleton
