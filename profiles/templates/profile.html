@@ -31,7 +31,7 @@
             <strong>Bio:</strong> {{ profile.bio }}
           </p>
           <p>
-            <strong>Recipes:</strong> {{ profile.user.recipe_posts.all.count }}
+            <strong>Recipes:</strong> {{ posted_recipes|length }}
           </p>
 
           <!-- User options -->
@@ -82,11 +82,11 @@
   <div class="btn-group col-10 offset-1 d-flex" role="group" aria-label="Basic radio toggle button group">
     <input type="radio" class="btn-check" name="btnradio" id="btnradiosaved" autocomplete="off" checked>
     <label class="btn btn-warning bg-highlight btn-tab rounded-top" for="btnradiosaved">Saved <span
-        class="badge text-bg-warning">{{ profile.count_saved_recipes }}</span></label>
+        class="badge text-bg-warning">{{ saved_recipes|length }}</span></label>
 
     <input type="radio" class="btn-check" name="btnradio" id="btnradioposted" autocomplete="off">
     <label class="btn btn-warning bg-highlight btn-tab rounded-top" for="btnradioposted">Posted <span
-        class="badge text-bg-warning">{{ profile.user.recipe_posts.all.count }}</span></label>
+        class="badge text-bg-warning">{{ posted_recipes|length }}</span></label>
   </div>
   <!-- Recipe cards display (dynamic) -->
   <div id="content"

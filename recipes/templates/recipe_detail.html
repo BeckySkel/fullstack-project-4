@@ -93,8 +93,35 @@
                     <div class="row mt-3 justify-content-around">
                         <div class="col-12 d-flex">
                             <a href="{% url 'edit_recipe' recipe.slug %}" class="btn btn-warning flex-grow-1">Edit</a>
-                            <a href="{% url 'delete_recipe' recipe.slug %}"
-                                class="btn btn-danger mx-2 flex-grow-1">Delete</a>
+                            <button type="button" class="btn btn-danger mx-2 flex-grow-1" data-bs-toggle="modal"
+                                data-bs-target="#recipeDeletionModal">
+                                Delete
+                            </button>
+
+                            <!-- Modal to confirm deletion of recipe -->
+                            <div class="modal fade" id="recipeDeletionModal" tabindex="-1"
+                                aria-labelledby="recipeDeletionModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="recipeDeletionModalLabel">Delete Comment</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Are you sure you want to delete this recipe? <strong>This is
+                                                permanent</strong>
+                                            <p>{{ recipe.title }}</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Close</button>
+                                            <a class="btn btn-danger"
+                                                href="{% url 'delete_recipe' recipe.slug %}">Delete</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     {% endif %}
@@ -178,35 +205,40 @@
             {% if not comment.removed %}
             <div class="card bg-light bg-gradient mb-2">
                 <div class="card-header">
-                    <h5 class="card-title d-inline">{{ comment.commenter }}</h5>
+                    <h5 class="card-title d-inline"><a href="{% url 'profile_page' comment.commenter %}"
+                            class="text-reset">{{ comment.commenter }}</a></h5>
                     <span class="fs-6">{{ comment.created_on }}</span>
                 </div>
                 <div class="card-body">
                     <p>{{ comment.body }}</p>
                     {% if user == comment.commenter %}
-                    <button type="button" class="btn btn-danger btn-sm rounded" data-bs-toggle="modal" data-bs-target="#deletionModal">
+                    <button type="button" class="btn btn-danger btn-sm rounded" data-bs-toggle="modal"
+                        data-bs-target="#deletionModal">
                         delete
-                      </button>
+                    </button>
 
-                      <!-- Modal to confirm deletion of comment -->
-                      <div class="modal fade" id="deletionModal" tabindex="-1" aria-labelledby="deletionModalLabel" aria-hidden="true">
+                    <!-- Modal to confirm deletion of comment -->
+                    <div class="modal fade" id="deletionModal" tabindex="-1" aria-labelledby="deletionModalLabel"
+                        aria-hidden="true">
                         <div class="modal-dialog">
-                          <div class="modal-content">
-                            <div class="modal-header">
-                              <h5 class="modal-title" id="deletionModalLabel">Delete Comment</h5>
-                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="deletionModalLabel">Delete Comment</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <strong>Are you sure you want to delete this comment?</strong>
+                                    <p>{{ comment.body }}</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Close</button>
+                                    <a class="btn btn-danger" href="{% url 'delete_comment' comment.id %}">Delete</a>
+                                </div>
                             </div>
-                            <div class="modal-body">
-                              <strong>Are you sure you want to delete this comment?</strong>
-                              <p>{{ comment.body }}</p>
-                            </div>
-                            <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                              <a class="btn btn-danger" href="{% url 'delete_comment' comment.id %}">delete</a>
-                            </div>
-                          </div>
                         </div>
-                      </div>
+                    </div>
                     {% endif %}
                 </div>
             </div>
