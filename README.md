@@ -124,7 +124,6 @@
 
 ![Schema](static/images/schema.png)
 
-
 ---
 ## Skeleton
 
@@ -138,6 +137,7 @@
 - Search bar input which leads to search results page when submitted
 
 ![Header on desktop](static/images/header-desktop.png)
+
 ![Header on mobile](static/images/header-mobile.png)
 
 #### Footer
@@ -161,6 +161,7 @@
 - Displays all matching recipes as cards in grid view.
 
 !['Browse page on desktop](static/images/browse-desktop.png)
+
 ![Search page on mobile](static/images/search-mobile.png)
 
 ##### Cards
@@ -173,29 +174,38 @@
 ##### No results
 - Other options suggested if no results found
 
-![Other options](static/images/options.png)
+![Other options](static/images/other-options.png)
 
 #### Recipe
-- 
+- Recipe image, title, author, created and modified dates and caption displayed in container at top.
+- Edit and delete buttons present if viewed by owner. Like, save and notes available if viewed by someone else.
+- Ingredients and steps displayed in their own containers below
 
 ![Recipe page on desktop](static/images/recipe-desktop.png)
+
 ![Recipe page on mobile](static/images/recipe-mobile.png)
 
 #### Add/Edit Recipe
-- 
+- Crispy form
+- Inputs: title, caption, image select, ingredients, steps, private checkbox, tags checkboxes
 
 ![Edit recipe page on mobile](static/images/edit-recipe-mobile.png)
 
 #### Profile
-- 
+- Profile image, username, joined date, bio and count of public recipes displayed in container at top.
+- Edit and notifications buttons present if viewed by owner. Toggle to switch between viewing saved and posted recipes also present when viewed by self.
+- Only public posted recipes available if viewed by someone else
 
 ![Others profile page on desktop](static/images/profile-desktop.png)
+
 ![Own profile page on mobile](static/images/profile-mobile.png)
 
 #### Edit Profile
--
+- Crispy form
+- Form is optional after registration so not inputs are required
+- Inputs: first name, last name, image select, bio
 
-![Edit profile on desktop](static/images/edit-profile-desktop.png)
+![Edit profile on desktop](static/images/edit-profile.png)
 
 ### Technologies used
 
@@ -216,6 +226,7 @@
 - [oauthlib](https://pypi.org/project/oauthlib/)
 - [psycopg2](https://pypi.org/project/psycopg2/)
 - [whitenoise](https://pypi.org/project/whitenoise/)
+- [django-crispy-forms](https://pypi.org/project/django-crispy-forms/)
 
 #### Frameworks
 - [Django](https://www.djangoproject.com/)

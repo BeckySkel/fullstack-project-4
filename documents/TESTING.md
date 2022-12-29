@@ -75,10 +75,10 @@
 - All pages were ran through Lighthouse on Chrome Devtools for both desktop and mobile device display. Ran in incognito mode. Any issues were dealt with and all now have a high passing mark with any exceptions detailed in linked documents.
 
 ### Desktop
-- Click [here]() to see Lighthouse scores on desktop
+- Click [here](documents/desktop-lighthouse-testing.pdf) to see Lighthouse scores on desktop
 
 ### Mobile
-- Click [here]() to see Lighthouse scores on mobile
+- Click [here](documents/mobile-lighthouse-testing.pdf) to see Lighthouse scores on mobile
 
 ---
 ## Manual testing
@@ -168,7 +168,10 @@
 ## Bugs
 ### Resolved Bugs
 - Form pages showing scroll-space to the left when on smaller screens fixed by applying `overflow: hidden` to form container.
+- Carousels on home page would not scroll when clicking button resolved by making sure IDs were unique.
+- Bug where hosting 2 forms on same page meant that both were posted resolved with help from [https://openclassrooms.com/en/courses/7107341-intermediate-django/7264795-include-multiple-forms-on-a-page](https://openclassrooms.com/en/courses/7107341-intermediate-django/7264795-include-multiple-forms-on-a-page)
+- I tried adding supporting pdf documents to the static file but this caused a bug so I removed them and hosted them in a documents folder.
 
 ### Unresolved Bugs
-- 
+- Search page recieving poor Performance score on Ligthhouse despite my attempts to follow the advice about render blocking, etc. In the end the styling of the page suffered with all the changes so I reverted back to normal links but would like to try to resolve this issue in the future.
 
