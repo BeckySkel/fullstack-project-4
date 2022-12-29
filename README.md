@@ -111,9 +111,6 @@
 - [View the wireframes here](documents/wireframes.pdf)
 - The key differences between planning and the final product are presentation of the nav bar and the forms.
 
-### Flowchart
-- [Lucid](https://lucid.app/) was used to create a flowchart to map out the functions and processes of the application. Follow [this link](/assets/documents/flowchart.pdf) to view
-
 ### Information architecture
 - Recipebook is a blog-style site with multiple pages which relies on the MVC framework: Django to present information from a recipe database and provide CRUD functionality.
 - Recipes are presented as cards whilst browsing and full page views when viewing. the cards link to the recipe viewer.
@@ -124,20 +121,81 @@
 - Profile pages can be viewed by either clicking the author/username at the top of the recipe detail page or selecting Dashboard from the Profile dropdown menu in the navbar (this will show your own profile if logged in).
 
 ### Data model
-- The app is linked to a Google Sheets database and uses a variety of functions to interact with and manipulate the data.
-- The database is split into 2 worksheets: users & entries.
-- In the 'users' worksheet exists a table with each user's user id (their unique identifier, used to acceess the correct data), their name, username, password (both used to provide a level of security before accessing the data), their chosen goal month and goal amount for their savings budget (both used to calculate how much they should be saving each month in order to reach their goals).
-- The 'entries' sheet holds a table with the entry id (unique identifier of the entry, used by the app to locate the correct entry when editing), the user's id (their unique identifier), the entry number (used by the user to interact with the entry), the month, incoming and outgoing data (all used to store and display the user's saving data) and the net savings calculated from the incoming and outgoing amounts.
-- The majority of the functions use the user_id to locate the correct user's data to be manipulated but some also use indexing.
+
+![Schema](static/images/schema.png)
+
 
 ---
 ## Skeleton
 
 ### Current Features
 
-#### Heading & Navbar
+#### Header & Navbar
+- Sticky
+- Logo to the left with 3 navigation buttons: Home button, Browse dropdown and Profile dropdown. When reduced to small screens, logo stay left while navigation hidden in collapsible menu.
+- Browse dropdown hosts links to browse recipes by tag
+- Profile dropdown hosts links to interact with user's profile options whilst logged in or to login/register when logged out
+- Search bar input which leads to search results page when submitted
 
-####
+![Header on desktop](static/images/header-desktop.png)
+![Header on mobile](static/images/header-mobile.png)
+
+#### Footer
+- Copyright on left
+- External links to social medias on right
+
+![Footer on mobile](static/images/footer-mobile.png)
+
+#### Homepage
+- Welcomes user and displays either 2 carousels (new & popular recipes) or 2 side-scrollers depending on screen size
+##### Carousels
+- Up to 3 'pages' with 3 cards on (final card is link to view more). Less if not enough recipes on the site. Displayed on larger screens.
+
+!['New' carousel on desktop](static/images/carousel-desktop.png)
+##### Scrollers
+- Cards displayed inline and up to 9 (final card is link to view more). Displayed on smaller screens and user can swipe to scroll.
+
+!['Popular' scroller on mobile](static/images/scroller-mobile.png)
+
+#### Browse & Search
+- Displays all matching recipes as cards in grid view.
+
+!['Browse page on desktop](static/images/browse-desktop.png)
+![Search page on mobile](static/images/search-mobile.png)
+
+##### Cards
+- Compact view of recipe key features.
+- Displays recipe image, title, caption, likes counter, comments counter and saves counter as well as a stretched link.
+- If recipe belongs to the user currently logged in, a banner is displayed which lets them know whether this recipes is private or public.
+
+![Close up of card](static/images/card.png)
+
+##### No results
+- Other options suggested if no results found
+
+![Other options](static/images/options.png)
+
+#### Recipe
+- 
+
+![Recipe page on desktop](static/images/recipe-desktop.png)
+![Recipe page on mobile](static/images/recipe-mobile.png)
+
+#### Add/Edit Recipe
+- 
+
+![Edit recipe page on mobile](static/images/edit-recipe-mobile.png)
+
+#### Profile
+- 
+
+![Others profile page on desktop](static/images/profile-desktop.png)
+![Own profile page on mobile](static/images/profile-mobile.png)
+
+#### Edit Profile
+-
+
+![Edit profile on desktop](static/images/edit-profile-desktop.png)
 
 ### Technologies used
 
@@ -190,7 +248,7 @@
 
 ![The colour scheme I used for the standard display](static/images/colour-scheme.png)
 
-- The colour-scheme is vibrant but soft to provide a pleasing display and compliment any recipe images displayed on the site.
+- The colour-scheme is vibrant but soft to provide a pleasing display and compliment any recipe images displayed on the site. The tone of the colours were chosen to compliment the bootstrap *light* and *secondary* classes as ashown above.
 - Bootstrap border and background colours were used on secondary features. Bootstrap button colours also used.
 - I used [Coolors](https://coolors.co/) to help pick a colour scheme.
 

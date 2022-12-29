@@ -47,7 +47,7 @@ class Recipe(models.Model):
         return self.recipe_comments.filter(removed=False).count()
 
     def list_of_tags(self):
-        return self.tags.translate({ord(i): None for i in "][,'"}).split()
+        return self.tags.translate({ord(i): None for i in "]['"}).split(',')
 
     def count_saved_by(self):
         return self.saved_by.count()
