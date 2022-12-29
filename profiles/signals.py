@@ -48,3 +48,18 @@ def notify_of_comment_removal(sender, instance, created, **kwargs):
             sender=User.objects.filter(username='recipebook')[0],
             message=f'Your comment on {instance.recipe.title} has been removed'
             )
+
+
+@receiver(post_save, sender=Comment)
+def notify_of_new_comment(sender, instance, created, **kwargs):
+    """
+    Signal to create notification of new comment on recipe
+    """
+    commenter = instance.commenter
+
+    if commenter != instance.recipe.author:
+        Notification.objects.create(
+            to=instance.recipe.author.profile,
+            sender=User.objects.filter(username=commenter)[0],
+            message=f'New comment from {commenter} on {instance.recipe.title}'
+            )

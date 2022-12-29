@@ -10,6 +10,8 @@ from profiles.models import Note
 from datetime import datetime
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
+from profiles.models import Notification
+from django.contrib.auth.models import User
 
 
 class RecipeDetail(View):
@@ -228,6 +230,7 @@ class EditRecipe(LoginRequiredMixin, View):
 class RecipeLike(LoginRequiredMixin, View):
     """
     Toggles like status on submission of like form/button on recipe page.
+    Also sends notification to recipe author
     Login required
     """
     def post(self, request, slug, *args, **kwargs):
@@ -236,6 +239,11 @@ class RecipeLike(LoginRequiredMixin, View):
             recipe.likes.remove(request.user)
         else:
             recipe.likes.add(request.user)
+            Notification.objects.create(
+                to=recipe.author.profile,
+                sender=User.objects.filter(username=request.user)[0],
+                message=f'{request.user} liked your recipe {recipe}'
+            )
 
         return HttpResponseRedirect(reverse('recipe_detail', args=[slug]))
 
