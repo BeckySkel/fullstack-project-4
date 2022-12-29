@@ -2,7 +2,7 @@
 
 ## HTML and CSS Validation Testing
 
-- All pages were passed through either the [W3C CSS validator](https://jigsaw.w3.org/css-validator/), [W3C HTML Validator](https://validator.w3.org/nu/), [JSHint JavaScript Linter]() or [pep8online Python Linter]() (depending on relevance).
+- All pages were passed through either the [W3C CSS validator](https://jigsaw.w3.org/css-validator/), [W3C HTML Validator](https://validator.w3.org/nu/), [JSHint JavaScript Linter](https://jshint.com/) or Github's local pycodestyle PROBLEMS tab (depending on relevance).
 - Any issues found have been rectified and all pages now pass with no errors to show. Any warnings received explained below.
 
 
@@ -59,23 +59,20 @@
 
 
 ###  JSHint Validator
-- Some warnings displayed due to splitting of JavaScript betweeen multiple files. When code combined and ran together, these warnings disappear.
-- All other warnings determined to be unavoidable and do not affect running of code ("Functions declared within loops referencing an outer scoped variable may lead to confusing semantics").
+- /*jshint esversion: 6 */ applied to disable following irrelevant warnings: 'let' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).
 
-#### script.js
-![Feedback from run through the JSHint linter for script.js](/assets/images/jshint-result.png)
-
+#### Script in profile.html
+![Feedback from run through the JSHint linter for script in profile.html](/static/images/jshint-result.png)
 
 
-
-
-
-
-
+###  Python Linter
+- Pep8 website appears to not be working when visited. This was confirmed on Slack by posts from CI.
+- All files, instead, checked against Github's local pycodestyle PROBLEMS tab.
+- Any issues found have been rectified and all pages now pass with no errors or warnings to show.
 
 ---
 ## Lighthouse
-- All pages were ran through Lighthouse on Chrome Devtools for both desktop and mobile device display. Ran in incognito mode. Any issues were dealt with and all now have a high passing mark.
+- All pages were ran through Lighthouse on Chrome Devtools for both desktop and mobile device display. Ran in incognito mode. Any issues were dealt with and all now have a high passing mark with any exceptions detailed in linked documents.
 
 ### Desktop
 - Click [here]() to see Lighthouse scores on desktop
@@ -86,15 +83,6 @@
 ---
 ## Automatic testing
 
-### index.html
-- All navigation buttons tested manually **8/7/22** and found to be working as intended
-- All game buttons tested manually **8/7/22** and found to be working as intended
-- All game levels tested manually on **8/7/22** and found to be working as intended
-- All upgrade unlocks tested manually on **8/7/22** and found to be working as intended
-- All uprgade toggles tested manually on **8/7/22** and found to be working as intended
-
-### 404.html
-- All navigation buttons tested manually **10/7/22** and found to be working as intended
 
 ---
 ## Manual testing
@@ -148,15 +136,8 @@
 ---
 ## Bugs
 ### Resolved Bugs
-- Issue where screen would inch to left slightly when displayed message at bottom of screen, solved with help from by adding `overflow: hidden;` to budy during function and removing once element removed.
-- Issue with dividing width of score bar and multiplying by points to increment progress bar not calling a level-up solved by reducing precision of condition.
-- Issue with level 5 progress bar extending past the container solved by applying `overflow: hidden;` to container.
-- Originally tried to call multiple messages to display but this caused a bug as it meant multiples of the same ID. Fixed by removing old message once finished with.
-- Error was displayed in console when displaying the rules message type. This did not affect the message being displayed. Solved by altering function to display message by removing code to populate butttons if rules message called.
-- Bug where upgraded backgrouns colour was not taking up whole screen when applied solved by adding JavaScript to add in-line style to overide any other styles.
-- Issue with trying to display the chosen weapon icon by using code to map the index in an array solved with code from [Borislav Hadzhiev](https://bobbyhadz.com/blog/javascript-array-find-index-of-object-by-property)
-- Issue where player is able to display multiple level-up messages by raidly clicking game buttons, thus causing mutliple elements of the same ID and causing the the game to break. Solved by calling the disableBackground function immediately after level-up is established, before the message is displayed.
+- Form pages showing scroll-space to the left when on smaller screens fixed by applying `overflow: hidden` to form container.
 
 ### Unresolved Bugs
-- Scrolling on mobile device very briefly displays white background at the bottom of the page - have tried a few combinations of background properties but none have fixed this. It is only brief and does not affext user experience.
+- 
 

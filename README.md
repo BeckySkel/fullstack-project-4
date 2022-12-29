@@ -1,6 +1,6 @@
 # Recipebook
 
-![The Recipebook website displayed on different devices](/assets/images/responsive-test.png)
+![The Recipebook website displayed on different devices](static/images/responsive-test.png)
 
 - Recipebook is a social recipe website which combines the functionality of social media with the practicality of a recipe hosting site. Users can sign-up to share their own recipes, save and like other's, and interact with each other through commenting.   
 
@@ -135,101 +135,9 @@
 
 ### Current Features
 
-#### Header
-- Contains the site logo and navigation buttons
+#### Heading & Navbar
 
-![Screenshot of the header on desktop](/assets/images/header-desktop.png)
-![Screenshot of the header on mobile](/assets/images/header-mobile.png)
-##### Logo
-- Large and central, the logo features bright and bold colours with text shadow providing a 3D-effect to make it stand out.
-
-![Screenshot of the logo](/assets/images/logo.png)
-##### Navigation
-- The navigation menu appears in top right on desktop with the icons splitting and appearing in each top corner on mobile to make selection easier on smaller screens. 
-- A gear icon leads to the settings and a book has been used to represent a rulebook which brings up the game rules/hot to play.
-
-![Screenshot of the navigation bar](/assets/images/navigation.png)
-
-#### Game Board
-- The main game area; contains boxes to display the user's and computer's choices of weapon, a weapon selection area with 3 to 5 buttons (depending on game mode) and a scoreboard area to communicate the outcome and scores.
-
-![Screenshot of the game board on desktop](/assets/images/gameboard-desktop.png)
-![Screenshot of the game board on mobile](/assets/images/gameboard-mobile.png)
-##### Display Boxes
-- Both blank to start with but later contain large icons representing the weapon choices once a game has been played. On desktop, both appear side-by-side to fill the landscape aspect of the screen, placed one on top of the other on mobile to fit into the the smaller portrait aspect. 
-- Whilst the player is selecting their choice, a preview is displayed in a pale grey colour so that the user can see what they will be selecting. Once the player has chosen, the icon is displayed in a darker grey along with the computer choice in the other box to indicate that the battle has played-out.
-
-![Screenshot of the display boxes](/assets/images/display-boxes.png)
-##### Weapon Select
-- 3 weapon choices displayed inline (Rock, Paper & Scissors). These buttons are where the player selects their weapon to battle with. This is then shown in the display box.
-- After upgrading, the player has the option to add fourth and fifth options of Lizard and Spock to offer more possibilities of battle outcomes. These extra buttons can then be removed again if the player so chooses.
-
-![Screenshot of the weapon choices with 3 options](/assets/images/weapons-rps.png)
-![Screenshot of the weapon choices with 5 options](/assets/images/weapons-rpsls.png)
-##### Scoreboard
-- The scoreboard area is made up of the outcome display, progress bar and scores display stacked atop each other. 
-- The progress is incrememented after each battle to either increase with a win, decrease with a loss or stay the same with a draw. Once the bar fills up, the player reaches the next level and unlock an upgrade. The bar is used to make it easy for the user to track their progress towards the next upgrade. The requirement to fill the bar gets more difficult with each level.
--  3 scores are displayed below: Wins, Losses and Draws. The current level is also tracked and displayed. The goal of the game is to beat the computer in as many turns as possibly so these scores can help the player track their progress and their ratio of successes and fails.
-
-![Screenshot of the scoreboard on desktop](/assets/images/scoreboard.png)
-
-#### Message Container
-- Sliding in from the top of the screen when called, the message container can host 5 different messages. Some message can only be removed by selecting one of the button options whilst others can be removed with an exit icon in the top right. Slides out at the bottom of the screen when dismissed.
-- Sizing differences between mobile and desktop but otherwise largely unchanged.
-- The game buttons and navigation icons are disabled when a message is being displayed to avoid the game playing-out when not intended.
-
-![Screenshot of the message container on desktop](/assets/images/message-desktop.png)
-![Screenshot of the message container on mobile](/assets/images/message-mobile.png)
-##### Welcome Message
-- Welcomes the player to the game and gives them the opportunity to check the rules and settings before beginning the game. Or they can jump straight in with the **Begin!** button. Slides out when
-
-![Screenshot of the welcome message](/assets/images/welcome.png)
-##### Rules Display
-- Can be called from the welcome message before the player begins the game if they have not played before. Can also be called by clicking the gear icon in the top right of the screen once the game has begun if a player needs some more help later on.
-- Includes a brief paragraph with a description of the game and it's mechanics and an unordered list with details the outcome of each battle combination. The user can refer to this if they are unsure which weapon wins in a battle or if they are confused why a certain weapon would beat another.
-
-![Screenshot of the rules display](/assets/images/rules.png)
-##### Settings Menu
-- This is where the user can toggle their unlocked upgrades on and off and choose between available background themes.
-- The player may choose to swap out a background if they find it harder to view the content on certain colours/patterns so it was important to include an pportunity for them to do so.
-- The addiditon of the Lizard & Spock buttons can make the game significantly more difficult so an option to remove them has been provided for players who do not wish to use them.
-- buttons are disabled and greyed out
-
-![Screenshot of the settings menu](/assets/images/settings.png)
-##### Level-up Message
-- Appears when the player has beaten the computer enough times to fill the progress bar and reach the next level. Provides the player with 3 (or less) random locked upgrades to choose from and is dismissed once one has been chosen. The ability to select an upgrade between levels is a way of rewarding the player for player and progressing and provide them with some customisation options.
-- If there are less than 3 locked upgrades, any remaining buttons are disabled and display a message to say that no more upgrades are available to unlock.
-
-![Screenshot of the level-up message](/assets/images/level-up.png)
-##### Completion Message
-- Once the player has completed the game and beat all 5 levels, one final message is displayed to congratulate them and ask if they would like to restart and try to beat their score. This message can only be removed by clicking restart. 
-- The total number of turns it took for the player to complete the game is repoorted back to them so they have a goal to beat next time they play.
-
-![Screenshot of the winner message](/assets/images/winner.png)
-
-#### Backgrounds
-- Different backgrounds are unlocked by playing the game and progressing through the levels. These are applied when unlocked and can be changed again in the settings menu if the player so chooses.
-##### Blue Theme
-- This is the standard background and features a subtle gradient from mint grenn to pale blue. It is a soft background and harmonises well with the other colours used on the site.
-
-![Screenshot of the blue theme](/assets/images/blue.png)
-##### Pink Theme
-- Very similar to the blue theme, the pink theme is a subtle gradient of pale pink to a darker pink.
-
-![Screenshot of the pink theme](/assets/images/pink.png)
-##### Rainbow Theme
-- This is the boldest background of the game. I suspect that it will be the most popular amongst players as it adds an extra layer of excitement to the game. A transparent white backing is added to the scoreboard so that the text can be more easily read against the busy background.
-
-![Screenshot of the rainbow theme](/assets/images/rainbow.png)
-##### Dark Theme
-- The dark theme will be good for those who are playing in a dark room and find the lighter colours too much for their eyes. It also ups the contrast between elements if the player is having trouble viewing the screen in very bright light. The text on the screen is changed from grey to white to provide sufficient contrast. The gradient is similar to that of the blue and pink themes. 
-
-![Screenshot of the dark theme](/assets/images/dark.png)
-#### 404 Page
-- A custom 404 page has been added for broken links and navigation back to the main page
-
-![Screenshot of the 404 page on desktop](/assets/images/404-desktop.png)
-![Screenshot of the 404 page on mobile](/assets/images/404-mobile.png)
+####
 
 ### Technologies used
 

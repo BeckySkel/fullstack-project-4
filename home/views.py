@@ -36,7 +36,7 @@ class BrowseByTag(View):
     """
     Custom view to display recipes matching the selected tag. Tags are accessed
     via a tuple of tuples called TAGS in utils.constants
-    
+
     recipes: queryset, items from Recipe model whose tag field contains the
     selected tag
     tag: str, the tag name, as it appears to the user

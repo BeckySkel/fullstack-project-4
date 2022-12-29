@@ -11,10 +11,15 @@ from recipes.models import Recipe, Comment
 def update_profile(sender, instance, created, **kwargs):
     """
     Signal creates new profile after user registers, checks if creating or
-    updating profile first
+    updating profile first. Also sends welcome notification to user
     """
     if created:
         Profile.objects.create(user=instance)
+        Notification.objects.create(
+            to=instance.profile,
+            sender=User.objects.filter(username='recipebook')[0],
+            message=f'Welcome to recipebook!'
+            )
     else:
         instance.profile.save()
 

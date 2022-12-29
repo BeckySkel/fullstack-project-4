@@ -57,7 +57,7 @@
             {% for n in profile.notifications.all %}
             {% if not n.dismissed %}
             <div class="alert alert-secondary" role="alert">
-              {{ n }} {{ n.id }}
+              {{ n }}
               <button type="button" id="hide{{n.id}}" class="btn-close float-end" data-bs-dismiss="alert"
                 aria-label="Dismiss" style="transform: rotate(0);">
                 <a id="dismiss{{n.id}}" href="{% url 'dismiss_notification' n.id %}" class="stretched-link"></a>
@@ -108,8 +108,8 @@
       {% for recipe in posted_recipes %}
       {% include "card.html" with recipe=recipe %}
       {% endfor %}
-      {% else %}<p>You've not posted any recipes yet!</p>
-      <a class="btn btn-lg btn-warning mt-1">Add new recipe</a>
+      {% else %}<p class="col-12 text-center">You've not posted any recipes yet!</p>
+      <a class="btn btn-lg btn-warning mt-1 text-center" href="{% url 'add_recipe' %}">Add new recipe</a>
       {% endif %}
     </div>
   </div>
@@ -130,19 +130,19 @@
 
 <script>
   // Adds event listeners to posed and saved toggle to update content in container
-  saved = document.getElementById('saved').innerHTML;
-  posted = document.getElementById('posted').innerHTML;
-  content = document.getElementById('content');
+  let saved = document.getElementById('saved').innerHTML;
+  let posted = document.getElementById('posted').innerHTML;
+  let content = document.getElementById('content');
 
   content.innerHTML = saved;
 
   document.getElementById('btnradioposted').addEventListener('click', function () {
     content.innerHTML = posted;
-  })
+  });
 
   document.getElementById('btnradiosaved').addEventListener('click', function () {
     content.innerHTML = saved;
-  })
+  });
 </script>
 
 

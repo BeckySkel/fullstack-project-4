@@ -63,7 +63,9 @@ class RecipeDetail(View):
 
             try:
                 profile = request.user.profile
-                saved = recipe.saved_by.filter(id=request.user.profile.id).exists()
+                saved = recipe.saved_by.filter(
+                    id=request.user.profile.id
+                    ).exists()
             except AttributeError:
                 profile = None
                 saved = False
