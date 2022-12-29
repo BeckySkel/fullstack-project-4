@@ -130,19 +130,22 @@
 
 <script>
   // Adds event listeners to posed and saved toggle to update content in container
-  let saved = document.getElementById('saved').innerHTML;
-  let posted = document.getElementById('posted').innerHTML;
+  let saved = document.getElementById('saved');
+  let posted = document.getElementById('posted');
   let content = document.getElementById('content');
+  if (saved && posted) {
+    content.innerHTML = saved.innerHTML;
 
-  content.innerHTML = saved;
-
-  document.getElementById('btnradioposted').addEventListener('click', function () {
-    content.innerHTML = posted;
+    document.getElementById('btnradioposted').addEventListener('click', function () {
+    content.innerHTML = posted.innerHTML;
   });
 
-  document.getElementById('btnradiosaved').addEventListener('click', function () {
-    content.innerHTML = saved;
+    document.getElementById('btnradiosaved').addEventListener('click', function () {
+    content.innerHTML = saved.innerHTML;
   });
+  }
+
+  
 </script>
 
 
