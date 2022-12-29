@@ -175,8 +175,7 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-bs-dismiss="modal">Close</button>
-                                            <a class="btn btn-danger"
-                                                href="{% url 'delete_note' note.id %}">Delete</a>
+                                            <a class="btn btn-danger" href="{% url 'delete_note' note.id %}">Delete</a>
                                         </div>
                                     </div>
                                 </div>
@@ -245,8 +244,8 @@
                     </button>
 
                     <!-- Modal to confirm deletion of comment -->
-                    <div class="modal fade" id="commentDeletionModal" tabindex="-1" aria-labelledby="commentDeletionModalLabel"
-                        aria-hidden="true">
+                    <div class="modal fade" id="commentDeletionModal" tabindex="-1"
+                        aria-labelledby="commentDeletionModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">

@@ -8,11 +8,11 @@
         <!-- User must be logged in -->
         {% if user.is_authenticated %}
         <h2 class="fs-1 text-center mt-5">Add a Recipe</h2>
-            <form method="POST" class="col-10 offset-1 col-lg-6 offset-lg-3" enctype="multipart/form-data">
-                {{ recipe_form | crispy }}
-                {% csrf_token %}
-                <button type="submit" class="btn btn-warning btn-lg mt-5">Post</button>
-            </form>
+        <form method="POST" class="col-10 offset-1 col-lg-6 offset-lg-3" enctype="multipart/form-data">
+            {{ recipe_form | crispy }}
+            {% csrf_token %}
+            <button type="submit" class="btn btn-warning btn-lg mt-5">Post</button>
+        </form>
         {% endif %}
     </div>
 </div>

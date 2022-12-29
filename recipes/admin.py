@@ -27,7 +27,6 @@ class CommentAdmin(admin.ModelAdmin):
     """
     list_filter = ('created_on', 'removed')
     list_display = ('recipe', 'commenter', 'created_on', 'removed')
-    search_fields = ['recipe', 'commenter']
     actions = [
         'remove_comment'
         ]

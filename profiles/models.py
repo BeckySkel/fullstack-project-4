@@ -29,6 +29,9 @@ class Profile(models.Model):
     def __str__(self):
         return self.user.username
 
+    def full_name(self):
+        return f'{self.first_name} {self.last_name}'
+
     def count_notifications(self):
         return self.notifications.filter(dismissed=False).count()
 
