@@ -104,7 +104,7 @@
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="recipeDeletionModalLabel">Delete Comment</h5>
+                                            <h5 class="modal-title" id="recipeDeletionModalLabel">Delete Recipe</h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                 aria-label="Close"></button>
                                         </div>
@@ -153,7 +153,34 @@
                         {% for note in notes %}
                         <div class="bg-light bg-gradient border mt-1 rounded px-2 py-2">
                             <p>{{ note.body }}</p>
-                            <a href="{% url 'delete_note' note.id %}">delete</a>
+                            <button type="button" class="btn btn-danger btn-sm rounded" data-bs-toggle="modal"
+                                data-bs-target="#noteDeletionModal">
+                                delete
+                            </button>
+
+                            <!-- Modal to confirm deletion of note -->
+                            <div class="modal fade" id="noteDeletionModal" tabindex="-1"
+                                aria-labelledby="noteDeletionModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="noteDeletionModalLabel">Delete Note</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Are you sure you want to delete this note?
+                                            <p>{{ note.body }}</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Close</button>
+                                            <a class="btn btn-danger"
+                                                href="{% url 'delete_note' note.id %}">Delete</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         {% endfor %}
                         {% else %}
@@ -213,22 +240,22 @@
                     <p>{{ comment.body }}</p>
                     {% if user == comment.commenter %}
                     <button type="button" class="btn btn-danger btn-sm rounded" data-bs-toggle="modal"
-                        data-bs-target="#deletionModal">
+                        data-bs-target="#commentDeletionModal">
                         delete
                     </button>
 
                     <!-- Modal to confirm deletion of comment -->
-                    <div class="modal fade" id="deletionModal" tabindex="-1" aria-labelledby="deletionModalLabel"
+                    <div class="modal fade" id="commentDeletionModal" tabindex="-1" aria-labelledby="commentDeletionModalLabel"
                         aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="deletionModalLabel">Delete Comment</h5>
+                                    <h5 class="modal-title" id="commentDeletionModalLabel">Delete Comment</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                         aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <strong>Are you sure you want to delete this comment?</strong>
+                                    Are you sure you want to delete this comment?
                                     <p>{{ comment.body }}</p>
                                 </div>
                                 <div class="modal-footer">
