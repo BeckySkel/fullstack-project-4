@@ -75,7 +75,7 @@
 - All pages were ran through Lighthouse on Chrome Devtools for both desktop and mobile device display. Ran in incognito mode. Any issues were dealt with and all now have a high passing mark with any exceptions detailed in linked documents.
 
 ### Desktop
-- Click [here](documents/desktop-lighthouse-testing.pdf) to see Lighthouse scores on desktop
+- Click [here](dcuments/desktop-lighthouse-testing.pdf) to see Lighthouse scores on desktop
 
 ### Mobile
 - Click [here](documents/mobile-lighthouse-testing.pdf) to see Lighthouse scores on mobile
@@ -86,17 +86,23 @@
 ### Homepage (https://pp4-recipebook.herokuapp.com/)
 - All internal links tested manually on **29/12/22** and found to be working as intended
 - All external links (social media links) tested manually on **29/12/22** and found to be working as intended
+- All dynamic content tested manually on **29/12/22** and found to be working as intended
+- All login-state sensitive content and links tested manually on **29/12/22** and found to be working as intended
 
 ### Browsing pages
+- - All dynamic content tested manually on **29/12/22** and found to be working as intended
 #### New (full) (https://pp4-recipebook.herokuapp.com/browse/new)
 - All internal links tested manually on **29/12/22** and found to be working as intended
 - All forms (search) tested manually on **29/12/22** and found to be working as intended
 #### Gluten Free (empty) (https://pp4-recipebook.herokuapp.com/browse/gluten-free)
 - All internal links tested manually on **29/12/22** and found to be working as intended
 - All forms (search) tested manually on **29/12/22** and found to be working as intended
+- All login-state sensitive content and links tested manually on **29/12/22** and found to be working as intended
 
 #### Search Results (https://pp4-recipebook.herokuapp.com/search/)
 - All internal links tested manually on **29/12/22** and found to be working as intended
+- All dynamic content tested manually on **29/12/22** and found to be working as intended
+- All login-state sensitive content and links tested manually on **29/12/22** and found to be working as intended
 
 #### Login (https://pp4-recipebook.herokuapp.com/accounts/login/)
 - All internal links tested manually on **29/12/22** and found to be working as intended
@@ -111,22 +117,29 @@
 
 #### Edit Profile (https://pp4-recipebook.herokuapp.com/profiles/edit_profile/)
 - Form tested manually on **29/12/22** and found to be working as intended
+- All dynamic content tested manually on **29/12/22** and found to be working as intended
 
 #### Profile (https://pp4-recipebook.herokuapp.com/profiles/recipebook/profile/)
 - All internal links tested manually on **29/12/22** and found to be working as intended
+- All dynamic content tested manually on **29/12/22** and found to be working as intended
+- Javascript to update DOM tested manually on **29/12/22** and found to be working as intended
 
 #### Add Recipe (https://pp4-recipebook.herokuapp.com/recipes/add_recipe/)
 - Form tested manually on **29/12/22** and found to be working as intended
 
 #### Edit Recipe (https://pp4-recipebook.herokuapp.com/recipes/fried-rice/edit)
 - Form tested manually on **29/12/22** and found to be working as intended
+- All login-state sensitive content and links tested manually on **29/12/22** and found to be working as intended
 
 #### Recipe Detail (https://pp4-recipebook.herokuapp.com/recipes/fried-rice/)
 - All internal links tested manually on **29/12/22** and found to be working as intended
+- All dynamic content tested manually on **29/12/22** and found to be working as intended
 - All forms (like, save, comment, notes) tested manually on **29/12/22** and found to be working as intended
+- All login-state sensitive content and links tested manually on **29/12/22** and found to be working as intended
 
 #### 404 Error (https://pp4-recipebook.herokuapp.com/recipes/404/)
 - All internal links tested manually on **29/12/22** and found to be working as intended
+- All dynamic content tested manually on **29/12/22** and found to be working as intended
 
 ---
 ## Different browsers
